@@ -1,11 +1,15 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{cinthesis}[2013/13/02]
 
-% Packages
+%%%%%%%  Packages %%%
 
 \RequirePackage{acronym}
 \RequirePackage{amsmath,amsfonts,amssymb,amsthm}
 \RequirePackage[utf8]{inputenc}
+
+%%%%%%%  End of packages %%%
+
+%%%%%%%  Custom commands %%%
 
 \newcommand{\listofacronyms}{
   \chapter*{List of Acronyms}
@@ -13,14 +17,18 @@
   \input{acronyms}
 }
 
-\def\mystretch{1.5}		% Double spacing hack
+%%%%%%%  End of custom commands %%%
+
+%%%%%%%%%  Style parameters %%%%
+
+\def\mystretch{1.5} % Double spacing hack
 \DeclareOption{doublespace}{}	% This is default
-				% So we do not read this style twice
-\DeclareOption{singlespace}{		% If he explicitly wants single spacing
+% So we do not read this style twice
+\DeclareOption{singlespace}{ % If he explicitly wants single spacing
     \typeout{Single spaced}
     \def\mystretch{1}}
 
-%% `vi' and `upcase' document style options.  Eduardo Lundgren (2013)
+%% `vi' and `upcase' document style options.
 \newcount\vithesis
 \DeclareOption{vi}{\typeout{Course VI/VIII thesis style.}\advance\vithesis by1}
 \vithesis=0
@@ -62,25 +70,25 @@
 
 \setlength{\oddsidemargin}{0.25in}	% 1.25in left margin
 \setlength{\evensidemargin}{0.25in}	% 1.25in left margin (even pages)
-\setlength{\topmargin}{0.0in}		% 1in top margin
-\setlength{\textwidth}{6.0in}		% 6.0in text - 1.25in rt margin
-\setlength{\textheight}{9in}		% Body ht for 1in margins
+\setlength{\topmargin}{0.0in}	% 1in top margin
+\setlength{\textwidth}{6.0in}	% 6.0in text - 1.25in rt margin
+\setlength{\textheight}{9in}	% Body ht for 1in margins
 \addtolength{\topmargin}{-\headheight}	% No header, so compensate
 \addtolength{\topmargin}{-\headsep}	% for header height and separation
 
 % The next two macros compensate page style for headers and footers
 % We only need them in page styles that USE headers and footers.
     % If we have a header, it must be 1in from top of page.
-\def\pulldownheader{			% Shift header down 1in from top
+\def\pulldownheader{ % Shift header down 1in from top
     \addtolength{\topmargin}{\headheight}
     \addtolength{\topmargin}{\headsep}
     \addtolength{\textheight}{-\headheight}
     \addtolength{\textheight}{-\headsep}
 }
     % If we have a footer, put it 1in up from bottom
-\def\pullupfooter{				% Shift footer up
+\def\pullupfooter{ % Shift footer up
     \addtolength{\textheight}{-\footskip}
-%    \addtolength{\textheight}{-\footheight}  %footheight doesn't
+%    \addtolength{\textheight}{-\footheight} %footheight doesn't
 %    						exist in 2e
 }
 
@@ -102,7 +110,7 @@
 % Format for draft of thesis.  Define our own PageStyle -
 % Just like headings, but has foot lines with the date and warning
 
-\if@twoside         % If two-sided printing.
+\if@twoside % If two-sided printing.
 \def\ps@drafthead{
     \let\@mkboth\markboth
     \def\@oddfoot{\rm \today \hfil \sc \draftrmark}
@@ -113,40 +121,38 @@
 	\@chapapp\ \thechapter. \ \fi ##1}}{}}
     \def\sectionmark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\z@
 	\thesection. \ \fi ##1}}}
-    \pulldownheader				% Bring header down from edge
-    \pullupfooter				% Bring footer up
+    \pulldownheader % Bring header down from edge
+    \pullupfooter % Bring footer up
 }
-\else               % If one-sided printing.
+\else % If one-sided printing.
 \def\ps@drafthead{
     \let\@mkboth\markboth
     \def\@oddfoot{\rm \today \hfil \sc \draftrmark}
     \def\@oddhead{\hbox{}\sl \rightmark \hfil \rm\thepage}
     \def\chaptermark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\m@ne
 	\@chapapp\ \thechapter. \ \fi ##1}}}
-    \pulldownheader				% Bring header down from edge
-    \pullupfooter				% Bring footer up
+    \pulldownheader % Bring header down from edge
+    \pullupfooter % Bring footer up
 }
 \fi
 
-% I redefine these formats that were defined in report.sty
 % Definition of 'headings' page style
 %  Note the use of ##1 for parameter of \def\chaptermark inside the
 %  \def\ps@headings.
-%
 
-\if@twoside					% If two-sided printing.
+\if@twoside % If two-sided printing.
 \def\ps@headings{\let\@mkboth\markboth
     \def\@oddfoot{}
-    \def\@evenfoot{}		% No feet.
+    \def\@evenfoot{} % No feet.
     \def\@evenhead{\rm \thepage\hfil \sl \leftmark}	% Left heading.
     \def\@oddhead{\hbox{}\sl \rightmark \hfil \rm\thepage}	% Right heading.
     \def\chaptermark##1{\markboth {\uppercase{\ifnum \c@secnumdepth >\m@ne
 	\@chapapp\ \thechapter. \ \fi ##1}}{}}
     \def\sectionmark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\z@
 	\thesection. \ \fi ##1}}}
-    \pulldownheader				% Bring header down from edge
+    \pulldownheader % Bring header down from edge
 }
-\else						% If one-sided printing.
+\else % If one-sided printing.
 \def\ps@headings{\let\@mkboth\markboth
     \def\@oddfoot{}
     \def\@evenfoot{}		%     No feet.
@@ -158,7 +164,6 @@
 \fi
 
 % Redefinition of 'myheadings' page style.
-%
 \def\ps@myheadings{\let\@mkboth\@gobbletwo
     \def\@oddfoot{}
     \def\@evenfoot{}
@@ -171,27 +176,25 @@
 
 % Redefine '/chapter' to always start on an odd page.
 % Should make no difference in singleside mode.
-%
 \if@leftblank
 % Prints "THIS PAGE INTENTIONALLY LEFT BLANK" on blank pages.
 \def\chapter{\clearpage\ifodd\c@page\else
    \hbox{}\par\vfill\centerline%
    {THIS PAGE INTENTIONALLY LEFT BLANK}%
    \vfill\newpage\fi
-   \thispagestyle{plain}	% Page style of chapter page is 'plain'
-   \global\@topnum\z@		% Prevents figures from going at top of page.
-   \@afterindentfalse		% Suppresses indent in first paragraph.  Change
+   \thispagestyle{plain} % Page style of chapter page is 'plain'
+   \global\@topnum\z@	% Prevents figures from going at top of page.
+   \@afterindentfalse	% Suppresses indent in first paragraph.  Change
    \secdef\@chapter\@schapter}	% to \@afterindenttrue to have indent.
 \else
 \def\chapter{\cleardoublepage	% Starts new page.
-   \thispagestyle{plain}	% Page style of chapter page is 'plain'
-   \global\@topnum\z@		% Prevents figures from going at top of page.
-   \@afterindentfalse		% Suppresses indent in first paragraph.  Change
-   \secdef\@chapter\@schapter}	% to \@afterindenttrue to have indent.
+   \thispagestyle{plain} % Page style of chapter page is 'plain'
+   \global\@topnum\z@	% Prevents figures from going at top of page.
+   \@afterindentfalse	% Suppresses indent in first paragraph.  Change
+   \secdef\@chapter\@schapter} % to \@afterindenttrue to have indent.
 \fi
 % If using the report style, use - instead of . in the figure number.
 \@ifundefined{thechapter}{}{\def\thefigure{\thechapter-\arabic{figure}}}
-
 
 %%%%%%%%%  End of Style parameters %%%%
 
@@ -215,7 +218,7 @@ reserved.\par\permission}}
 % Occacionally you will need to exactly specify the text of the
 % copyright notice.  The \copyrightnoticetext command is then useful.
 \long\def\copyrightnoticetext#1{\gdef\@copyrightnotice{#1}}
-\def\@copyrightnotice{\copyright\ \CIN\ \@degreeyear.  All rights reserved.}
+\def\@copyrightnotice{\copyright\ \CIn\ \@degreeyear.  All rights reserved.}
 
 %% `vi' documentclass option: Specifying this option automatically
 %% copyrights the thesis to the author and gives UFPE permission to copy and
@@ -311,7 +314,6 @@ requirements for the \@degreeword\ of \\
 
 %% Changed from \unvbox to \unvcopy for use with multiple copies of abstract
 %% page.
-%% Eduardo Lundgren (2013)
 \def\endabstractpage{\end{abstract}\noindent
  \unvcopy\@abstractsupervisor \newpage}
 
