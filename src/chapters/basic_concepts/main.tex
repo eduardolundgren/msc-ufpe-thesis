@@ -11,37 +11,48 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 \section{Web} % (fold)
 \label{sec:basic_concepts:web}
 
-Using concepts from existing hypertext systems, Tim Berners-Lee, computer scientist and at that time employee of CERN, wrote a proposal in March 1989 for what would eventually become the World Wide Web (WWW) \cite{w3c:history}.
+Using concepts from existing hypertext systems, Tim Berners-Lee, computer scientist and at that time employee of CERN, wrote a proposal in March 1989 for what would eventually become the World Wide Web (WWW) \cite{WC2006}.
 
-The World Wide Web is a shared information system operating on top of the Internet. Web browsers retrieve content and display from remote web servers using a stateless and anonymous protocol called HyperText Transfer Protocol (HTTP). Web pages are written using a simple language called HyperText Markup Language (HTML). They may be augmented with other technologies such as Cascading Style Sheets (CSS), which adds additional layout and style information to the page, and JavaScript language, which allows client-side computation. Browsers typically provide other useful features such as bookmarking, history, password management, and accessibility features to accommodate users with disabilities \cite{grosskurth2005reference}.
+The World Wide Web is a shared information system operating on top of the Internet. Web browsers retrieve content and display from remote web servers using a stateless and anonymous protocol called HyperText Transfer Protocol (HTTP). Web pages are written using a simple language called HyperText Markup Language (HTML). They may be augmented with other technologies such as Cascading Style Sheets (CSS), which adds additional layout and style information to the page, and JavaScript language, which allows client-side computation. Browsers typically provide other useful features such as bookmarking, history, password management, and accessibility features to accommodate users with disabilities \cite{Grosskurth2005}.
 
-In the beginning of the web, plain text and images were the most advanced features available on the browsers. Companies behind web browser development together with the web community, were able to contribute to the World Wide Web Consortium (W3C) specifications \cite{w3c:www}. Today's web is a result of the ongoing efforts of an open web community that helps define these technologies and ensure that they're supported in all web browsers. Those contributions transformed the web in a growing universe of interlinked pages and applications, with videos, photos, interactive content, 3D graphics processed by the Graphics Processing Unit (GPU), and other varieties of features without requiring any third-party plugins installation.
-
-There are five major browsers used today: Internet Explorer, Firefox, Safari, Chrome and Opera. Currently, the usage share of Firefox, Safari and Chrome together is nearly 60\%. The browser main functionality is to present a web resource, by requesting it from the server and displaying it on the browser window. The resource is usually a HTML document.
-
-* Contextualization
-    * Problems of augmented reality on the web
-* State of the art
-    * History of web
-    * W3C
-    * Browsers
-        * The browser's high level structure
-        * The browser's main functionality
-    * HTML5
-    * JavaScript
-        * Language details
-        * Typed arrays
-        * requestAnimationFrame
-        * getUserMedia
-    * Canvas
-    * Video
-    * WebRTC
-    * APIs
-
-    \cite{w3c:history}.
-
+In the beginning of the web, plain text and images were the most advanced features available on the browsers. In 1994, the World Wide Web Consortium (W3C) was founded to promote interoperability among web technologies. Companies behind web browser development together with the web community, were able to contribute to the W3C specifications \cite{WC2006}. Today's web is a result of the ongoing efforts of an open web community that helps define these technologies and ensure that they're supported in all web browsers. Those contributions transformed the web in a growing universe of interlinked pages and applications, with videos, photos, interactive content, 3D graphics processed by the Graphics Processing Unit (GPU), and other varieties of features without requiring any third-party plugins installation \cite{Hickson2013}. The significant reuse of open source components among different browsers and the emergence of extensive web standards have caused the browsers to exhibit ``convergent evolution'' \cite{Grosskurth2005}.
+%
+% * Contextualization
+%     * Problems of augmented reality on the web
+% * State of the art
+%     * History of web
+%     * W3C
+%     * Browsers
+%         * The browser's high level structure
+%         * The browser's main functionality
+%     * HTML5
+%     * JavaScript
+%         * Language details
+%         * Typed arrays
+%         * requestAnimationFrame
+%         * getUserMedia
+%     * Canvas
+%     * Video
+%     * WebRTC
+%     * APIs
+%
 \subsection{State of the Art} % (fold)
 \label{sub:basic_concepts:web:state_of_the_art}
+
+The browser main functionality is to present a web resource, by requesting it from the server and displaying it on the browser window. There are four major browsers used today: Internet Explorer, Firefox, Safari and Chrome. Currently, the usage share of Firefox, Safari and Chrome together is nearly 60\%.
+
+Two mature browser implementations were selected and, for each browser, a conceptual architecture was described based on domain knowledge and available documentation. Firefox and Chrome were used to derive the reference architecture because they are mature systems, have reasonably large developer communities and user bases, provide good support for web standards, and are entirely open source.
+
+The reference architecture for web browsers based on two well known open source implementations architecture is shown in Figure \ref{figure:web_architecture}; it comprises eight major subsystems plus the dependencies between them: (1) the User Interface, this includes the address bar, back and forward buttons, bookmarking menu etc. Every part of the browser display except the main window where you see the requested resource; (2) the Browser Engine, an embeddable component that provides a high-level interface for querying and manipulating the Rendering Engine; (3) the Rendering Engine, which performs parsing and layout for HTML documents, optionally styled with CSS; (4) the Networking subsystem, used for network calls, like HTTP requests. It has platform independent interface and underneath implementations for each platform; (5) the JavaScript Interpreter, used to parse and execute the JavaScript code; (6) the XML Parser; (7) the UI Backend, which provides drawing and windowing primitives, user interface widgets, and fonts. Underneath it uses the operating system user interface methods; and (8) the Data Persistence subsystem, which stores various data associated with the browsing session on disk, including bookmarks, cookies, and cache \cite{Grosskurth2005}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics{chapters/basic_concepts/web_architecture.pdf}
+  \caption{Reference architecture for web browsers}
+  \label{figure:web_architecture}
+\end{figure}
+
+Browser subsystem are swappable and could vary for browser vendor, platform or operational system. The browsers mostly differ in subsystems (2) the Browser Engine, (3) the Rendering Engine, and (5) the JavaScript Interpreter. Firefox subsystems (2) and (3) is known as Gecko, Safari as Webkit and Chrome uses a fork of Webkit called Blink.
 
 % subsection state_of_the_art (end)
 
