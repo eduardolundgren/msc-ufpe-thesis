@@ -4,7 +4,22 @@
 \usepackage{lgrind}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{expl3}
 \pagestyle{plain}
+
+\ExplSyntaxOn
+\newcommand\latinabbrev[1]{
+  \peek_meaning:NTF . {
+    #1\@}
+  { \peek_catcode:NTF a {
+      #1.\@ }
+    {#1.\@}}}
+\ExplSyntaxOff
+
+\def\eg{\latinabbrev{e.g}}
+\def\etal{\latinabbrev{et al}}
+\def\etc{\latinabbrev{etc}}
+\def\ie{\latinabbrev{i.e}}
 
 \begin{document}
 \include{cover}
