@@ -9,6 +9,8 @@
 \usepackage{beramono}
 \usepackage{listings}
 \usepackage{expl3}
+
+% Styles -----------------------------------------------------------------------
 \pagestyle{plain}
 
 \lstset{
@@ -26,6 +28,8 @@
 	showstringspaces=false,
 	tabsize=2
 }
+
+% Extras -----------------------------------------------------------------------
 \ExplSyntaxOn
 \newcommand\latinabbrev[1]{
   \peek_meaning:NTF . {
@@ -39,6 +43,8 @@
 \def\etal{\latinabbrev{et al}}
 \def\etc{\latinabbrev{etc}}
 \def\ie{\latinabbrev{i.e}}
+
+% Document ---------------------------------------------------------------------
 
 \begin{document}
 \include{cover}
