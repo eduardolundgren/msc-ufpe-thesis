@@ -7,6 +7,21 @@
 \usepackage{expl3}
 \pagestyle{plain}
 
+\lstset{
+	basicstyle=\small,
+	captionpos=b,
+	columns=fullflexible,
+	extendedchars=true,
+	frame=lines,
+	framexleftmargin=17pt,
+	framexrightmargin=5pt,
+	framexbottommargin=4pt,
+	numbers=left,
+	numbersep=10pt,
+	numberstyle=\tiny,
+	showstringspaces=false,
+	tabsize=2
+}
 \ExplSyntaxOn
 \newcommand\latinabbrev[1]{
   \peek_meaning:NTF . {
