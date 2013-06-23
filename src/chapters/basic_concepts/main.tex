@@ -81,7 +81,7 @@ JavaScript typed arrays provide a mechanism for accessing raw binary data much m
 
 The three well known open-source browsers, Firefox version 16.0, Safari version 6.0.4 and Chrome version 25.0.1364, were compared in the following benchmark executed on Mac OS X 10.8.3, 2.6 GHz Intel Core i7 16 GB 1600 MHz RAM. The array types selected were \textit{Array}, not strongly typed array; \textit{Float32Array}, represents an array of 32-bit floating point numbers; \textit{Uint8Array}, represents an array of 8-bit unsigned integers. For each array type a read and a write operation was executed $100,000$ times. In order to not compromise benchmark results caused by run-time type conversion \cite{International2009}, the write value used for each array type were proper selected, \eg\ \textit{Number} $1.0$ was used for regular arrays \textit{Array}, \textit{Number} $1.0$ was used for \textit{Float32Array}, and unsigned \textit{Number} $1$ for \textit{Uint8Array}. Regular \textit{vs} typed arrays performance benchmark is shown in Figure \ref{figure:typed_arrays_performance} \cite{TypedArrayPerformance2013}.
 
-As conclusion, typed arrays provides fast read and write operations when compared to regular arrays in JavaScript, \ie\ $7872$ \textit{ops/sec} for unsigned array \textit{vs} $4437$ \textit{ops/sec} in Firefox browser, similar behavior is noticeable on Safari and Chrome, thereby float and unsigned arrays are vastly used on complex algorithms implementations on the web.
+As conclusion, typed arrays provides faster read and write operations than regular arrays in JavaScript, \ie\ $7872$ \textit{ops/sec} for unsigned array \textit{vs} $4437$ \textit{ops/sec} for regular arrays in Firefox browser, similar behavior is noticeable on Safari and Chrome, thereby float and unsigned arrays are vastly used on complex algorithms implementations on the web.
 
 \begin{figure}[!htb]
   \begin{tikzpicture}
@@ -129,7 +129,7 @@ As conclusion, typed arrays provides fast read and write operations when compare
   \label{figure:typed_arrays_performance}
 \end{figure}
 
-Nevertheless, reading and writing raw binary data using typed arrays solves part of the problem of manipulating video and images. The other missing feature was resolved by the fact of HTML5 brings a new element called \textit{canvas}, which provides access to the pixel matrix of those medias in order to be manipulated from Augmented Reality (AR) algorithms.
+Nevertheless, reading and writing raw binary data using typed arrays solves part of the problem of manipulating video and images data. The other missing feature was resolved by the fact of HTML5 has a new element called \textit{canvas}, which provides access to the pixel matrix of those medias in order to be manipulated from Augmented Reality (AR) algorithms.
 
 % subsection state_of_the_art (end)
 
