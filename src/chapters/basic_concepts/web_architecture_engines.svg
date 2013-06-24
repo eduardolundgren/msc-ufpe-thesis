@@ -2,55 +2,53 @@
 <svg xmlns="http://www.w3.org/2000/svg"
     xmlns:latexdraw="http://latexdraw.sourceforge.net/namespaces/latexdraw"
     version="1.1" baseProfile="full">
-    <defs/>
+    <defs>
+        <marker overflow="visible" orient="auto" id="arrow2-5566">
+            <path
+                d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -2.79125 0.0 L -4.652083333333334 -1.6614583333333335 z "
+                latexdraw:arrSizeNum="2.0" fill="black"/>
+        </marker>
+    </defs>
     <g>
-        <g latexdraw:type="text" id="id198" font-family="Dialog"
+        <g latexdraw:type="text" id="id5553" font-family="Dialog"
             fill="black" font-size="18" latexdraw:x="192.0">
             <text x="192.0" y="226.0"><![CDATA[Browser Engine]]></text>
         </g>
-        <g latexdraw:type="drawing" id="id200">
-            <g latexdraw:type="line" id="id201">
-                <line x1="257.0" x2="257.0" y1="239.00033487272967"
-                    y2="270.7386615915791" stroke-width="2.0"
-                    stroke="black" latexdraw:rotationAngle="0.0"/>
-            </g>
-            <g latexdraw:type="triangle" id="id202" latexdraw:points="251.0 276.46919280470473 263.0 276.46919280470473 251.0 267.0 263.0 267.0">
-                <polygon
-                    points="257.0,274.60086 261.3857,268.0 252.6143,268.0"
-                    latexdraw:borderPos="outer" stroke-width="2.0"
-                    stroke="black" fill="black"/>
-            </g>
-        </g>
-        <g latexdraw:type="rectangle" id="id204">
+        <g latexdraw:type="rectangle" id="id5555">
             <rect x="40.0" y="277.0" width="432.0" height="38.0"
                 latexdraw:borderPos="outer" stroke-width="2.0"
                 stroke="black" fill="none"/>
         </g>
-        <g latexdraw:type="text" id="id205" font-family="Dialog"
+        <g latexdraw:type="text" id="id5556" font-family="Dialog"
             fill="black" font-size="18" latexdraw:x="181.0">
             <text x="181.0" y="302.0"><![CDATA[Rendering Engine]]></text>
         </g>
-        <g latexdraw:type="rectangle" id="id207">
+        <g latexdraw:type="rectangle" id="id5558">
             <rect x="40.0" y="201.0" width="433.0" height="38.0"
                 latexdraw:borderPos="outer" stroke-width="2.0"
                 stroke="black" fill="none"/>
         </g>
-        <g latexdraw:type="rectangle" id="id208">
+        <g latexdraw:type="rectangle" id="id5559">
             <rect x="23.0" y="183.0" width="467.0" height="148.0"
                 latexdraw:borderPos="outer" stroke-width="2.0"
                 stroke="black" fill="none" stroke-dasharray="8.0, 8.0"/>
         </g>
-        <g latexdraw:type="text" id="id209" font-family="Dialog"
+        <g latexdraw:type="text" id="id5560" font-family="Dialog"
             fill="black" font-size="18" latexdraw:x="504.0">
             <text x="504.0" y="244.0"><![CDATA[Gecko]]></text>
         </g>
-        <g latexdraw:type="text" id="id212" font-family="Dialog"
+        <g latexdraw:type="text" id="id5562" font-family="Dialog"
             fill="black" font-size="18" latexdraw:x="505.0">
             <text x="505.0" y="266.0"><![CDATA[WebKit]]></text>
         </g>
-        <g latexdraw:type="text" id="id215" font-family="Dialog"
+        <g latexdraw:type="text" id="id5564" font-family="Dialog"
             fill="black" font-size="18" latexdraw:x="507.0">
             <text x="507.0" y="285.0"><![CDATA[Blink]]></text>
+        </g>
+        <g latexdraw:type="line" id="id5566">
+            <line x1="257.0" x2="257.0" y1="239.00033487272967"
+                y2="276.0" stroke-width="2.0" stroke="black"
+                latexdraw:rotationAngle="0.0" marker-end="url(#arrow2-5566)"/>
         </g>
     </g>
     <metadata>
