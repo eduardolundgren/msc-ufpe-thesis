@@ -1,12 +1,8 @@
 \chapter{Basic Concepts} % (fold)
 \label{cha:basic_concepts}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+This section introduces some basic concepts related to this work. They are presented as individual sections, describing about the state of the art techniques and applications involving the main technical subjects of this work.
+
 %
 % * Contextualization
 %     * Problems of augmented reality on the web
@@ -170,7 +166,15 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order,
 
 Audio and video capture has been a limitation of web browsers for a long time. For many years the authors had to rely on browser plugins, such as Flash \cite{Flash2013} or Silverlight \cite{Silverlight2013} \cite{Rocks2013}. HTML5 has brought a surge of access to device hardware, Geolocation (GPS), the Orientation API (accelerometer), WebGL (GPU) and the Real-time Communication Between Browsers specification (WebRTC) in conjunction with Media Capture and Streams specification, a set of JavaScript APIs that allow local media, including audio and video, to be requested from a platform trough \textit{getUserMedia} API \cite{WC2006}.
 
-With \textit{navigator.getUserMedia()}, the browser can access the camera and microphone input without a plugin. It's available directly into the browser. The access camera and microphone hardware access can be used in combination with the HTML5 \textit{audio} and \textit{video} elements.
+With \textit{navigator.getUserMedia()}, the browser can access the camera and microphone input without a plugin. It's available directly into the browser. The access camera and microphone hardware access can be used in combination with the HTML5 \textit{audio} and \textit{video} elements. The access flow of raw binary data captured from videos on modern browsers is shown on Figure \ref{figure:get_user_media}. It comprises five major steps: (1) Hardware access, camera and microphone hardware is accessed by the browser; (2) Streaming, using \textit{getUserMedia} API the hardware streams audio and video to the browser UI Elements; (3) UI Elements, HTML elements that displays the data stream; (4) Raw Binary Data, HTML \textit{canvas} element that ``hosts'' video frames providing access to the array of pixels;
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics{chapters/basic_concepts/get_user_media.pdf}
+  \caption{Access flow of raw binary data captured from videos on modern browsers}
+  \label{figure:get_user_media}
+\end{figure}
+
 
 The \textit{audio} and \textit{video} tag is one of those HTML5 features that gets a lot of attention. Often presented as an alternative to Flash in the media, the video tag has advantages due to its natural integration with the other layers of the web development stack such as CSS and JavaScript as well as the other HTML tags. The three video formats supported by the three well known browsers cited in this thesis are, webm (VP8 Vorbis), mp4 (H.264 AAC) and ogv (Theora Vorbis) \cite{WC2006} \cite{Rocks2013}. The audio formats available are ogg (Theora Vorbis) and mp4 (H.264 AAC). An example of \textit{getUserMedia} API being used to capture the camera and microphone using a \textit{video} tag to display is shown on Listing \ref{lst:get_user_media}.
 
@@ -195,6 +199,8 @@ The \textit{audio} and \textit{video} tag is one of those HTML5 features that ge
 
 \subsection{Problems of Augmented Reality on the Web} % (fold)
 \label{sub:basic_concepts:web:problems_of_augmented_reality_on_the_web}
+
+Client-side native web applications use to have intrinsic performance limitations, although this premise is changing. Browsers are evolving very fast when compared to the the previous \textit{lustrum}. JavaScript language wasn't prepared to handle typed data structures able to manipulate raw binary data safely, all the computational complexity required by AR algorithms was too much for that growing environment. Browsers weren't able to capture audio and video natively, without plugin installation, an essential feature for AR applications. This reality has changed, this involves the use of several modern browser specifications as well as implementation of different computer vision algorithms and techniques into the browser environment taking advantage of all those modern APIs. Some optimizations are discussed and implemented on this work in order to achieve good results when compared with similar implementations in compiled languages.
 
 % subsection problems_of_augmented_reality_on_the_web (end)
 
