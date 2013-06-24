@@ -23,9 +23,9 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 %         * requestAnimationFrame
 %         * getUserMedia
 %     * Canvas ✔
-%     * Video
-%     * WebRTC
-%     * APIs
+%     * Video ✔
+%     * WebRTC ✔
+%     * APIs ✔
 %
 \section{Web} % (fold)
 \label{sec:basic_concepts:web}
@@ -159,7 +159,7 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order,
 5 & 5 & 6
 \end{bmatrix}$, in row-major order it is laid out contiguously in linear memory as $\begin{bmatrix}
 1 & 2 & 3 & 4 & 5 & 6
-\end{bmatrix}$. Each array value is represented as integers between $0$ and $255$, where each four-integer group represents the four color channels of one pixel: red, group, blue and alpha (RGBA). While RGBA is sometimes described as a color space, it is actually simply a use of the RGB color model \cite{Gonzalez2007}. An example of the canvas image data array of pixels is shown on Figure \ref{figure:imagedata_array}.
+\end{bmatrix}$. Each array value is represented as integers between $0$ and $255$, where each four-integer group represents the four color channels of one pixel: red, green, blue and alpha (RGBA). While RGBA is sometimes described as a color space, it is actually simply a use of the RGB color model \cite{Gonzalez2007}. An example of the canvas image data array of pixels is shown on Figure \ref{figure:imagedata_array}.
 
 \begin{figure}[!htb]
   \centering
@@ -167,6 +167,28 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order,
   \caption{The canvas image data array of pixels}
   \label{figure:imagedata_array}
 \end{figure}
+
+Audio and video capture has been a limitation of web browsers for a long time. For many years the authors had to rely on browser plugins, such as Flash \cite{Flash2013} or Silverlight \cite{Silverlight2013} \cite{Rocks2013}. HTML5 has brought a surge of access to device hardware, Geolocation (GPS), the Orientation API (accelerometer), WebGL (GPU) and the Real-time Communication Between Browsers specification (WebRTC) in conjunction with Media Capture and Streams specification, a set of JavaScript APIs that allow local media, including audio and video, to be requested from a platform trough \textit{getUserMedia} API \cite{WC2006}.
+
+With \textit{navigator.getUserMedia()}, the browser can access the camera and microphone input without a plugin. It's available directly into the browser. The access camera and microphone hardware access can be used in combination with the HTML5 \textit{audio} and \textit{video} elements.
+
+The \textit{audio} and \textit{video} tag is one of those HTML5 features that gets a lot of attention. Often presented as an alternative to Flash in the media, the video tag has advantages due to its natural integration with the other layers of the web development stack such as CSS and JavaScript as well as the other HTML tags. The three video formats supported by the three well known browsers cited in this thesis are, webm (VP8 Vorbis), mp4 (H.264 AAC) and ogv (Theora Vorbis) \cite{WC2006} \cite{Rocks2013}. The audio formats available are ogg (Theora Vorbis) and mp4 (H.264 AAC). An example of \textit{getUserMedia} API being used to capture the camera and microphone using a \textit{video} tag to display is shown on Listing \ref{lst:get_user_media}.
+
+\begin{lstlisting}[language=C++,label={lst:get_user_media},caption=Capture and display microphone and camera]
+<video autoplay></video>
+<script>
+  var video = document.querySelector('video');
+  navigator.getUserMedia(
+    {video: true, audio: true},
+    function(localMediaStream) {
+        video.src = window.URL.createObjectURL(localMediaStream);
+        video.onloadedmetadata = function(e) {
+          // Ready to go.
+        };
+    },
+    onFail);
+</script>
+\end{lstlisting}
 
 
 % subsection state_of_the_art (end)
