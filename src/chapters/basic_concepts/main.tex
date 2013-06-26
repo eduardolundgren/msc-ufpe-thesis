@@ -175,7 +175,6 @@ With \textit{getUserMedia}, the browser can access the camera and microphone inp
   \label{figure:get_user_media}
 \end{figure}
 
-
 The \textit{audio} and \textit{video} tag is one of those HTML5 features that gets a lot of attention. Often presented as an alternative to Flash in the media, the video tag has advantages due to its natural integration with the other layers of the web development stack such as CSS and JavaScript as well as the other HTML tags. The three video formats supported by the three well known browsers cited in this thesis are, webm (VP8 Vorbis), mp4 (H.264 AAC) and ogv (Theora Vorbis) \cite{WC2006} \cite{Rocks2013}. The audio formats available are ogg (Theora Vorbis) and mp4 (H.264 AAC). An example of \textit{getUserMedia} API being used to capture the camera and microphone using a \textit{video} tag to display is shown on Listing \ref{lst:get_user_media}.
 
 \begin{lstlisting}[language=C++,label={lst:get_user_media},caption=Capture and display microphone and camera]
@@ -194,10 +193,9 @@ The \textit{audio} and \textit{video} tag is one of those HTML5 features that ge
 </script>
 \end{lstlisting}
 
-
 % subsection state_of_the_art (end)
 
-\subsection{Problems of Augmented Reality on the Web} % (fold)
+\subsection{Augmented Reality on the Web} % (fold)
 \label{sub:basic_concepts:web:problems_of_augmented_reality_on_the_web}
 
 Client-side native web applications use to have intrinsic performance limitations, although this premise is changing. Browsers are evolving very fast when compared to the the previous decade. JavaScript language wasn't prepared to handle typed data structures able to manipulate raw binary data safely, all the computational complexity required by AR algorithms was too much for that growing environment. Browsers weren't able to capture audio and video natively, without plugin installation, an essential feature for AR applications. This reality has changed, this involves the use of several modern browser specifications as well as implementation of different computer vision algorithms and techniques into the browser environment taking advantage of all those modern APIs. Some optimizations are discussed and implemented on this work in order to achieve good results when compared with similar implementations in compiled languages.
@@ -209,22 +207,49 @@ Client-side native web applications use to have intrinsic performance limitation
 \section{Augmented Reality} % (fold)
 \label{sec:basic_concepts:augmented_reality}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Imagine a technology in which you could see more than others see, hear more than others hear, and even touch things that others cannot. A technology able to perceive computational elements and objects within our real world experience that help us in our daily activities, while interacting almost unconsciously through mere gestures and speech.
+
+With such technology, mechanics could see instructions what to do next when repairing an unknown piece of equipment, surgeons could take advantage of augmented reality while performing surgery on them and we could read reviews for each restaurant in the street we're walking in on the way to work \cite{Krevelen2010}.
+
+Augmented reality (AR) is this technology to create a ``next generation, reality-based interface'' \cite{Krevelen2010} and is moving from laboratories around the world into various industries and consumer markets. AR supplements the real world with virtual (computer-generated) objects that appear to coexist in the same space as the real world. AR was recognized as an emerging technology of 2007 \cite{Krevelen2010}, and with today's smart-phones and AR browsers we are starting to embrace this very new and exciting kind of human-computer interaction.
 
 \subsection{State of the Art} % (fold)
 \label{sub:basic_concepts:augmented_reality:state_of_the_art}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+On the reality-virtuality \textit{continuum} by Milgram and Ki \cite{Mistry2009}, Augmented Reality (AR) is one part of the general area of mixed reality. Both virtual environments (or virtual reality) and augmented virtuality, in which real objects are added to virtual ones, replace the surrounding environment by a virtual one. In contrast, AR provides local virtuality. The reality-virtuality \textit{continuum} is shown on Figure \ref{figure:reality_continuum}. Three important aspects of an AR system: (1) combines real and virtual objects in a real environment; (2) registers (aligns) real and virtual objects with each other and (3) runs interactively, in three dimensions, and in real time \cite{Benford1998}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics{chapters/basic_concepts/reality_continuum.pdf}
+  \caption{Reality-virtuality continuum}
+  \label{figure:reality_continuum}
+\end{figure}
+
+The first AR prototypes, shown in Figure \ref{figure:first_head_mount}, created by computer graphics pioneer Ivan Sutherland and his students at Harvard University and the University of Utah, appeared in the 1960s and used a see-through to present 3D graphics \cite{Benford1998}. It took until the early 1990s before the term ``augmented reality'' was proposed by Caudell and Mizell \cite{Benford1998}, scientists at Boeing Corporation who were developing an experimental AR system to help workers put together wiring harnesses.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/basic_concepts/first_head_mount.png}
+  \caption{The world's first head-mounted display with the ``Sword of Damocles''}
+  \label{figure:first_head_mount}
+\end{figure}
+
+By the late 1990s, as AR became a distinct field of research. Displays, trackers, graphics computers and software remain essential in many AR experiences. There are several displays devices that could be used on AR applications, the major ones could be divided as follows: (1) Visual display: Video see-through, optical see-through and projective; (2) Display positioning: Head-worn, hand-held and spatial \cite{Benford1998}.
+
+More details for each sub-section from section (1) Visual displays and (2) Display positioning, are presented in the following paragraphs.
+
+Section (1) Visual display: Video see-through is the closest to virtual reality, where the virtual environment is replaced by a video feed of reality and the AR is placed on the video frames. The optical see-through systems combine computer-generated imagery with holographic optical elements (HOEs), providing a ``through the glasses'' image of the real world. The last sub-category in section (1) is the projective, these displays have the advantage that they do not require special eye-wear, it projects the information into a surface, wall or even the human palm \cite{Benford1998}.
+
+Section (2) Display positioning: Head-worn is a visual displays attached to the head include the video or optical see-through head-mounted display (HMD), virtual retinal display (VRD), and head-mounted projective display (HMPD). Google Inc. released a first-class optical HDM called Project Glass shown on Figure \ref{figure:google_glass} \cite{Glass2013}. The hand-held sub-category includes hand-held video or optical see-through displays as well as hand-held projectors, it is currently the best choice to introduce AR to a mass market due to low production costs and ease of use since it may be based on existing consumer products, such as mobile phones. The last sub-category in section (2) is the spatial, those are displays that could placed statically within the environment and include screen-based video see-through displays \cite{Benford1998}.
+
+In this thesis, it was designed and implemented an Augmented Reality (AR) framework aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (Google Glass) are browser ready. They all could benefit from a reusable, cross-platform framework for AR applications.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/basic_concepts/google_glass.png}
+  \caption{Optical head-mounted display Google Glass \cite{Glass2013}}
+  \label{figure:google_glass}
+\end{figure}
 
 % subsection state_of_the_art (end)
 
