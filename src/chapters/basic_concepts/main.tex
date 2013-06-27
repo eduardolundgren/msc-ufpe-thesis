@@ -238,11 +238,9 @@ By the late 1990s, as AR became a distinct field of research. Displays, trackers
 
 More details for each sub-section from section (1) Visual displays and (2) Display positioning, are presented in the following paragraphs.
 
-Section (1) Visual display: Video see-through is the closest to virtual reality, where the virtual environment is replaced by a video feed of reality and the AR is placed on the video frames. The optical see-through systems combine computer-generated imagery with holographic optical elements (HOEs), providing a ``through the glasses'' image of the real world. The last sub-category in section (1) is the projective, these displays have the advantage that they do not require special eye-wear, it projects the information into a surface, wall or even the human palm \cite{Benford1998}.
+Section (1) Visual display: Video see-through is the closest to virtual reality, where the virtual environment is replaced by a video feed of reality and the AR is placed on the video frames. The optical see-through systems combine computer-generated imagery with holographic optical elements (HOEs), providing a ``through the glasses'' image of the real world. The last sub-category in section (1) is the projective, these displays have the advantage that they do not require special eye-wear, it projects the information into a surface, wall or even the human palm \cite{Benford1998}. The use of a regular computer monitor has become popular as a visual display since AR techniques are now available on the Internet.
 
 Section (2) Display positioning: Head-worn is a visual displays attached to the head include the video or optical see-through head-mounted display (HMD), virtual retinal display (VRD), and head-mounted projective display (HMPD). Google Inc. released a first-class optical HDM called Project Glass shown on Figure \ref{figure:google_glass} \cite{Glass2013}. The hand-held sub-category includes hand-held video or optical see-through displays as well as hand-held projectors, it is currently the best choice to introduce AR to a mass market due to low production costs and ease of use since it may be based on existing consumer products, such as mobile phones. The last sub-category in section (2) is the spatial, those are displays that could placed statically within the environment and include screen-based video see-through displays \cite{Benford1998}.
-
-In this thesis, it was designed and implemented an Augmented Reality (AR) framework aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (\ie\ Google Glass) are browser ready. They all could benefit from a reusable, cross-platform framework for AR applications.
 
 \begin{figure}[!htb]
   \centering
@@ -251,25 +249,61 @@ In this thesis, it was designed and implemented an Augmented Reality (AR) framew
   \label{figure:google_glass}
 \end{figure}
 
+In this thesis, it was designed and implemented an Augmented Reality (AR) framework aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (\ie\ Google Glass) are browser ready. They all could benefit from a reusable, cross-platform framework for AR applications.
+
 % subsection state_of_the_art (end)
 
 % section augmented_reality (end)
 
-\section{Tracking and Object Detection} % (fold)
-\label{sec:basic_concepts:tracking}
+\section{Augmented Reality Tracking} % (fold)
+\label{sec:basic_concepts:augmented_reality_tracking}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application.
+2D tracking typically aims at following the image projection of objects or parts of objects whose 3D displacement results in a motion that can be modeled as a 2D transformation \cite{Lepetit2005}.
 
-\subsection{State of the Art} % (fold)
-\label{sub:basic_concepts:tracking:state_of_the_art}
+The 3D tracking literature is particularly massive both because there are almost as many approaches as target applications and because many different approaches to solving the same problem are possible. Here we focus on a web based online model-based 2D tracking using a single camera.
 
-% subsection state_of_the_art (end)
+One of the major responsibility of a tracking algorithms is to extract information that allows superposing computer generated images on real scenes. Many potential Augmented Reality (AR) applications have been explored, such as medical visualization, maintenance and repair, annotation, entertainment, aircraft navigation and targeting. The objects in the real and virtual worlds must be properly aligned and the system latency should also be low, lest the illusion that the two worlds coexist be compromised. \cite{Lepetit2005} Due to the importance of tracking in AR, this area owns the biggest number of publications and challenge requests on the International Symposium on Mixed and Augmented Reality (ISMAR) \cite{Zhou2008}.
 
-% section tracking (end)
+There are a variety of ways to track a real environment: \eg\ Global Positioning System (GPS), mechanical trackers, magnetic trackers, ultrasonic trackers \etc, but they all have their weaknesses. Mechanical trackers are accurate enough, although they tether the user to a limited working. Magnetic trackers are vulnerable to distortions by metal in the environment. Ultrasonic trackers suffer from noise and tend to be inaccurate at long ranges because of variations in the ambient temperature \cite{Lepetit2005}.
+
+By contrast, vision has the potential to yield non-invasive, accurate and low-cost solutions to this problem, provided that one is willing to invest the effort required to develop sufficiently robust algorithms. Bringing video tracking based techniques on the web are the focus of this work \cite{Lepetit2005}.
+
+In some cases, it is acceptable to add fiducials, such as special markers, to the scene or target object. The addition of fiducials in the scene, also called landmarks or markers, greatly helps since they constitute image features easy to extract, and they provide reliable, easy to exploit measurements for the pose estimation.
+
+It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture. The latter, makes tracking far more difficult because finding and following feature points or edges can be difficult. There are too few of them on many typical objects. Section \ref{sec:basic_concepts:markerless_augmented_reality} details Markerless Augmented Reality (MAR), main technique implemented on the web by this thesis.
+
+% section augmented_reality_tracking (end)
+
+\section{Markerless Augmented Reality} % (fold)
+\label{sec:basic_concepts:markerless_augmented_reality}
+
+Markerless Augmented Reality (MAR) systems integrate virtual objects into a real environment in real-time, enhancing user's perception of and interaction with the world. This approach is not based on the use of traditional artificial markers that need to be placed in the world to be tracked by the system in order to calculate their position and orientation \cite{Teichrieb2007}, instead, MAR relies on naturally present features in order to position virtual objects. Tracking and registration techniques become more complex in MAR systems when compared to marker techniques.
+
+MAR can be classified in two major types: model based and Structure from Motion (SfM) based. The Online monocular MAR taxonomy is shown on Figure \ref{figure:mar_taxonomy}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics{chapters/basic_concepts/mar_taxonomy.pdf}
+  \caption{Online monocular Markerless Augmented Reality taxonomy}
+  \label{figure:mar_taxonomy}
+\end{figure}
+
+\subsection{Model Based} % (fold)
+\label{sub:basic_concepts:markerless_augmented_reality:model_based}
+
+The advantage of using a model based approach is the possibility of interaction between real and virtual worlds, like occlusion and collision. In order to accomplish such types of interaction, the application exploits the fact that the real object pose is known and its structure is described by the 3D model. Model based approaches require an a priori knowledge about the real scene. Due to the offline model acquiring process, these techniques are, in general, not totally online and cannot be used in unprepared environments. Furthermore, tracker initialization is usually done manually or requires a prior training in order to be automatic \cite{Teichrieb2007}.
+
+Model based techniques can be classified in three categories, (1) Edge Based, The camera pose is estimated by matching a wireframe 3D model of an object with the real world image edge information; (2) Optical Flow Based, rely on spatial information obtained by image-model matching extracted from the relative movement of the object projection onto the image; and (3) Texture Based, takes into account texture information presented in images.
+
+Category (3) Texture Based is the tracking technique used in this thesis, therefore a much detailed description is presented in the following lines. Texture Based could be divided into two sub-categories: template-matching and interest point.
+
+The template matching approach is based on global information, this subcategory lies in its ability to treat complex patterns that would be difficult to model by local features. These techniques are also called sum-of-square-difference (SSD), as they consist in minimizing the difference between a region of the image and a reference template.
+
+The subcategory of interest point based techniques takes into account localized features. As a result, this subcategory is less computer-intensive than model based, this characteristic makes interest point technique a good choice for AR applications on the web.
+
+% subsection basic_concepts:markerless_augmented_reality:model_based (end)
+
+% section markerless_augmented_reality (end)
 
 % chapter basic_concepts (end)
