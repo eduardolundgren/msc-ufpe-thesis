@@ -3,25 +3,6 @@
 
 This section introduces this master thesis. It will briefly describe the motivation of the work itself, state the problem that we will focus on solving and shortly discuss the proposed solution. In the end, explain the structure of the next chapters.
 
-Micro-optimization is a technique to reduce the overall operation count of
-floating point operations.  In a standard floating point unit, floating
-point operations are fairly high level, such as ``multiply'' and ``add'';
-in a micro floating point unit ($\mu$FPU), these have been broken down into
-their constituent low-level floating point operations on the mantissas and
-exponents of the floating point numbers.
-
-Chapter two describes the architecture of the $\mu$FPU unit, and the
-motivations for the design decisions made.
-
-Chapter three describes the design of the compiler, as well as how the
-optimizations discussed in section~\ref{cha:introduction} were implemented.
-
-Chapter four describes the purpose of test code that was compiled, and which
-statistics were gathered by running it through the simulator.  The purpose
-is to measure what effect the micro-optimizations had, compared to
-unoptimized code.  Possible future expansions to the project are also
-discussed.
-
 \section{Motivation} % (fold)
 \label{sec:introduction:motivation}
 
