@@ -295,9 +295,9 @@ Category (3) Texture Based is the tracking technique used in this thesis, theref
 
 The template matching approach is based on global information, this subcategory lies in its ability to treat complex patterns that would be difficult to model by local features. These techniques are also called sum-of-square-difference (SSD), as they consist in minimizing the difference between a region of the image and a reference template.
 
-The subcategory of interest point based techniques takes into account localized features. As a result, this subcategory is less computer-intensive than template matching approach, this characteristic makes interest point technique a good choice for AR applications on the web.
+The subcategory of interest point based (or feature points) techniques takes into account localized features. As a result, this subcategory is less computer-intensive than template matching approach, this characteristic makes interest point technique a good choice for AR applications on the web.
 
-The tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Ozuysal2010a} to extracts interest points using corner detection. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations.
+The tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Rosten2010} to extracts feature points using corner detection. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations.
 
 % subsection basic_concepts:markerless_tracking_technique:model_based (end)
 
