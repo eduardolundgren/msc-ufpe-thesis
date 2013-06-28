@@ -297,10 +297,52 @@ The template matching approach is based on global information, this subcategory 
 
 The subcategory of interest point based (or feature points) techniques takes into account localized features. As a result, this subcategory is less computer-intensive than template matching approach, this characteristic makes interest point technique a good choice for AR applications on the web.
 
-The tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Rosten2010} to extracts feature points using corner detection. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations.
+The tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Rosten2010} to extracts feature points using corner detection. This technique is detailed on Section \ref{sec:basic_concepts:detecting_the_feature_points}. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor (also known as feature matching), detailed on Section \ref{sec:basic_concepts:feature_matching}. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations.
 
 % subsection basic_concepts:markerless_tracking_technique:model_based (end)
 
 % section markerless_tracking_technique (end)
+
+\section{Detecting the Feature Points} % (fold)
+\label{sec:basic_concepts:detecting_the_feature_points}
+
+Feature Points detection is used as the first step of many vision tasks such as tracking, localization, image matching and recognition. In this article we call ``feature'' or ``keypoint'' to refer to a point of interest in two dimensions. The method to extract feature points suggested in Features from Accelerated Segment Test (FAST) \cite{Rosten2010}. FAST is based on corner detection. A large number of corner detectors exist in the literature. However, we have a strong interest in realtime frame rate applications which computational resources are required requisites. The approach proposed by FAST allows the detector to produce a suite of high-speed detectors which we currently use for real-time tracking and AR label placement \cite{Calonder2010}. In particular, it is still true that when processing live video streams at full frame rate, existing feature detectors leave little if any time for further processing, even despite the consequences of Moore’s Law \cite{Rosten2010}.
+
+To show that speed can been obtained without necessarily sacrificing the quality of the feature detector, in Chapter \ref{cha:evaluation}, we compare our detector, to a variety of well-known detectors.
+
+A number of the detectors described below compute a corner response, (1) Edge based corner detectors, corresponds to the boundary between two regions; (2) Greylevel derivative based detectors, the assumption that corners exist along edges is an inadequate model for patches of texture and point like features, and is difficult to use at junctions. Therefore a large number of detectors operate directly on greylevel images without requiring edge detection; and (3) Direct greylevel detectors, Another major class of corner detectors work by examining a small patch of an image to see if it ``looks'' like a corner \cite{Rosten2010}.
+
+The thesis choice was (3) Direct greylevel detectors. It works by testing a small patch of an image to see if it could be a corner. The detector is evaluated using a circle surrounding the candidate pixel, the test is based on whether the concentric contiguous arcs around the pixel are significantly different from the central pixel $p$ \cite{Rosten2010}.
+
+To classify $p$ as a corner should exists a set of $n$ contiguous pixels in the circle which are all brighter than the intensity of the candidate pixel $I_{p} + t$ (threshold), or all darker than $I_{p} - t$ \cite{Rosten2010}.
+
+On Figure \ref{figure:fast}, the highlighted squares are the pixels used in the corner detection. The pixel at $p$ is the central pixel. The arc is indicating that the dashed line passes through FAST-$n$, let $n$ be $9$ or $12$ contiguous pixels which are brighter or darker than $p$ \cite{Rosten2010}.
+
+The number of contiguous tested pixels could vary accordingly \cite{Rosten2010}, being more common to be FAST-$12$ or FAST-$9$. Empirically, FAST-$9$ showed to have a good repeatability and a better efficiency on the web.
+
+The repeatability of found feature points is also important because determines whether the technique is useful in a real-world application.
+
+This detector in itself exhibits high performance, but there are several weaknesses: (1) This high-speed test does not reject as many candidates; (2) The efficiency of the detector will depend on the ordering of the questions and the distribution of corner appearances; and (3) Multiple features are detected adjacent to one another \cite{Rosten2010}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/basic_concepts/fast.png}
+  \caption{Point segment test corner detection in an image patch \cite{Glass2013}}
+  \label{figure:fast}
+\end{figure}
+
+% section detecting_the_feature_points (end)
+
+\section{Feature Matching} % (fold)
+\label{sec:basic_concepts:feature_matching}
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+% section feature_matching (end)
 
 % chapter basic_concepts (end)
