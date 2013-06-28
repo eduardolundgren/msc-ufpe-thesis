@@ -278,9 +278,9 @@ It is therefore much more desirable to rely on naturally present features, such 
 \section{Markerless Augmented Reality} % (fold)
 \label{sec:basic_concepts:markerless_augmented_reality}
 
-Markerless Augmented Reality (MAR) systems integrate virtual objects into a real environment in real-time, enhancing user's perception of and interaction with the world. This approach is not based on the use of traditional artificial markers that need to be placed in the world to be tracked by the system in order to calculate their position and orientation \cite{Teichrieb2007}, instead, MAR relies on naturally present features in order to position virtual objects. Tracking and registration techniques become more complex in MAR systems when compared to marker techniques.
+Markerless Augmented Reality (MAR) systems integrate virtual objects into a real environment in real-time, enhancing user's perception of and interaction with the world. This approach is not based on the use of traditional artificial markers that need to be placed in the world to be tracked by the system in order to calculate their position and orientation \cite{Teichrieb2007}, instead, MAR relies on naturally present features in order to position virtual objects. Tracking techniques become more complex in MAR systems when compared to marker techniques.
 
-MAR can be classified in two major types: model based and Structure from Motion (SfM) based. The Online monocular MAR taxonomy is shown on Figure \ref{figure:mar_taxonomy}.
+MAR can be classified in two major types: Model based and Structure from Motion (SfM) based. SfM based systems have advantages, since they are capable of continuously tracking the camera in unknown scenes, although it's not detailed in this thesis. Model based systems usually requires lower computational complexity, ideal to the web environment. The online monocular MAR taxonomy is shown on Figure \ref{figure:mar_taxonomy}.
 
 \begin{figure}[!htb]
   \centering
@@ -300,7 +300,7 @@ Category (3) Texture Based is the tracking technique used in this thesis, theref
 
 The template matching approach is based on global information, this subcategory lies in its ability to treat complex patterns that would be difficult to model by local features. These techniques are also called sum-of-square-difference (SSD), as they consist in minimizing the difference between a region of the image and a reference template.
 
-The subcategory of interest point based techniques takes into account localized features. As a result, this subcategory is less computer-intensive than model based, this characteristic makes interest point technique a good choice for AR applications on the web.
+The subcategory of interest point based techniques takes into account localized features. As a result, this subcategory is less computer-intensive than template matching approach, this characteristic makes interest point technique a good choice for AR applications on the web.
 
 % subsection basic_concepts:markerless_augmented_reality:model_based (end)
 
