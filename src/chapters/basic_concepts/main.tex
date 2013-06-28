@@ -255,7 +255,7 @@ In this thesis, it was designed and implemented an Augmented Reality (AR) framew
 
 % section augmented_reality (end)
 
-\section{Augmented Reality Tracking} % (fold)
+\section{Tracking} % (fold)
 \label{sec:basic_concepts:augmented_reality_tracking}
 
 Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application.
@@ -271,16 +271,16 @@ By contrast, vision has the potential to yield non-invasive, accurate and low-co
 
 In some cases, it is acceptable to add fiducials, such as special markers, to the scene or target object. The addition of fiducials in the scene, also called landmarks or markers, greatly helps since they constitute image features easy to extract, and they provide reliable, easy to exploit measurements for the pose estimation.
 
-It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture. The latter, makes tracking far more difficult because finding and following feature points or edges can be difficult. There are too few of them on many typical objects. Section \ref{sec:basic_concepts:markerless_augmented_reality} details Markerless Augmented Reality (MAR), main technique implemented on the web by this thesis.
+It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture. The latter, makes tracking far more difficult because finding and following feature points or edges can be difficult. There are too few of them on many typical objects. Section \ref{sec:basic_concepts:markerless_tracking_technique} details markerless tracking techniques, main technique implemented on the web by this thesis.
 
 % section augmented_reality_tracking (end)
 
-\section{Markerless Augmented Reality} % (fold)
-\label{sec:basic_concepts:markerless_augmented_reality}
+\section{Markerless Tracking Techniques} % (fold)
+\label{sec:basic_concepts:markerless_tracking_technique}
 
 Markerless Augmented Reality (MAR) systems integrate virtual objects into a real environment in real-time, enhancing user's perception of and interaction with the world. This approach is not based on the use of traditional artificial markers that need to be placed in the world to be tracked by the system in order to calculate their position and orientation \cite{Teichrieb2007}, instead, MAR relies on naturally present features in order to position virtual objects. Tracking techniques become more complex in MAR systems when compared to marker techniques.
 
-MAR can be classified in two major types: Model based and Structure from Motion (SfM) based. SfM based systems have advantages, since they are capable of continuously tracking the camera in unknown scenes, although it's not detailed in this thesis. Model based systems usually requires lower computational complexity, ideal to the web environment. The online monocular MAR taxonomy is shown on Figure \ref{figure:mar_taxonomy}.
+MAR can be classified in two major types: Model based and Structure from Motion (SfM) based. The online monocular MAR taxonomy is shown on Figure \ref{figure:mar_taxonomy}.
 
 \begin{figure}[!htb]
   \centering
@@ -289,8 +289,15 @@ MAR can be classified in two major types: Model based and Structure from Motion 
   \label{figure:mar_taxonomy}
 \end{figure}
 
+\subsection{Structure from Motion (SfM)} % (fold)
+\label{sub:basic_concepts:markerless_tracking_technique:sfm}
+
+SfM based systems have advantages, since they are capable of continuously tracking the camera in unknown scenes, although it's not detailed in this thesis. Model based systems usually requires lower computational complexity, ideal to the web environment.
+
+% subsection sfm (end)
+
 \subsection{Model Based} % (fold)
-\label{sub:basic_concepts:markerless_augmented_reality:model_based}
+\label{sub:basic_concepts:markerless_tracking_technique:model_based}
 
 The advantage of using a model based approach is the possibility of interaction between real and virtual worlds, like occlusion and collision. In order to accomplish such types of interaction, the application exploits the fact that the real object pose is known and its structure is described by the 3D model. Model based approaches require an a priori knowledge about the real scene. Due to the offline model acquiring process, these techniques are, in general, not totally online and cannot be used in unprepared environments. Furthermore, tracker initialization is usually done manually or requires a prior training in order to be automatic \cite{Teichrieb2007}.
 
@@ -304,8 +311,8 @@ The subcategory of interest point based techniques takes into account localized 
 
 The tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Ozuysal2010a} to extracts interest points using corner detection. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations.
 
-% subsection basic_concepts:markerless_augmented_reality:model_based (end)
+% subsection basic_concepts:markerless_tracking_technique:model_based (end)
 
-% section markerless_augmented_reality (end)
+% section markerless_tracking_technique (end)
 
 % chapter basic_concepts (end)
