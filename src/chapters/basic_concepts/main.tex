@@ -25,7 +25,7 @@
 
 Using concepts from existing hypertext systems, Tim Berners-Lee, computer scientist and at that time employee of CERN, wrote a proposal in March 1989 for what would eventually become the World Wide Web (WWW) \cite{WC2006}.
 
-The World Wide Web is a shared information system operating on top of the Internet \cite{WC2006}. Web browsers retrieve content and display from remote web servers using a stateless and anonymous protocol called HyperText Transfer Protocol (HTTP) \cite{WC2006}. Web pages are written using a simple language called HyperText Markup Language (HTML) \cite{WC2006}. They may be augmented with other technologies such as Cascading Style Sheets (CSS), which adds additional layout and style information to the page, and JavaScript (JS) language, which allows client-side computation \cite{WC2006}. Client-side refers to operations that are performed by the client in a client–server relationship in a computer network. Typically, a client is a computer application, such as a web browser, that runs on a user's local computer or workstation and connects to a server as necessary. Browsers typically provide other useful features such as bookmarking, history, password management, and accessibility features to accommodate users with disabilities \cite{Grosskurth2005}.
+The World Wide Web is a shared information system operating on top of the Internet \cite{WC2006}. Web browsers retrieve content and display from remote web servers using a stateless and anonymous protocol called HyperText Transfer Protocol (HTTP) \cite{WC2006}. Web pages are written using a simple language called HyperText Markup Language (HTML) \cite{WC2006}. They may be augmented with other technologies such as Cascading Style Sheets (CSS) \cite{CSS2013}, which adds additional layout and style information to the page, and JavaScript (JS) language, which allows client-side computation \cite{WC2006}. Client-side refers to operations that are performed by the client in a client–server relationship in a computer network. Typically, a client is a computer application, such as a web browser, that runs on a user's local computer or workstation and connects to a server as necessary. Browsers typically provide other useful features such as bookmarking, history, password management, and accessibility features to accommodate users with disabilities \cite{Grosskurth2005}.
 
 In the beginning of the web, plain text and images were the most advanced features available on the browsers \cite{WC2006}. In 1994, the World Wide Web Consortium (W3C) was founded to promote interoperability among web technologies. Companies behind web browser development together with the web community, were able to contribute to the W3C specifications \cite{WC2006}. Today's web is a result of the ongoing efforts of an open web community that helps define these technologies and ensure that they're supported in all web browsers \cite{Grosskurth2005}. Those contributions transformed the web in a growing universe of interlinked pages and applications, with videos, photos, interactive content, 3D graphics processed by the Graphics Processing Unit (GPU) \cite{WebGL2013}, and other varieties of features without requiring any third-party plugins installation \cite{Hickson2013}. The significant reuse of open source components among different browsers and the emergence of extensive web standards have caused the browsers to exhibit ``convergent evolution'' \cite{Grosskurth2005}.
 
@@ -39,12 +39,12 @@ Three mature browser implementations were selected and, for each browser, a conc
 \begin{enumerate}
   \item User interface: includes the address bar, back and forward buttons, bookmarking menu \etc\ Every part of the browser display except the main window where you see the requested resource \cite{Grosskurth2005}.
   \item Browser engine: an embeddable component that provides a high-level interface for querying and manipulating the Rendering engine \cite{Grosskurth2005} \cite{Rocks2013}.
-  \item Rendering engine: which performs parsing and layout for HTML documents, optionally styled with CSS \cite{Grosskurth2005} \cite{Rocks2013}.
+  \item Rendering engine: performs parsing and layout for HTML documents \cite{Grosskurth2005} \cite{Rocks2013}.
   \item Networking subsystem: used for network calls, like HTTP requests. It has platform independent interface and underneath implementations for each platform \cite{Grosskurth2005} \cite{Rocks2013}.
-  \item JavaScript parser: used to parse and execute the JavaScript code \cite{Grosskurth2005}.
+  \item JavaScript parser: parses and executes the JavaScript code \cite{Grosskurth2005}.
   \item XML Parser.
-  \item UI backend: which provides drawing and windowing primitives, user interface widgets, and fonts. Underneath it uses the operating system user interface methods \cite{Grosskurth2005}.
-  \item Data persistence: which stores various data associated with the browsing session on disk, including bookmarks, cookies, and cache \cite{Grosskurth2005} \cite{Rocks2013}.
+  \item UI backend: provides drawing and windowing primitives, user interface widgets, and fonts. Underneath it uses the operating system user interface methods \cite{Grosskurth2005}.
+  \item Data persistence: stores various data associated with the browsing session on disk, including bookmarks, cookies, and cache \cite{Grosskurth2005} \cite{Rocks2013}.
 \end{enumerate}
 
 \begin{figure}[!htb]
@@ -70,15 +70,39 @@ Another common swappable subsystem is (5) the JavaScript parser. JavaScript is a
 \subsection{Audio and Video} % (fold)
 \label{sub:basic_concepts:web:audio_and_video}
 
-Audio and video capture has been a limitation of web browsers for a long time \cite{Hickson2013}. For many years the authors had to rely on browser plugins, such as Flash \cite{Flash2013} or Silverlight \cite{Silverlight2013} \cite{Rocks2013}. HTML5 \cite{Hickson2013} has brought a surge of access to device hardware, Geolocation (GPS), the Orientation API (accelerometer), WebGL \cite{WebGL2013} and the Real-time Communication Between Browsers specification (WebRTC) \cite{WebRTC2013} in conjunction with Media Capture and Streams specification, a set of JavaScript APIs that allow local media, including audio and video, to be requested from a platform trough \textit{getUserMedia} API \cite{WC2006}.
+Audio and video elements were introduced into the browsers by HTML5 \cite{Hickson2013} specification. Audio and video are HTML5 \cite{Hickson2013} features that attracts a lot of attention. Often presented as an alternative to Flash \cite{Flash2013} in the media, the video element has advantages due to its natural integration with the other layers of the web development stack such as CSS \cite{CSS2013} and JavaScript \cite{International2009} as well as the other HTML elements \cite{WC2006}. The three video formats supported by the three well known browsers cited in this thesis are \cite{WC2006} \cite{Rocks2013}, webm (VP8 Vorbis) \cite{Vorbis2012}, mp4 (H.264 AAC) \cite{AAC2006} and ogv (Theora Vorbis) \cite{Theora2011}. The audio formats available are ogg (Theora Vorbis) \cite{Theora2011} and mp4 (H.264 AAC) \cite{AAC2006}.
 
-With \textit{getUserMedia} \cite{WebRTC2013}, the browser can access the camera and microphone input without a plugin. It's available directly into the browser. The access camera and microphone hardware access can be used in combination with the HTML5 \cite{Hickson2013} audio and video elements. The access flow of raw binary data captured from videos on modern browsers is shown on Figure \ref{figure:get_user_media} and comprises five major steps \cite{WebRTC2013} \cite{Rocks2013}:
+Audio and video addition to the browser environment was a good first step for Augmented Reality (AR) applications, on the other hand, the browsers were still not capable of capturing audio and video from the user's camera and microphone, respectively. Audio and video capture has been a limitation of web browsers for a long time \cite{Hickson2013}. For many years the authors had to rely on browser plugins, such as Flash \cite{Flash2013} or Silverlight \cite{Silverlight2013} \cite{Rocks2013}. With HTML5 \cite{Hickson2013}, you can now add media to a webpage with just a line or two of code \cite{WebKit2013}. Browser audio and video elements \cite{Hickson2013} are shown in Figure \ref{figure:html5_audio_video}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=400pt]{chapters/basic_concepts/html5_audio_video.png}
+  \caption{Video and audio HTML elements \cite{WebKit2013}}
+  \label{figure:html5_audio_video}
+\end{figure}
+
+Missing audio and video browser capturing is no longer a problem for the modern browsers cited in this thesis \cite{WebRTC2013} \cite{Hickson2013}. HTML5 specification \cite{Hickson2013} has brought a surge of access to device hardware, including Real-time Communication Between Browsers specification (WebRTC) \cite{WebRTC2013} and with Media Capture and Streams specification \cite{MediaCapture2013}. Together, they provide a set of HTML5 \cite{Hickson2013} and JavaScript APIs \cite{WebRTC2013} that allows local media, including audio and video, to be requested from the user platform \cite{WC2006}. With Media Capture and Streams specification \cite{MediaCapture2013}, the browser can access the camera and microphone input without requiring third-party plugin installation. It's available directly into the browser.
+
+The access camera and microphone hardware access can be used in combination with the HTML5 \cite{Hickson2013} audio and video elements. An example of camera and microphone capturing using a video element is shown on Listing \ref{lst:get_user_media}.
+
+\begin{lstlisting}[language=C++,label={lst:get_user_media},caption=Capture and display microphone and camera]
+<video autoplay></video>
+<script>
+  var video = document.querySelector('video');
+  navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
+      video.src = window.URL.createObjectURL(localMediaStream);
+      video.onloadedmetadata = function(e) { alert('Ready to go.') };
+  }, onFail);
+</script>
+\end{lstlisting}
+
+In Section \ref{sub:basic_concepts:web:canvas_element}, a new HTML5 \cite{Hickson2013} called canvas \cite{Canvas2013} is introduced. Trough the canvas element \cite{Canvas2013} the video frames can be read, thus providing access to the raw binary data information of each frame \cite{Canvas2013} \cite{Hickson2013}. This raw binary data, also known as array of pixels \cite{Gonzalez2007}, is extremely useful for AR applications \cite{Teichrieb2007}. Since the AR area of study performed on this thesis is based on video tracking, from now on, it will focus on camera and video. There are several integration steps required from capturing video to reading the array of pixels \cite{Gonzalez2007}. In order to enable the browser to capture the user camera \cite{MediaCapture2013}, stream the information into a video element \cite{Hickson2013}, connect the video to a canvas element \cite{Canvas2013}, to finally access the array of pixels of each video frame is a long run. The access flow of raw binary data captured from videos on modern browsers is shown on Figure \ref{figure:get_user_media} and comprises five major steps \cite{WebRTC2013} \cite{Rocks2013}:
 
 \begin{enumerate}
-  \item  Hardware access: browser camera and microphone hardware is accessed \cite{WebRTC2013}.
+  \item  Hardware access: using HTML5 \cite{Hickson2013} new media capture and streams specification \cite{MediaCapture2013}, the browser camera and microphone hardware is accessed \cite{WebRTC2013}.
   \item Streaming: hardware streams audio and video to the browser UI elements \cite{WebRTC2013}.
-  \item UI elements: elements that displays the data stream, \eg\ audio and video elements \cite{Hickson2013}.
-  \item Raw binary data: canvas element \cite{Canvas2013} that ``hosts'' video frames providing access to the array of pixels.
+  \item UI elements: using HTML5 \cite{Hickson2013} video element displays the data stream into the browser viewport \cite{WC2006}.
+  \item Raw binary data: using HTML5 \cite{Hickson2013} canvas element \cite{Canvas2013} reads the video frames, providing access to the array of pixels.
 \end{enumerate}
 
 \begin{figure}[!htb]
@@ -88,40 +112,20 @@ With \textit{getUserMedia} \cite{WebRTC2013}, the browser can access the camera 
   \label{figure:get_user_media}
 \end{figure}
 
-Audio and video elements are HTML5 \cite{Hickson2013} features that attracts a lot of attention. Often presented as an alternative to Flash \cite{Flash2013} in the media, the video element has advantages due to its natural integration with the other layers of the web development stack such as CSS and JavaScript as well as the other HTML elements. The three video formats supported by the three well known browsers cited in this thesis are, webm (VP8 Vorbis) \cite{WC2006}, mp4 (H.264 AAC) \cite{WC2006} and ogv (Theora Vorbis) \cite{WC2006} \cite{Rocks2013}. The audio formats available are ogg (Theora Vorbis) \cite{WC2006} and mp4 (H.264 AAC) \cite{WC2006}. An example of \textit{getUserMedia} API being used to capture the camera and microphone using a video element to display is shown on Listing \ref{lst:get_user_media}.
-
-\begin{lstlisting}[language=C++,label={lst:get_user_media},caption=Capture and display microphone and camera]
-<video autoplay></video>
-<script>
-  var video = document.querySelector('video');
-  navigator.getUserMedia(
-    {video: true, audio: true},
-    function(localMediaStream) {
-        video.src = window.URL.createObjectURL(localMediaStream);
-        video.onloadedmetadata = function(e) {
-          // Ready to go.
-        };
-    },
-    onFail);
-</script>
-\end{lstlisting}
-
 % subsection audio_and_video (end)
 
 \subsection{Canvas Element} % (fold)
 \label{sub:basic_concepts:web:canvas_element}
 
-The canvas element \cite{Canvas2013} provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly \cite{Canvas2013}. Authors should not use the canvas element \cite{Canvas2013} in a document when a more suitable element is available, \eg\ it is inappropriate to use a canvas element \cite{Canvas2013} to render a page heading. The usage of canvas conveys essentially the same function or purpose as the canvas bitmap. Listing \ref{lst:canvas_element_markup} shows an example of a basic canvas element \cite{Canvas2013} HTML markup given a width and height in pixels.
+The canvas \cite{Canvas2013} is an HTML5 \cite{Hickson2013} element that provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly \cite{Canvas2013}.
+
+Authors should not use the canvas element \cite{Canvas2013} in a document when a more suitable element is available, \eg\ it is inappropriate to use a canvas element \cite{Canvas2013} to render a page heading. The usage of canvas conveys essentially the same function or purpose as the canvas bitmap. Listing \ref{lst:canvas_element_markup} shows an example of a basic canvas element \cite{Canvas2013} HTML markup given a width and height in pixels.
 
 \begin{lstlisting}[language=HTML,label={lst:canvas_element_markup},caption=The HTML canvas element markup]
 <canvas width="200" height="200"></canvas>
 \end{lstlisting}
 
-For each canvas element \cite{Canvas2013} a ``context'' is available , then, from that, the drawing context can be accessed and JavaScript commands can be invoked to draw or read data \cite{Canvas2013}. Browsers can implement multiple canvas contexts and the different APIs provide the drawing functionality \cite{Canvas2013}. Most of the major browsers include the 2D canvas context capabilities. Individual vendors have experimented with their own three-dimensional canvas APIs \cite{Canvas2013}, but none of them have been standardized. The HTML5 \cite{Hickson2013} specification notes, ``A future version of this specification will probably define a 3D context'' \cite{Canvas2013}. Even though 3D context is not available in most part of the major browsers, three-dimensional applications are already being developed based on the 2D canvas context.
-
-Is mandatory the use of the canvas element \cite{Canvas2013} to develop AR applications on the web. Canvas provides APIs to: draw basic shapes, images, videos frames, Bezier \cite{piegl1993fundamental} and quadratic curves \cite{piegl1993fundamental} \cite{Hartley2004}; Apply transformations, translate, rotate and scale; Read raw pixel data \etc.
-
- The canvas \cite{Canvas2013} is a two-dimensional grid that could be described as a simple computer graphics coordinate system \cite{Hartley2004}. Normally $1$ unit in the grid corresponds to $1$ pixel on the canvas \cite{Canvas2013}. The origin of this grid is positioned in the top left corner coordinate $(0,0)$ \cite{Canvas2013}. All elements are placed relative to this origin \cite{Canvas2013}. So the position of the top left corner of the blue square becomes $x$ pixels from the left and $y$ pixels from the top coordinate $(x,y)$ \cite{Canvas2013}. The canvas coordinate space is shown on Figure \ref{figure:canvas_axis} \cite{MDN2013}.
+The canvas \cite{Canvas2013} is a two-dimensional grid that could be described as a simple computer graphics coordinate system \cite{Hartley2004}. Normally one unit in the grid corresponds to one pixel on the canvas \cite{Canvas2013}. The origin of this grid is positioned in the top left corner coordinate $(0,0)$ \cite{Canvas2013}. All elements are placed relative to this origin \cite{Canvas2013}. So the position of the top left corner of the blue square becomes $x$ pixels from the left and $y$ pixels from the top coordinate $(x,y)$ \cite{Canvas2013}. The canvas coordinate space is shown on Figure \ref{figure:canvas_axis} \cite{MDN2013}.
 
  \begin{figure}[!htb]
    \centering
@@ -130,12 +134,16 @@ Is mandatory the use of the canvas element \cite{Canvas2013} to develop AR appli
    \label{figure:canvas_axis}
  \end{figure}
 
+For each canvas element \cite{Canvas2013} a ``context'' is available. The canvas context provides the drawing context that can be accessed and JavaScript commands can be invoked to draw or read data \cite{Canvas2013}. Browsers can implement multiple canvas contexts and the different APIs provide the drawing functionality \cite{Canvas2013}. Most of the major browsers include the 2D canvas context capabilities. Individual vendors have experimented with their own three-dimensional canvas APIs \cite{Canvas2013}, but none of them have been standardized. The HTML5 \cite{Hickson2013} specification notes, ``A future version of this specification will probably define a 3D context'' \cite{Canvas2013}. Even though 3D context is not available in most part of the major browsers, three-dimensional applications are already being developed based on the 2D canvas context.
+
+Is mandatory the use of the canvas element \cite{Canvas2013} to develop AR applications on the web, since it's the only way to read video frames array of pixels without any plugin in the browser environment, for more information see Section \ref{sub:basic_concepts:web:audio_and_video}. Canvas provides APIs to: draw basic shapes, images, videos frames, Bezier \cite{piegl1993fundamental} and quadratic curves \cite{piegl1993fundamental} \cite{Hartley2004}; Apply transformations, translate, rotate and scale; Read raw pixel data \etc.
+
 % subsection canvas_element (end)
 
 \subsection{JavaScript Typed Arrays} % (fold)
 \label{sub:basic_concepts:web:javascript_typed_arrays}
 
-The JavaScript language is intended to be used within some larger environment \cite{MDN2013}, be it a browser, server-side scripts, or similar. JavaScript core language features comprises few major features \cite{MDN2013}:
+The JavaScript language \cite{International2009} is intended to be used within some larger environment, be it a browser, server-side scripts, or similar \cite{Grosskurth2005}. JavaScript core language features comprises few major features \cite{MDN2013}:
 
 \begin{enumerate}
 \item Functions and function scope: function is a subprogram that can be called by code external \cite{MDN2013}, functions have a scope it references for execution \cite{MDN2013}.
@@ -200,7 +208,7 @@ As conclusion, typed arrays provides faster read and write operations than regul
   \label{figure:typed_arrays_performance}
 \end{figure}
 
-Nevertheless, reading and writing raw binary data \cite{Canvas2013} \cite{TypedArray2013} using typed arrays only solves part of the problem of manipulating video and images data. The other missing feature was solved by HTML5 \cite{Hickson2013} canvas element \cite{Canvas2013}, which one important feature is to provide access to the pixel matrix of those medias \cite{Canvas2013} \cite{Hickson2013}. The raw binary data is used by Augmented Reality (AR) algorithms.
+Nevertheless, reading and writing raw binary data \cite{Canvas2013} \cite{TypedArray2013} using typed arrays only solves part of the problem of manipulating video and images data. The other missing feature was solved by HTML5 \cite{Hickson2013} canvas element \cite{Canvas2013}, which one important feature is to provide access to the array of pixels of those medias \cite{Canvas2013} \cite{Hickson2013}. The raw binary data is used by Augmented Reality (AR) algorithms. For more information see Section \ref{sub:basic_concepts:web:audio_and_video}.
 
  Videos and images pixels can be drew on a canvas bitmap \cite{Canvas2013}. Canvas raw binary data can be accessed from the canvas JavaScript API as an object of type \textit{ImageData} \cite{Canvas2013}. Each object has three properties: width, height and data \cite{Canvas2013} \cite{MDN2013}. The data property is of type \textit{Uint8ClampedArray} \cite{TypedArray2013} that is a one-dimensional array containing the data in RGBA \cite{Gonzalez2007} order, as integers in the range $0$ to $255$. The \textit{Uint8ClampedArray} \cite{TypedArray2013} interface type is specifically used in the definition of the canvas element's 2D API and its structure is  similar to the previous shown typed array \textit{Uint8Array} \cite{Canvas2013} \cite{TypedArray2013}.
 
