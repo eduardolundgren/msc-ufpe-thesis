@@ -394,12 +394,15 @@ The interest point based tracking solution proposed, uses Features from Accelera
 \subsection{Structure from Motion (SfM)} % (fold)
 \label{sub:basic_concepts:markerless_tracking_technique:sfm}
 
-SfM based systems have advantages, since they are capable of continuously tracking the camera in unknown scenes, although it's not detailed in this thesis. Model based systems usually requires lower computational complexity, ideal to the web environment. Real time Structure from Motion (SfM) \cite{Teichrieb2007} is shown on Figure \ref{figure:sfm}.
+One interesting aspect of SfM based techniques are that they are mainly online, since they do not require any previous offline learning phase \cite{Teichrieb2007}. Therefore, it is possible to reconstruct a totally unknown environment on the fly. As a drawback, SfM approaches are often very complex and have some constraints related to their real-time nature \cite{Teichrieb2007}.
+Instead of relying on previously obtained information about the scene to be tracked, some MAR techniques estimate the camera displacement without any a priori knowledge about the environment. These methods are also able to retrieve the structure of the scene in real-time, with different levels of detail, depending on the approach used \cite{Teichrieb2007}.
+
+SfM based systems have advantages, since they are capable of continuously tracking the camera in unknown scenes \cite{Teichrieb2007}. The focus of this thesis is provide texture based techniques on the web, therefore SfM techniques are not detailed in this thesis. Model based systems requires lower computational complexity, ideal to the web environment. Real time tracking using Structure from Motion (SfM) techniques \cite{Teichrieb2007} is shown on Figure \ref{figure:sfm}.
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=350pt]{chapters/basic_concepts/sfm.png}
-  \caption{Real time Structure from Motion (SfM)}
+  \caption{Real time tracking using Structure from Motion (SfM) techniques}
   \label{figure:sfm}
 \end{figure}
 
