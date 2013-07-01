@@ -342,21 +342,60 @@ SfM based systems have advantages, since they are capable of continuously tracki
 \subsection{Model Based} % (fold)
 \label{sub:basic_concepts:markerless_tracking_technique:model_based}
 
-The advantage of using a model based approach is the possibility of interaction between real and virtual worlds, like occlusion and collision. In order to accomplish such types of interaction, the application exploits the fact that the real object pose is known and its structure is described by the 3D model. Model based approaches require an a priori knowledge about the real scene. Due to the offline model acquiring process, these techniques are, in general, not totally online and cannot be used in unprepared environments. Furthermore, tracker initialization is usually done manually or requires a prior training in order to be automatic \cite{Teichrieb2007}. Model based techniques can be classified in three categories:
+Model-based trackers usually construct their models based on lines or edges in the model. Edges are the most frequently used features as they are computationally efficient to find and robust to changes in lighting \cite{Zhou2008}. Texture is another useful feature for constructing models. The advantage of using a model based approach is the possibility of interaction between real and virtual worlds \cite{Teichrieb2007}, like occlusion and collision. In order to accomplish such types of interaction, the application exploits the fact that the real object pose is known and its structure is described by the 3D model \cite{Teichrieb2007}.
+
+Model based approaches require an a priori knowledge about the real scene \cite{Teichrieb2007}. Due to the offline model acquiring process, these techniques are, in general, not totally online and cannot be used in unprepared environments \cite{Teichrieb2007}. Furthermore, tracker initialization is usually done manually or requires a prior training in order to be automatic \cite{Teichrieb2007}. Model based techniques can be classified in three categories:
 
 \begin{enumerate}
-  \item Edge based: the camera pose is estimated by matching a wireframe 3D model of an object with the real world image edge information.
-  \item Optical flow based: rely on spatial information obtained by image-model matching extracted from the relative movement of the object projection onto the image.
-  \item Texture based: takes into account texture information presented in images.
+  \item Edge based: the camera pose is estimated by matching a wireframe 3D model of an object with the real world image edge information. This matching is achieved by projecting the model onto the image and minimizing the displacement between the projected model and the imaged object \cite{Teichrieb2007,Lepetit2005}. In edge based methods, the initialization is done manually \cite{Teichrieb2007}. Once the first pose is estimated, it is used to project the model onto the next frame. Assuming that camera displacement between consecutive frames is relatively small, using the previous pose estimation to predict the next pose will not harm the matching process \cite{Teichrieb2007}. Edge based methods usually do not support fast camera movements, since the projected model will be too far from its correct location \cite{Teichrieb2007}. Edge based methods can be divided in two subcategories \cite{Teichrieb2007}:
+
+    \begin{enumerate}
+      \item Point sampling: sample some control points along the edges of the wireframe 3D model and compare their projections with strong gradients present in the image \cite{Teichrieb2007}. Edge based by point sampling is shown on Figure \ref{figure:point_sampling}.
+
+      \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=200pt]{chapters/basic_concepts/point_sampling.png}
+        \caption{Edge based by point sampling}
+        \label{figure:point_sampling}
+      \end{figure}
+
+      \item Edge detection: detect explicit edges on the image and match them with the model projection \cite{Teichrieb2007}. Edge based by edge detection is shown on Figure \ref{figure:edge_detection}.
+
+      \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=200pt]{chapters/basic_concepts/edge_detection.png}
+        \caption{Edge based by edge detection \cite{Teichrieb2007}}
+        \label{figure:edge_detection}
+      \end{figure}
+
+    \end{enumerate}
+
+  \item Optical flow based: rely on spatial information obtained by image-model matching extracted from the relative movement of the object projection onto the image \cite{Teichrieb2007,Lepetit2005}. After initialization, which is often manual, the optical flow between the frames captured at time t and $t+1$ is calculated \cite{Teichrieb2007}. Then, the algorithm determines which points from the model projected onto the image at time t are still present in the image at time $t+1$ \cite{Teichrieb2007}.
+  \item Texture based: takes into account texture information presented in images \cite{Teichrieb2007,Lepetit2005}. Texture based technique could be divided in two sub-categories: (a) template-matching \cite{Teichrieb2007,Lepetit2005} and (b) interest point \cite{Teichrieb2007,Lepetit2005}. The technique implemented in this thesis is texture based, furthermore, a much detailed description is presented:
+
+    \begin{enumerate}
+      \item Template matching: is based on global information, this subcategory lies in its ability to treat complex patterns that would be difficult to model by local features \cite{Teichrieb2007,Lepetit2005}. These techniques are also called sum-of-square-difference (SSD) \cite{Teichrieb2007,RostenFaster2010}, as they consist in minimizing the difference between a region of the image and a reference template \cite{Teichrieb2007,Lepetit2005}. Texture based by template matching is shown on Figure \ref{figure:template_matching}.
+
+        \begin{figure}[!htb]
+          \centering
+          \includegraphics[width=200pt]{chapters/basic_concepts/template_matching.png}
+          \caption{Texture based by template matching}
+          \label{figure:template_matching}
+        \end{figure}
+
+      \item Interest point: takes into account localized features \cite{Teichrieb2007}. As a result, this subcategory is less computer-intensive than template matching approach \cite{Teichrieb2007,RostenFaster2010}, this characteristic makes interest point technique a good choice for AR applications on the web. Texture based by interest points is shown on Figure \ref{figure:keypoints}.
+
+        \begin{figure}[!htb]
+          \centering
+          \includegraphics[width=200pt]{chapters/basic_concepts/keypoints.png}
+          \caption{Texture based by interest points}
+          \label{figure:keypoints}
+        \end{figure}
+    \end{enumerate}
+
 \end{enumerate}
 
-The technique implemented in this thesis is based on texture, therefore a much detailed description is presented in the following lines. Texture based could be divided into two sub-categories: template-matching and interest point.
-
-The template matching approach is based on global information, this subcategory lies in its ability to treat complex patterns that would be difficult to model by local features. These techniques are also called sum-of-square-difference (SSD), as they consist in minimizing the difference between a region of the image and a reference template.
-
-The subcategory of interest point based (or feature points) techniques takes into account localized features. As a result, this subcategory is less computer-intensive than template matching approach, this characteristic makes interest point technique a good choice for AR applications on the web.
-
-The tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Rosten2010} to extracts feature points using corner detection. This technique is detailed on Section \ref{sec:ar_library_for_the_web:interest_point_detection}. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor (also known as feature matching), detailed on Section \ref{sec:ar_library_for_the_web:interest_point_matching}. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations.
+The interest point based tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Rosten2010} to extracts feature points using corner detection. This technique is detailed on Section \ref{sec:ar_library_for_the_web:interest_point_detection}. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor (also known as feature matching), detailed on Section \ref{sec:ar_library_for_the_web:interest_point_matching}. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations \cite{Calonder2010,RostenFaster2010}.
 
 % subsection basic_concepts:markerless_tracking_technique:model_based (end)
 
