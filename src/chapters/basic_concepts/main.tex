@@ -332,13 +332,6 @@ MAR can be classified in two major types: Model based and Structure from Motion 
   \label{figure:mar_taxonomy}
 \end{figure}
 
-\subsection{Structure from Motion (SfM)} % (fold)
-\label{sub:basic_concepts:markerless_tracking_technique:sfm}
-
-SfM based systems have advantages, since they are capable of continuously tracking the camera in unknown scenes, although it's not detailed in this thesis. Model based systems usually requires lower computational complexity, ideal to the web environment.
-
-% subsection sfm (end)
-
 \subsection{Model Based} % (fold)
 \label{sub:basic_concepts:markerless_tracking_technique:model_based}
 
@@ -397,6 +390,20 @@ Model based approaches require an a priori knowledge about the real scene \cite{
 The interest point based tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Rosten2010} to extracts feature points using corner detection. This technique is detailed on Section \ref{sec:ar_library_for_the_web:interest_point_detection}. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor (also known as feature matching), detailed on Section \ref{sec:ar_library_for_the_web:interest_point_matching}. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations \cite{Calonder2010,RostenFaster2010}.
 
 % subsection basic_concepts:markerless_tracking_technique:model_based (end)
+
+\subsection{Structure from Motion (SfM)} % (fold)
+\label{sub:basic_concepts:markerless_tracking_technique:sfm}
+
+SfM based systems have advantages, since they are capable of continuously tracking the camera in unknown scenes, although it's not detailed in this thesis. Model based systems usually requires lower computational complexity, ideal to the web environment. Real time Structure from Motion (SfM) \cite{Teichrieb2007} is shown on Figure \ref{figure:sfm}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=350pt]{chapters/basic_concepts/sfm.png}
+  \caption{Real time Structure from Motion (SfM)}
+  \label{figure:sfm}
+\end{figure}
+
+% subsection sfm (end)
 
 % section markerless_tracking_technique (end)
 
