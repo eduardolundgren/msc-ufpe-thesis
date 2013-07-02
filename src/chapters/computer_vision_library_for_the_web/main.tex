@@ -4,9 +4,50 @@
 \section{Introduction} % (fold)
 \label{sec:ar_library_for_the_web:introduction}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+The desktop platform is the target environment most commonly addressed when developing Augmented Reality (AR) systems. However, depending on the requirements of an AR application, the use of different execution platforms may be necessary. If the system has to be published to several users, the web platform shows to be more adequate, where the application is executed through the Internet in a web browser \cite{Pablo2013}.
+The use of markerless tracking, which is based on natural features of the scene, has also been gaining more space on web targeted AR applications for advertising. The media used in this kind of application needs to be as appealing as possible in order to catch consumers’ attention. Markerless tracking satisfies this requirement, since the idea of having a real scene augmented with virtual objects without any artificial elements such as markers added to the environment is very attractive \cite{Pablo2013}. In addition, the product being advertised can be tracked and augmented with virtual elements \cite{Pablo2013}.
+Browsers are evolving very fast when compared to the the previous decade \cite{Hickson2013}. JavaScript language \cite{International2009,MDN2013} wasn't prepared to handle typed data structures \cite{TypedArray2013} able to manipulate raw binary data safely \cite{Canvas2013}, all the computational complexity required by AR algorithms was too much for that growing environment. Browsers weren't able to capture audio and video \cite{MediaCapture2013,WebRTC2013} natively, without plugin installation \cite{Flash2013}, an essential feature for AR applications. This reality has changed, this involves the use of several modern browser specifications \cite{Hickson2013,WC2006} as well as implementation of different computer vision algorithms and techniques into the browser environment taking advantage of all those modern APIs \cite{Hickson2013,WC2006}.
+
+In this context, this thesis aims to present the implementation and evaluation of some solutions regarding markerless tracking for web targeted AR. Some optimizations are discussed and implemented on this work in order to achieve good results when compared with similar implementations in compiled languages.
 
 % section introduction (end)
+
+\section{Related Work} % (fold)
+\label{sec:ar_library_for_the_web:related_work}
+
+There are not many web based RA solutions available and registered in the literature. The ones available are mainly focused on fiducial markers \cite{Cho1998}, such as FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011}, they both are ports of ARToolKit \cite{Hirokazu2002}. ARToolKit is a desktop library which is useful to make vision-based Augmented Reality applications \cite{Hirokazu2002}. The Metaio company developed Unifeye Viewer \cite{Metaio2009}, a proprietary plug-in for Flash \cite{Flash2013} that allows the utilization of markerless AR applications on the web. In order to run Flash \cite{Flash2013} based applications, the instalation of its plugin is required. Third-party plugins, such as Flash \cite{Flash2013}, are in decadency on modern and mobile web browsers, instead JavaScript \cite{International2009} based solutions are preffered, since they can run in any modern browser without required any user effort of installing external software. Some smart-phones doesn't even support Flash \cite{Flash2013} plugin into their browsers, \eg\ Safari for mobile \cite{Safari2013} is one example of a mobile browser that have banned Flash \cite{Flash2013}.
+
+\begin{enumerate}
+    \item FLARToolKit: is a port of the well-known ARToolKit \cite{Hirokazu2002} marker tracking library to ActionScript \cite{Flash2013}, which is the language utilized in the development of Flash \cite{Flash2013} applications for the web. This was the first initiative towards AR solutions for the web \cite{Pablo2013}. Using FLARToolKit, is possible to develop AR applications that runs on client's browser. A marker based AR example for the web developed for a marketing campaing of General Electric's company using FLARToolKit is shown on Figure \ref{figure:flartoolkit}.
+
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=240pt]{chapters/computer_vision_library_for_the_web/flartoolkit.png}
+      \caption{Marker based AR for the web using FLARToolKit}
+      \label{figure:flartoolkit}
+    \end{figure}
+
+    \item JSARToolkit: is a JavaScript \cite{International2009} port of FLARToolKit \cite{Yan2011}, operating on canvas images \cite{Canvas2013} and
+video element \cite{Hickson2013} contents, provides another marker tracking library. This was the first, open-source, JavaScript \cite{International2009} based, AR solution available for the web. A marker based AR example for the web using JSARToolKit is shown on Figure \ref{figure:jsartoolkit}.
+
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=240pt]{chapters/computer_vision_library_for_the_web/jsartoolkit.png}
+      \caption{Marker based AR for the web using JSARToolKit}
+      \label{figure:jsartoolkit}
+    \end{figure}
+
+    \item Unifeye Viewer: from Metaio company, offers a robust markerless tracking solution. Unifeye \cite{Metaio2009} also depends on Flash \cite{Flash2013} plugin in order to run on web browsers. A similar example of General Electric's marker based, previously shown on Figure \ref{figure:flartoolkit}, is a markerless based using Unifeye Eye \cite{Metaio2009} shown on Figure \ref{figure:unifeyeviewer}. Note that the 3D image is projected over a magazine cover instead of a fiducial marker \cite{Cho1998}.
+
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=240pt]{chapters/computer_vision_library_for_the_web/unifeyeviewer.png}
+      \caption{Marker based AR for the web using JSARToolKit}
+      \label{figure:unifeyeviewer}
+    \end{figure}
+\end{enumerate}
+
+% section related_work (end)
 
 \section{Marker-less Tracking Algorithm (Keypoints)} % (fold)
 \label{sec:ar_library_for_the_web:marker_less_tracking_algorithm}
