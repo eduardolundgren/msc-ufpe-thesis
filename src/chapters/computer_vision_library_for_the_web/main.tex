@@ -25,7 +25,7 @@ The two main available packages splits Base from AR classes. Furthermore, each c
   \item DOMElement: provides a way to create, and manipulate HTML \cite{Hickson2013} DOM nodes \cite{WC2006}. Each DOMElement instance represents an underlying DOM node \cite{WC2006}. In addition to wrapping the basic DOM API \cite{WC2006} and handling cross browser issues, Nodes provide convenient methods for managing styles, subscribing to events, \etc.
   \item Canvas: provides an utility class to create, and manipulate HTML5 \cite{Hickson2013} canvas element \cite{Canvas2013}. Each Canvas instance represents an underlying canvas DOM node \cite{Canvas2013}. In addition to wrapping the basic DOM API \cite{WC2006}, also provides methods to extract via \textit{getImageData} method, to loop via \textit{forEach} method, and to set the canvas array of pixels via \textit{setImageData} method.
   \item Video: provides an utility class to create, and manipulate HTML5 \cite{Hickson2013} video element. Each Video instance represents an underlying video DOM node \cite{Canvas2013}. In addition to wrapping the basic DOM API \cite{WC2006}, also provides methods to \textit{play}, \textit{pause} and register tracker algorithms via \textit{track} method. See subsection \ref{sub:basic_concepts:web:audio_and_video} for more information about video element.
-  \item VideoCamera: extends all functionalities from Video class with the addition of capturing the user camera via \textit{capture} method. The underlying implementation uses WebRTC \cite{WebRTC2013} and Media Capture and Streams \cite{MediaCapture2013} specifications. 
+  \item VideoCamera: extends all functionalities from Video class with the addition of capturing the user camera via \textit{capture} method. The underlying implementation uses WebRTC \cite{WebRTC2013} and Media Capture and Streams \cite{MediaCapture2013} specifications.
 \end{enumerate}
 
 Augmented reality classes includes several computer vision algorithms, such as FAST \cite{RostenFaster2010}, BRIEF \cite{Calonder2010} implementations, homography estimation and others. As the library grows, many other computer vision algorithms are going to be added to the library, such as 3D pose calculation.
@@ -36,6 +36,8 @@ Augmented reality classes includes several computer vision algorithms, such as F
   \item RANSAC: TODO.
   \item Homography: TODO.
   \item Pose: TODO.
+  \item ViolaJones: TODO.
+  \item Color: TODO.
 \end{enumerate}
 
 \begin{figure}[!htb]
@@ -58,7 +60,7 @@ Augmented reality classes includes several computer vision algorithms, such as F
               set(name, value) : void \\
             }
 
-            \umlclass[y=-130pt]{DOMElement}{
+            \umlclass[y=-100pt]{DOMElement}{
               width : Number\\
               height : Number\\
               visible : boolean\\
@@ -67,7 +69,7 @@ Augmented reality classes includes several computer vision algorithms, such as F
               hide() : void \\
             }
 
-            \umlclass[y=-290pt]{Canvas}{
+            \umlclass[y=-220pt]{Canvas}{
               context : Object
             }{
               forEach(data, callback) : void\\
@@ -75,14 +77,14 @@ Augmented reality classes includes several computer vision algorithms, such as F
               setImageData(data, x, y) : void\\
             }
 
-            \umlclass[y=-440pt]{Video}{}{
+            \umlclass[y=-340pt]{Video}{}{
               play() : void\\
               pause() : void\\
               track(tracker) : void \\
               getVideoCanvasImageData(x, y, width, height) : ImageData \\
             }
 
-            \umlclass[y=-430pt,x=220pt]{VideoCamera}{}{
+            \umlclass[y=-340pt,x=220pt]{VideoCamera}{}{
               capture() : void \\
             }
 
@@ -106,9 +108,18 @@ Augmented reality classes includes several computer vision algorithms, such as F
               findCorners(data, threshold) : Array\\
             }
 
-            \umlclass[y=-90pt]{BRIEF}{}{
+            \umlclass[y=-70pt]{BRIEF}{}{
               getDescriptors(data, corners) : Array\\
               match(c1, d1, c2, d2) : Array\\
+            }
+
+            \umlclass[y=-150pt]{ViolaJones}{}{
+              find() : Array\\
+              evalStage() : boolean\\
+            }
+
+            \umlclass[y=-225pt]{Color}{}{
+              find() : Array\\
             }
 
             \umlclass[x=200pt]{RANSAC}{}{
