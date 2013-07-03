@@ -138,6 +138,96 @@ Where $w_i$ is the weight of the $i$th element. The goal is to learn $w_i,i=1,2\
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 
+\begin{center}
+    % \tikzumlset{font=\scriptsize}
+    \begin{tikzpicture}
+        \begin{umlpackage}{Base classes}
+
+            \umlclass{Attribute}{}{
+                get(name) : Object\\
+                set(name, value) : void \\
+            }
+
+            \umlclass[y=-130pt]{DOMElement}{
+                width : int\\
+                height : int\\
+                visible : boolean
+            }{
+                show() : void\\
+                hide() : void \\
+            }
+
+            \umlclass[y=-290pt]{Canvas}{
+                context : Object
+            }{
+                forEach(data, callback) : void\\
+                getImageData(x, y, width, height) : Array \\
+                setImageData(data, x, y) : void\\
+                transform() : void\\
+            }
+
+            \umlclass[y=-440pt]{Video}{}{
+                play() : void\\
+                pause() : void\\
+                track(tracker) : void \\
+                getVideoCanvasImageData(x, y, width, height) : Array \\
+            }
+
+            \umlclass[y=-430pt,x=200pt]{VideoCamera}{}{
+                capture() : void \\
+            }
+
+        \end{umlpackage}
+
+        \umlinherit[geometry=-|]{DOMElement}{Attribute}
+        \umlinherit[geometry=-|]{Canvas}{DOMElement}
+        \umlinherit[geometry=-|]{Video}{DOMElement}
+        \umlinherit[geometry=|-]{VideoCamera}{Video}
+    \end{tikzpicture}
+\end{center}
+
+\begin{center}
+    % \tikzumlset{font=\scriptsize}
+    \begin{tikzpicture}
+        \begin{umlpackage}{Augmented reality classes}
+
+            \umlclass{FAST}{}{
+                findCorners(frame, threshold) : Array\\
+            }
+
+            \umlclass[y=-90pt]{BRIEF}{}{
+                getDescriptors(frame, corners) : Array\\
+                match(corners1, descriptors1, corners2, descriptors2) : Array\\
+            }
+
+            \umlclass[y=-240pt]{Math}{}{
+                createIdentityMatrix(size) : Matrix\\
+                distance() : Number\\
+                getDeterminant(Matrix) : Number\\
+                getInverse(Matrix) : Matrix\\
+                hammingDistance(descriptors1, descriptors2) : Number\\
+                hammingWeight(number) : Number\\
+                ...
+            }
+
+            \umlclass[x=240pt]{RANSAC}{}{
+                find(matches) : void\\
+                score() : Number\\
+            }
+
+            \umlclass[y=-90pt,x=240pt]{Homography}{}{
+                score(H, matches) : Number\\
+            }
+
+            \umlclass[y=-160pt,x=240pt]{Pose}{}{}
+
+        \end{umlpackage}
+
+        \umlinherit[geometry=-|]{Homography}{RANSAC}
+        \umlinherit[geometry=-|]{Pose}{RANSAC}
+    \end{tikzpicture}
+\end{center}
+
 % section pose_estimation (end)
 
 % chapter ar_library_for_the_web (end)
