@@ -323,4 +323,40 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 
 % section pose_estimation (end)
 
+\section{Rapid Object Detection (Viola Jones)} % (fold)
+\label{sec:ar_library_for_the_web:rapid_object_detection}
+
+Rapid Object Detection \cite{Viola2001} technique, much known as Viola Jones \cite{Viola2001}, brings together new algorithms and insights to construct a framework for robust and extremely rapid object detection. What has motivated this technique to be added to \textit{tracking.js} library was the task of face detection. Surprisingly, the algorithm became robust enough to detect any training data \cite{Viola2001}, not only for faces. Currently, \textit{tracking.js} supports, face, eyes, upper body and palm detection.
+
+In order to scan faces, eyes or palm from images, a training phase is required. The training phase generate cascading stages. The cascade are constructed by training classifiers using AdaBoost \cite{Viola2001} and then adjusting the threshold to minimize false negatives. OpenCV library \cite{Bradski2000} have some open-source training data, therefore doubling efforts on training is unnecessary, \ie\ the face training set consisted of 4916 faces, extracted from images downloaded during a random crawl of the world wide web \cite{Viola2001}. Those faces were scaled and aligned to a base resolution of $24$ by $24$ pixels \cite{Viola2001}, see Figure \ref{figure:viola_training}. Training is not the focus of this work, the algorithm to scan the faces is. The training data itself is useless if a Scanning Detector \cite{Viola2001} is not available, the scanning is what makes the rapid object detection.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=240pt]{chapters/computer_vision_library_for_the_web/viola_training.png}
+  \caption{Example of frontal upright face images used for training \cite{Viola2001}}
+  \label{figure:viola_training}
+\end{figure}
+
+A scanning detector was implemented in JavaScript \cite{International2009} and is available on \textit{tracking.js}. The training data used is from OpenCV library \cite{Bradski2000} converted from Extensible Markup Language (XML) \cite{Bray2013} to JavaScript Object Notation (JSON) \cite{Crockford2013}. JSON \cite{Crockford2013} has much superior performance since it's interpreted by JavaScript language \cite{International2009,Crockford2013}. The results of the JavaScript \cite{International2009} implementation can be used in real-time applications, the detector runs at 15 frames per second. For more information about performance see Chapter \ref{cha:evaluation}.
+
+The overall idea of the detection process is that it uses a degenerate decision tree, what Viola and Jones \cite{Viola2001} call ``cascade''. A positive result from the first classifier triggers the evaluation of a second classifier which has also been adjusted to achieve very high detection rates \cite{Viola2001}. A positive result from the second classifier triggers a third classifier, and so on \cite{Viola2001}. The main steps of the scanning algorithm are:
+
+\begin{enumerate}
+  \item Create or scale a squared block, initially set to $20\times20$ pixels, by $1.25$ per iteration;
+  \item Loop the squared block by $\Delta$ pixels over the image;
+  \item For each squared block location, loop the decision tree and evaluate each stage;
+  \item A positive result of the stage \cite{Viola2001} triggers the next stage, otherwise stops the stages loop;
+  \item If all stages were positively evaluated store that rectangle as a possible face;
+  \item Once the the decision tree is done, group the overlapping rectangles;
+  \item Find the best rectangle of each the group to represent the face. This phase is also known as ``merging phase''.
+\end{enumerate}
+
+The final detector is scanned across the image at multiple scales and locations of the image. This process makes sense because the features can be evaluated at any scale with the same cost \cite{Viola2001}. Good results were obtained using a set of scales a factor of $1.25$. Subsequent locations are obtained by shifting the window some number of pixels $\Delta$, for a better accuracy $\Delta=1$ is recommended. We can achieve a significant speedup by setting $\Delta=2$ with only a slight decrease in accuracy, thus this value was set as default value of the JavaScript \cite{International2009} implementation.
+
+Viola and Jones \cite{Viola2001} proposed that for each found possible rectangle representing the face to be partitioned into disjoint subsets data structures. Two detections are in the same subset if their bounding regions overlap \cite{Viola2001}. The corners of the final bounding region are the average of the corners of all detections in the set. In order to perform well on the web, some optimizations were made in the implementation level of the scanning detector. The disjoint set was replaced by an alternative logic that is called ``Minimum Neighbor Area Grouping'' by this thesis. Minimum Neighbor Area Grouping has $O(N^2)$ performance \cite{black2007big} and consists in a loop trough the possible rectangle faces returned by the scanning detector. For each step of the loop compare the current rectangle with all other not yet compared rectangles. If the rectangle area overlaps more than $\eta$ with the compared, by default $\eta=0.5$ (or $50\%$), select the smallest rectangle in area of the comparison. Using the smallest rectangle, guarantees that the best match is much centralized in the face.
+
+For more information about the JavaScript \cite{International2009} implementation, such as evaluation and results, see Chapter \ref{cha:evaluation}.
+
+% section rapid_object_detection (end)
+
 % chapter ar_library_for_the_web (end)
