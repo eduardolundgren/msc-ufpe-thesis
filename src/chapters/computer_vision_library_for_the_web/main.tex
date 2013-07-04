@@ -269,6 +269,44 @@ Where $w_i$ is the weight of the $i$th element. The goal is to learn $w_i,i=1,2\
 
 % section interest_point_matching (end)
 
+
+\section{Homography Estimation} % (fold)
+\label{sec:ar_library_for_the_web:homography_estimation}
+
+Typically, homographies are estimated between images by finding feature correspondences in those images. A 2D point $(x,y)$ in an image can be represented as a 3D vector $\textbf{x} = (x_1, x_2, x_3)$ where $x = \frac{x_1}{x_3}$ and $y = \frac{x_2}{x_3}$ \cite{Homography2009}. This is called the homogeneous representation of a point and it lies on the projective plane $P^2$. A homography is an invertible mapping of points and lines on the projective plane $P^2$. Hartley and Zisserman \cite{Hartley2004} provide the specific definition that a homography is a mapping from $P^2$ → $P^2$ is a projectivity if and only if there exists a non-singular $3\times3$ matrix $H$ such that for any point in $P^2$ represented by vector $\textbf{x}$ it is true that its mapped point equals $H\textbf{x}$. It should be noted that $H$ can be changed by multiplying by an arbitrary non-zero constant without altering the projective transformation. Thus $H$ is considered a homogeneous matrix and only has $8$ degrees of freedom even though it contains $9$ elements.
+
+The method choose to solve the homography estimation was the Direct Linear Transformation (DLT) \cite{Impa2009,Hartley2004} algorithm. The DLT algorithm is a simple algorithm used to solve for the homography matrix $H$ given a sufficient set of point correspondences \cite{Homography2009}.
+
+Since we are working in homogeneous coordinates, the relationship between two corresponding points $\textbf{x}$ and $\textbf{x'}$ can be re-written as \cite{Homography2009}:
+
+$$c\begin{pmatrix}u\\ v\\ 1\\\end{pmatrix} = H\begin{pmatrix}x\\ y\\ 1\\\end{pmatrix} \;\; \forall \;\; H=\begin{pmatrix}h1 & h2 & h3\\ h4 & h5 & h6\\ h7 & h8 & h9\\\end{pmatrix},$$
+
+where $c$ is any non-zero constant, $(\; u \; v \; 1 \;)^T$ represents $\textbf{x'}$, $(\; x \; y \; 1 \;)^T$ represents $\textbf{x}$. Dividing the first row of equation (2.1) by the third row and the second row by the third row we get the following two equations \cite{Homography2009}:
+
+\begin{equation}
+\label{eq:homography1}
+-h1x-h2y-h3 +(h7x+h8y+h9)u=0
+\end{equation}
+\begin{equation}
+\label{eq:homography2}
+-h4x-h5y-h6 +(h7x+h8y+h9)u=0
+\end{equation}
+
+Equations (\ref{eq:homography1}) and (\ref{eq:homography2}) can be written in matrix form as $A_i\textbf{h}=0$. Where,
+
+$$A_i=\begin{pmatrix}-x & -y & -1 & 0 & 0 & 0 & ux & uy & u\\0 & 0 & 0 & -x & -y & -1 & vx & vy & v\end{pmatrix}$$
+
+and
+
+$$\textbf{h}=\begin{pmatrix}h1 & h2 & h3 & h4 & h5 & h6 & h7 & h8 & h9\end{pmatrix}.$$
+
+Since each point correspondence provides $2$ equations, $4$ correspondences are sufficient to solve for the $8$ degrees of freedom of $H$. JavaScript typed arrays, defined in Section \ref{sub:basic_concepts:web:javascript_typed_arrays}, were used in the homography estimation implementation for better performance results.
+
+% where $c$ is any non-zero constant, $\begin{pmatrix}u\\ v\\ 1\end{pmatrix}^T$ represents $\begin{pmatrix}x y 1\end{pmatrix}^T$.
+
+
+% section homography_estimation (end)
+
 \section{Pose Estimation} % (fold)
 \label{sec:ar_library_for_the_web:pose_estimation}
 
