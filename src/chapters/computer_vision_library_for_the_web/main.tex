@@ -304,6 +304,18 @@ Since each point correspondence provides $2$ equations, $4$ correspondences are 
 
 % section homography_estimation (end)
 
+\section{Random Sample Consensus (RANSAC)} % (fold)
+
+RANSAC (Random Sample Consensus) \cite{Hartley2004} is the most commonly used robust estimation method for homographies according to \cite{Homography2009}. The idea of the algorithm is pretty simple; For a number of iterations, a random sample of $4$ correspondences is selected and a homography $H$ is computed from those four correspondences. Each other correspondence is then classified as an inlier or outlier depending on its concurrence with $H$. After all of the iterations are done, the iteration that contained the largest number of inliers is selected. $H$ can then be recomputed from all of the correspondences that were consider as inliers in that iteration \cite{Homography2009}.
+
+One important step when applying the RANSAC algorithm described above is to decide how to classify correspondences as inliers or outliers. In the implementation for the web only assign the geometric distance \cite{Homography2009} threshold, $t$, between $\textbf{x'}$ and $H\textbf{x}$ was enough. Hartley and Zisserman \cite{Hartley2004} provides more details about RANSAC.
+
+Another issue is to decide how many iterations to run the algorithm, it's not required to try every combination of 4 correspondences. The goal becomes to determine the number of iterations, $N$, that ensures with a probability $p$ that at least one of the random samples will be free from outliers. $N=100$ was used on the web implementation.
+
+\label{sec:ar_library_for_the_web:ransac}
+
+% section ransac (end)
+
 \section{Pose Estimation} % (fold)
 \label{sec:ar_library_for_the_web:pose_estimation}
 
