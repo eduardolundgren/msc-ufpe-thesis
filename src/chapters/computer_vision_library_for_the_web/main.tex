@@ -1,4 +1,4 @@
-\chapter{Augmented Reality Library for the Web (tracking.js)} % (fold)
+\chapter{Tracking Library for the Web (tracking.js)} % (fold)
 \label{cha:ar_library_for_the_web}
 
 \section{Introduction} % (fold)
@@ -28,7 +28,7 @@ The two main available packages splits Base from AR classes. Furthermore, each c
   \item VideoCamera: extends all functionalities from Video class with the addition of capturing the user camera via \textit{capture} method. The underlying implementation uses WebRTC \cite{WebRTC2013} and Media Capture and Streams \cite{MediaCapture2013} specifications.
 \end{enumerate}
 
-Augmented reality classes includes several computer vision algorithms, such as FAST \cite{RostenFaster2010}, BRIEF \cite{Calonder2010} implementations, homography estimation and others. As the library grows, many other computer vision algorithms are going to be added to the library, such as 3D pose calculation.
+Visual tracking classes includes several computer vision algorithms, such as FAST \cite{RostenFaster2010}, BRIEF \cite{Calonder2010} implementations, homography estimation and others. As the library grows, many other computer vision algorithms are going to be added to the library, such as 3D pose calculation.
 
 \begin{enumerate}
   \item FAST: provides an implementation of Features from Accelerated Segment Test (FAST) \cite{Rosten2010} for interest points detection via \textit{findCorners(data, threshold)} method, where $data$ is the \textit{ImageData} of the canvas \cite{Canvas2013} frame. It also dependents on a $threshold$ argument. The pixel at $p$, see Figure \ref{figure:fast}, is the centre of a candidate corner and they are classified if brighter than $p$ by more than the $threshold$.
@@ -102,7 +102,7 @@ Augmented reality classes includes several computer vision algorithms, such as F
 \begin{figure}[!htb]
     % \tikzumlset{font=\scriptsize}
     \begin{tikzpicture}
-        \begin{umlpackage}{Augmented reality classes}
+        \begin{umlpackage}{Visual tracking classes}
 
             \umlclass{FAST}{}{
               findCorners(data, threshold) : Array\\
@@ -140,7 +140,7 @@ Augmented reality classes includes several computer vision algorithms, such as F
         \umlinherit[geometry=-|]{Homography}{RANSAC}
         \umlinherit[geometry=-|]{Pose}{RANSAC}
     \end{tikzpicture}
-    \caption{Augmented reality classes of tracking.js library}
+    \caption{Visual tracking classes of tracking.js library}
     \label{figure:ar_classes}
 \end{figure}
 
