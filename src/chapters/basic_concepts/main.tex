@@ -230,100 +230,11 @@ One of the major responsibility of tracking algorithms is to extract information
 There are a variety of ways to track a real environment: \eg\ global positioning system (GPS) \cite{Krevelen2010}, mechanical trackers \cite{Krevelen2010}, magnetic trackers \cite{Krevelen2010} and ultrasonic trackers \cite{Krevelen2010}, but they all have their weaknesses \cite{Krevelen2010}. Mechanical trackers are accurate enough, although they tether the user to a limited working. Magnetic trackers are vulnerable to distortions by metal in the environment. Ultrasonic trackers suffer from noise and tend to be inaccurate at long ranges because of variations in the ambient temperature \cite{Lepetit2005}.
 By contrast, vision has the potential to yield non-invasive, accurate and low-cost solutions to this problem, provided that one is willing to invest the effort required to develop sufficiently robust algorithms \cite{Lepetit2005}. Bringing video tracking based techniques on the web are the focus of this work \cite{Lepetit2005}.
 In some cases, it is acceptable to add fiducials \cite{Cho1998}, such as special markers, to the scene or target object \cite{Cho1998,Lepetit2005}. The addition of fiducials in the scene, also called landmarks or markers \cite{Cho1998}, greatly helps since they constitute image features easy to extract, and they provide reliable, easy to exploit measurements for the pose estimation \cite{Cho1998,Lepetit2005}.
-It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture \cite{Lepetit2005}. The latter, makes tracking far more difficult because finding and following feature points or edges can be difficult \cite{Lepetit2005}. There are too few of them on many typical objects. Section \ref{sec:basic_concepts:markerless_tracking_technique} details markerless tracking techniques, main technique implemented on the web by this thesis.
+It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture \cite{Lepetit2005}. The latter, makes tracking far more difficult because finding and following feature points or edges can be difficult \cite{Lepetit2005}. There are too few of them on many typical objects.
 
 % subsection contextualization (end)
 
 % section visual_tracking (end)
-
-\section{Markerless Tracking Techniques} % (fold)
-\label{sec:basic_concepts:markerless_tracking_technique}
-
-Markerless Augmented Reality (MAR) systems integrate virtual objects into a real environment in real-time, enhancing user's perception of and interaction with the world. This approach is not based on the use of traditional artificial markers that need to be placed in the world to be tracked by the system in order to calculate their position and orientation \cite{Teichrieb2007}, instead, MAR relies on naturally present features in order to position virtual objects. Tracking techniques become more complex in MAR systems when compared to marker techniques.
-MAR can be classified in two major types: Model based and Structure from Motion (SfM) based. The online monocular MAR taxonomy is shown on Figure \ref{figure:mar_taxonomy}.
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics{chapters/basic_concepts/mar_taxonomy.pdf}
-  \caption{Online monocular Markerless Augmented Reality taxonomy.}
-  \label{figure:mar_taxonomy}
-\end{figure}
-
-\subsection{Model Based} % (fold)
-\label{sub:basic_concepts:markerless_tracking_technique:model_based}
-
-Model-based trackers usually construct their models based on lines or edges in the model. Edges are the most frequently used features as they are computationally efficient to find and robust to changes in lighting \cite{Zhou2008}. Texture is another useful feature for constructing models. The advantage of using a model based approach is the possibility of interaction between real and virtual worlds \cite{Teichrieb2007}, like occlusion and collision. In order to accomplish such types of interaction, the application exploits the fact that the real object pose is known and its structure is described by the 3D model \cite{Teichrieb2007}. Model based approaches require an a priori knowledge about the real scene \cite{Teichrieb2007}. Due to the offline model acquiring process, these techniques are, in general, not totally online and cannot be used in unprepared environments \cite{Teichrieb2007}. Furthermore, tracker initialization is usually done manually or requires a prior training in order to be automatic \cite{Teichrieb2007}. Model based techniques can be classified in three categories:
-
-\begin{enumerate}
-  \item Edge based: the camera pose is estimated by matching a wireframe 3D model of an object with the real world image edge information. This matching is achieved by projecting the model onto the image and minimizing the displacement between the projected model and the imaged object \cite{Teichrieb2007,Lepetit2005}. In edge based methods, the initialization is done manually \cite{Teichrieb2007}. Once the first pose is estimated, it is used to project the model onto the next frame. Assuming that camera displacement between consecutive frames is relatively small, using the previous pose estimation to predict the next pose will not harm the matching process \cite{Teichrieb2007}. Edge based methods usually do not support fast camera movements, since the projected model will be too far from its correct location \cite{Teichrieb2007}. Edge based methods can be divided in two subcategories \cite{Teichrieb2007}:
-
-    \begin{enumerate}
-      \item Point sampling: sample some control points along the edges of the wireframe 3D model and compare their projections with strong gradients present in the image \cite{Teichrieb2007}. Edge based by point sampling is shown on Figure \ref{figure:point_sampling}.
-
-      \begin{figure}[!htb]
-        \centering
-        \includegraphics[width=240pt]{chapters/basic_concepts/point_sampling.png}
-        \caption{Edge based by point sampling.}
-        \label{figure:point_sampling}
-      \end{figure}
-
-      \item Edge detection: detect explicit edges on the image and match them with the model projection \cite{Teichrieb2007}. Edge based by edge detection is shown on Figure \ref{figure:edge_detection}.
-
-      \begin{figure}[!htb]
-        \centering
-        \includegraphics[width=240pt]{chapters/basic_concepts/edge_detection.png}
-        \caption{Edge based by edge detection \cite{Teichrieb2007}.}
-        \label{figure:edge_detection}
-      \end{figure}
-
-    \end{enumerate}
-
-  \item Texture based: takes into account texture information presented in images \cite{Teichrieb2007,Lepetit2005}. Texture based technique could be divided in two sub-categories: (a) template-matching \cite{Teichrieb2007,Lepetit2005} and (b) interest point \cite{Teichrieb2007,Lepetit2005}. The technique implemented in this thesis is texture based, furthermore, a much detailed description is presented:
-
-    \begin{enumerate}
-      \item Template matching: is based on global information, this subcategory lies in its ability to treat complex patterns that would be difficult to model by local features \cite{Teichrieb2007,Lepetit2005}. These techniques are also called sum-of-square-difference (SSD) \cite{Teichrieb2007,RostenFaster2010}, as they consist in minimizing the difference between a region of the image and a reference template \cite{Teichrieb2007,Lepetit2005}. Texture based by template matching is shown on Figure \ref{figure:template_matching}.
-
-        \begin{figure}[!htb]
-          \centering
-          \includegraphics[width=240pt]{chapters/basic_concepts/template_matching.png}
-          \caption{Texture based by template matching.}
-          \label{figure:template_matching}
-        \end{figure}
-
-      \item Interest point: takes into account localized features \cite{Teichrieb2007}. As a result, this subcategory is less computer-intensive than template matching approach \cite{Teichrieb2007,RostenFaster2010}, this characteristic makes interest point technique a good choice for AR applications on the web. Texture based by interest points is shown on Figure \ref{figure:keypoints}.
-
-        \begin{figure}[!htb]
-          \centering
-          \includegraphics[width=240pt]{chapters/basic_concepts/keypoints.png}
-          \caption{Texture based by interest points.}
-          \label{figure:keypoints}
-        \end{figure}
-    \end{enumerate}
-
-\end{enumerate}
-
-The interest point based tracking solution proposed, uses Features from Accelerated Segment Test (FAST) \cite{Rosten2010} to extract feature points using corner detection. This technique is detailed on Section \ref{sec:tracking_library_for_the_web:interest_point_detection}. Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} is used as an efficient feature point descriptor (also known as feature matching), detailed on Section \ref{sec:tracking_library_for_the_web:interest_point_matching}. Both techniques combined results in a high performance marker-less tracking solution which fits the native web needs due to the existing browsers performance limitations \cite{Calonder2010,RostenFaster2010}.
-
-% subsection basic_concepts:markerless_tracking_technique:model_based (end)
-
-\subsection{Structure from Motion (SfM)} % (fold)
-\label{sub:basic_concepts:markerless_tracking_technique:sfm}
-
-One interesting aspect of SfM based techniques are that they are mainly online, since they do not require any previous offline learning phase \cite{Teichrieb2007}. Therefore, it is possible to reconstruct a totally unknown environment on the fly. As a drawback, SfM approaches are often very complex and have some constraints related to their real-time nature \cite{Teichrieb2007}.
-Instead of relying on previously obtained information about the scene to be tracked, some MAR techniques estimate the camera displacement without any a priori knowledge about the environment. These methods are also able to retrieve the structure of the scene in real-time, with different levels of detail, depending on the approach used \cite{Teichrieb2007}.
-
-SfM based systems have advantages, since they are capable of continuously tracking the camera in unknown scenes \cite{Teichrieb2007}. The focus of this thesis is provide texture based techniques on the web, therefore SfM techniques are not detailed in this thesis. Model based systems requires lower computational complexity, ideal to the web environment. Real time tracking using Structure from Motion (SfM) techniques \cite{Teichrieb2007} is shown on Figure \ref{figure:sfm}.
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=380pt]{chapters/basic_concepts/sfm.png}
-  \caption{Real time tracking using Structure from Motion (SfM) techniques.}
-  \label{figure:sfm}
-\end{figure}
-
-% subsection sfm (end)
-
-% section markerless_tracking_technique (end)
 
 \section{Augmented Reality} % (fold)
 \label{sec:basic_concepts:augmented_reality}
