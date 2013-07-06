@@ -4,8 +4,8 @@
 \section{Introduction} % (fold)
 \label{sec:ar_library_for_the_web:introduction}
 
-The desktop platform is the target environment most commonly addressed when developing Augmented Reality (AR) systems. However, depending on the requirements of an AR application, the use of different execution platforms may be necessary. If the system has to be published to several users, the web platform shows to be more adequate, where the application is executed through the Internet in a web browser \cite{Pablo2013}.
-The use of markerless tracking, which is based on natural features of the scene, has also been gaining more space on web targeted AR applications for advertising. The media used in this kind of application needs to be as appealing as possible in order to catch consumers’ attention. Markerless tracking satisfies this requirement, since the idea of having a real scene augmented with virtual objects without any artificial elements such as markers added to the environment is very attractive \cite{Pablo2013}. In addition, the product being advertised can be tracked and augmented with virtual elements \cite{Pablo2013}.
+The desktop platform is the target environment most commonly addressed when developing AR systems. However, depending on the requirements of an AR application, the use of different execution platforms may be necessary. If the system has to be published to several users, the web platform shows to be more adequate, where the application is executed through the Internet in a web browser \cite{Pablo2013}.
+The use of markerless tracking, which is based on natural features of the scene, has also been gaining more space on web targeted AR applications for advertising. The media used in this kind of application needs to be as appealing as possible in order to catch consumers' attention. Markerless tracking satisfies this requirement, since the idea of having a real scene augmented with virtual objects without any artificial elements such as markers added to the environment is very attractive \cite{Pablo2013}. In addition, the product being advertised can be tracked and augmented with virtual elements \cite{Pablo2013}.
 Browsers are evolving very fast when compared to the the previous decade \cite{Hickson2013}. JavaScript language \cite{International2009,MDN2013} wasn't prepared to handle typed data structures \cite{TypedArray2013} able to manipulate raw binary data safely \cite{Canvas2013}, all the computational complexity required by AR algorithms was too much for that growing environment. Browsers weren't able to capture audio and video \cite{MediaCapture2013,WebRTC2013} natively, without plugin installation \cite{Flash2013}, an essential feature for AR applications. This reality has changed, this involves the use of several modern browser specifications \cite{Hickson2013,WC2006} as well as implementation of different computer vision algorithms and techniques into the browser environment taking advantage of all those modern APIs \cite{Hickson2013,WC2006}.
 
 In this context, this thesis aims to present the implementation and evaluation of a solution regarding tracking techniques for web targeted AR. The available algorithms and techniques can be used for different applications, such as, detect faces, identify objects and colors and track moving objects. The solution is called \textit{tracking.js}. Some optimizations are discussed and implemented on this work in order to achieve good results when compared with similar implementations in compiled languages.
@@ -13,16 +13,16 @@ In this context, this thesis aims to present the implementation and evaluation o
 \subsection{Library Modules} % (fold)
 \label{sub:ar_library_for_the_web:library_modules}
 
-The proposed library is divided in modules in order to allow extension and addition of new features, such as new RA techniques or math utils. For a better understanding of the library architecture, the current implementation is divided in two packages separating Base from AR classes. Base classes modules are shown in Figure \ref{figure:base_classes} and AR classes in Figure \ref{figure:ar_classes}.
+The proposed library is divided in modules in order to allow extension and addition of new features, such as new RA techniques or math utilities. For a better understanding of the library architecture, the current implementation is divided in two packages separating Base from AR classes. Base classes modules are shown in Figure \ref{figure:base_classes} and AR classes in Figure \ref{figure:ar_classes}.
 
 To develop AR applications using only raw JavaScript \cite{International2009} APIs \cite{MDN2013} could be too verbose and complex, \eg\ capturing users' camera and reading its array of pixels. The big amount of steps required for a simple task makes web developers life hard when the goal is to achieve complex implementations. Some level of encapsulation is needed in order to simplify development. The proposed library provides encapsulation for common tasks on the web platform.
 
 The two main available packages splits Base from AR classes. Furthermore, each class of those packages are described. Let's start with the base classes:
 
 \begin{enumerate}
-  \item Math: provides common math utilities optimized for the web, such as geometry, linear algebra \cite{Hartley2004}, hamming operations \etc. Typed arrays \cite{TypedArray2013} are used in order to optimize performance, see subsection \ref{sub:basic_concepts:web:javascript_typed_arrays} for more information about typed arrays.
-  \item Attribute: allows developers to add attributes to any class through an augmentable Attribute interface. The interface adds get and set methods to your class to retrieve and store attribute values, as well as support for change events that can be used to listen for changes in attribute values.
-  \item DOMElement: provides a way to create, and manipulate HTML \cite{Hickson2013} DOM nodes \cite{WC2006}. Each DOMElement instance represents an underlying DOM node \cite{WC2006}. In addition to wrapping the basic DOM API \cite{WC2006} and handling cross browser issues, Nodes provide convenient methods for managing styles, subscribing to events, \etc.
+  \item Math: provides common math utilities optimized for the web, such as geometry, linear algebra \cite{Hartley2004} and hamming operations. Typed arrays \cite{TypedArray2013} are used in order to optimize performance, see subsection \ref{sub:basic_concepts:web:javascript_typed_arrays} for more information about typed arrays.
+  \item Attribute: allows developers to add attributes to any class through an Attribute interface. The interface adds get and set methods to your class to retrieve and store attribute values, as well as support for change events that can be used to listen for changes in attribute values.
+  \item DOMElement: provides a way to create, and manipulate HTML \cite{Hickson2013} DOM nodes \cite{WC2006}. Each DOMElement instance represents an underlying DOM node \cite{WC2006}. In addition to wrapping the basic DOM API \cite{WC2006} and handling cross browser issues, Nodes provide convenient methods for managing styles and subscribing to events.
   \item Canvas: provides an utility class to create, and manipulate HTML5 \cite{Hickson2013} canvas element \cite{Canvas2013}. Each Canvas instance represents an underlying canvas DOM node \cite{Canvas2013}. In addition to wrapping the basic DOM API \cite{WC2006}, also provides methods to extract via \textit{getImageData} method, to loop via \textit{forEach} method, and to set the canvas array of pixels via \textit{setImageData} method.
   \item Video: provides an utility class to create, and manipulate HTML5 \cite{Hickson2013} video element. Each Video instance represents an underlying video DOM node \cite{Canvas2013}. In addition to wrapping the basic DOM API \cite{WC2006}, also provides methods to \textit{play}, \textit{pause} and register tracker algorithms via \textit{track} method. See subsection \ref{sub:basic_concepts:web:audio_and_video} for more information about video element.
   \item VideoCamera: extends all functionalities from Video class with the addition of capturing the user camera via \textit{capture} method. The underlying implementation uses WebRTC \cite{WebRTC2013} and Media Capture and Streams \cite{MediaCapture2013} specifications.
@@ -31,7 +31,7 @@ The two main available packages splits Base from AR classes. Furthermore, each c
 Visual tracking classes includes several computer vision algorithms, such as FAST \cite{RostenFaster2010}, BRIEF \cite{Calonder2010} implementations, homography estimation and others. As the library grows, many other computer vision algorithms are going to be added to the library, such as 3D pose calculation.
 
 \begin{enumerate}
-  \item FAST: provides an implementation of Features from Accelerated Segment Test (FAST) \cite{Rosten2010} for interest points detection via \textit{findCorners(data, threshold)} method, where $data$ is the \textit{ImageData} of the canvas \cite{Canvas2013} frame. It also dependents on a $threshold$ argument. The pixel at $p$, see Figure \ref{figure:fast}, is the centre of a candidate corner and they are classified if brighter than $p$ by more than the $threshold$.
+  \item FAST: provides an implementation of Features from Accelerated Segment Test (FAST) \cite{Rosten2010} for interest points detection via \textit{findCorners(data, threshold)} method, where $data$ is the \textit{ImageData} of the canvas \cite{Canvas2013} frame. It also depends on a $threshold$ argument. The pixel at $p$, see Figure \ref{figure:fast}, is the center of a candidate corner and they are classified if brighter than $p$ by more than the $threshold$.
   \item BRIEF: provides an implementation of Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} for feature description via \textit{getDescriptors(data, corners)} method and matching via \textit{match(c1, d1, c2, d2)}, where $data$ is an \textit{ImageData}, and $c1$ and $c2$ are the found corners array return by \textit{FAST.findCorners} method and $d1$ and $d2$ are feature descriptors array return by \textit{BRIEF.getDescriptors} method.
   \item RANSAC: provides an interface used to achieve robust estimation method for homographies and camera pose. There are two available estimation methods implemented that inherits from RANSAC \cite{Hartley2004}, Homography and Pose.
   \item Homography: provides an API to estimate a homography matrix $H$ between images by finding feature correspondences in those images.
@@ -95,7 +95,7 @@ Visual tracking classes includes several computer vision algorithms, such as FAS
         \umlinherit[geometry=-|]{Video}{DOMElement}
         \umlinherit[geometry=|-]{VideoCamera}{Video}
     \end{tikzpicture}
-    \caption{Base classes of tracking.js library}
+    \caption{Base classes of tracking.js library.}
     \label{figure:base_classes}
 \end{figure}
 
@@ -140,7 +140,7 @@ Visual tracking classes includes several computer vision algorithms, such as FAS
         \umlinherit[geometry=-|]{Homography}{RANSAC}
         \umlinherit[geometry=-|]{Pose}{RANSAC}
     \end{tikzpicture}
-    \caption{Visual tracking classes of tracking.js library}
+    \caption{Visual tracking classes of tracking.js library.}
     \label{figure:ar_classes}
 \end{figure}
 
@@ -153,15 +153,15 @@ Visual tracking classes includes several computer vision algorithms, such as FAS
 \section{Related Work} % (fold)
 \label{sec:ar_library_for_the_web:related_work}
 
-There are not many web based RA solutions available and registered in the literature. The ones available are mainly focused on fiducial markers \cite{Cho1998}, such as FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011}, they both are ports of ARToolKit \cite{Hirokazu2002}. ARToolKit is a desktop library which is useful to make vision-based Augmented Reality applications \cite{Hirokazu2002}. The Metaio company developed Unifeye Viewer \cite{Metaio2009}, a proprietary plug-in for Flash \cite{Flash2013} that allows the utilization of markerless AR applications on the web. In order to run Flash \cite{Flash2013} based applications, the instalation of its plugin is required. Third-party plugins, such as Flash \cite{Flash2013}, are in decadency on modern and mobile web browsers, instead JavaScript \cite{International2009} based solutions are preffered, since they can run in any modern browser without required any user effort of installing external software. Some smart-phones doesn't even support Flash \cite{Flash2013} plugin into their browsers, \eg\ Safari for mobile \cite{Safari2013} is one example of a mobile browser that have banned Flash \cite{Flash2013}.
+There are not many web based RA solutions available and registered in the literature. The ones available are mainly focused on fiducial markers \cite{Cho1998}, such as FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011}, they both are ports of ARToolKit \cite{Hirokazu2002}. ARToolKit is a desktop library which is useful to make vision-based AR applications \cite{Hirokazu2002}. The Metaio company developed Unifeye Viewer \cite{Metaio2009}, a proprietary plug-in for Flash \cite{Flash2013} that allows the utilization of markerless AR applications on the web. In order to run Flash \cite{Flash2013} based applications, the installation of its plugin is required. Third-party plugins, such as Flash \cite{Flash2013}, are in decadency on modern and mobile web browsers, instead JavaScript \cite{International2009} based solutions are preferred, since they can run in any modern browser without requiring any user effort of installing external software. Some smart-phones don't even support Flash \cite{Flash2013} plugin into their browsers, \eg\ Safari for mobile \cite{Safari2013} is one example of a mobile browser that has banned Flash \cite{Flash2013}.
 
 \begin{enumerate}
-    \item FLARToolKit: is a port of the well-known ARToolKit \cite{Hirokazu2002} marker tracking library to ActionScript \cite{Flash2013}, which is the language utilized in the development of Flash \cite{Flash2013} applications for the web. This was the first initiative towards AR solutions for the web \cite{Pablo2013}. Using FLARToolKit \cite{Yan2011}, is possible to develop AR applications that runs on client's browser. A marker based AR example for the web, developed for a marketing campaing of General Electric's company using FLARToolKit, is shown on Figure \ref{figure:flartoolkit}.
+    \item FLARToolKit: is a port of the well-known ARToolKit \cite{Hirokazu2002} marker tracking library to ActionScript \cite{Flash2013}, which is the language utilized in the development of Flash \cite{Flash2013} applications for the web. This was the first initiative towards AR solutions for the web \cite{Pablo2013}. Using FLARToolKit \cite{Yan2011}, is possible to develop AR applications that runs on client's browser. A marker based AR example for the web, developed for a marketing campaign of General Electric's company using FLARToolKit, is shown on Figure \ref{figure:flartoolkit}.
 
     \begin{figure}[!htb]
       \centering
       \includegraphics[width=240pt]{chapters/computer_vision_library_for_the_web/flartoolkit.png}
-      \caption{Marker based AR for the web using FLARToolKit}
+      \caption{Marker based AR for the web using FLARToolKit.}
       \label{figure:flartoolkit}
     \end{figure}
 
@@ -171,7 +171,7 @@ video element \cite{Hickson2013} contents, provides another marker tracking libr
     \begin{figure}[!htb]
       \centering
       \includegraphics[width=240pt]{chapters/computer_vision_library_for_the_web/jsartoolkit.png}
-      \caption{Marker based AR for the web using JSARToolKit}
+      \caption{Marker based AR for the web using JSARToolKit.}
       \label{figure:jsartoolkit}
     \end{figure}
 
@@ -180,14 +180,14 @@ video element \cite{Hickson2013} contents, provides another marker tracking libr
     \begin{figure}[!htb]
       \centering
       \includegraphics[width=240pt]{chapters/computer_vision_library_for_the_web/unifeyeviewer.png}
-      \caption{Marker based AR for the web using JSARToolKit}
+      \caption{Markerless example of image projected over a magazine cover using Unifeye Viewer solution.}
       \label{figure:unifeyeviewer}
     \end{figure}
 \end{enumerate}
 
-There is a disadvantage of using marker based augmented reality. Depend on a artificial marker in order to augment the scene with virtual elements is counterintuitive. Commonly, web applications are utilized by novice users that do not have sufficient technical knowledge to perform manual setup, such as print fiducial markers or perform manual initialization for the tracking. FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011} are both marker based techniques, using Flash \cite{Flash2013} and JavaScript \cite{International2009}, respectively. FLARToolKit has one more issue which is dependency on Flash \cite{Flash2013} plugin installation. Unifeye Viewer by Metaio, was the only existing solution that provided markerless tracking for the web, although it uses Flash \cite{Flash2013}, exlcuding it from a potential competitor of \textit{tracking.js}. Markerless tracking techniques does not depend on any artificial marker or advanced user initialization. The space on web targeted AR applications for advertising is gaining more space and the media used in this kind of application needs to be as appealing as possible \cite{Pablo2013}. Making markerless tracking a suitable technique to such applications.
+There is a disadvantage of using marker based AR. Depend on a artificial marker in order to augment the scene with virtual elements is counterintuitive. Commonly, web applications are utilized by novice users that do not have sufficient technical knowledge to perform manual setup, such as print fiducial markers or perform manual initialization for the tracking. FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011} are both marker based techniques, using Flash \cite{Flash2013} and JavaScript \cite{International2009}, respectively. FLARToolKit has one more issue which is dependency on Flash \cite{Flash2013} plugin installation. Unifeye Viewer by Metaio, was the only existing solution that provided markerless tracking for the web, although it uses Flash \cite{Flash2013}, excluding it from a potential competitor of \textit{tracking.js}. Markerless tracking techniques do not depend on any artificial marker or advanced user initialization. The space on web targeted AR applications for advertising is gaining more space and the media used in this kind of application needs to be as appealing as possible \cite{Pablo2013}. Making markerless tracking a suitable technique to such applications.
 
-The solution proposed in this thesis, \textit{tracking.js}, provides the first known, open-source, markerless tracking solution for the web that runs enterely in JavaScript \cite{International2009} and HTML5 \cite{Hickson2013}.
+The solution proposed in this thesis, \textit{tracking.js}, provides the first known, open-source, markerless tracking solution for the web that runs entirely in JavaScript \cite{International2009} and HTML5 \cite{Hickson2013}.
 
 % section related_work (end)
 
@@ -201,13 +201,13 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 \section{Interest Point Detection} % (fold)
 \label{sec:ar_library_for_the_web:interest_point_detection}
 
-This technique rely on matching individual features across images and are therefore easy to robustify against partial occlusions or matching errors. Illumination invariance is also simple to achieve. Feature points detection is used as the first step of many vision tasks such as tracking, localization, image matching and recognition. In this article we call ``feature'' or ``keypoint'' to refer to a point of interest in two dimensions.
+This technique relies on matching individual features across images and are therefore easy to increase robustness against partial occlusions or matching errors. Illumination invariance is also simple to achieve. Feature points detection is used as the first step of many vision tasks such as tracking, localization, image matching and recognition. In this article we call ``feature'' or ``keypoint'' to refer to a point of interest in two dimensions.
 
-For each frame, the object features are matched by localizing feature templates in search windows around hypothesized locations \cite{Lepetit2005}. The method to extract feature points suggested in Features from Accelerated Segment Test (FAST) \cite{Rosten2010}. FAST \cite{RostenFaster2010} hypothesizes the matches using corner detection. A large number of corner detectors exist in the literature. However, we have a strong interest in realtime frame rate applications which computational resources are required requisites. The approach proposed by FAST \cite{RostenFaster2010} allows the detector to produce a suite of high-speed detectors which we currently use for real-time tracking and AR label placement \cite{Calonder2010}. In particular, it is still true that when processing live video streams at full frame rate, existing feature detectors leave little if any time for further processing, even despite the consequences of Moore’s Law \cite{Rosten2010}.
+For each frame, the object features are matched by localizing feature templates in search windows around hypothesized locations \cite{Lepetit2005}. The method to extract feature points suggested in Features from Accelerated Segment Test (FAST) \cite{Rosten2010}. FAST \cite{RostenFaster2010} hypothesizes the matches using corner detection. A large number of corner detectors exist in the literature. However, we have a strong interest in real time frame rate applications which computational resources are required requisites. The approach proposed by FAST \cite{RostenFaster2010} allows the detector to produce a suite of high-speed detectors which we currently use for real-time tracking and AR label placement \cite{Calonder2010}. In particular, it is still true that when processing live video streams at full frame rate, existing feature detectors leave little if any time for further processing, even despite the consequences of Moore's Law \cite{Rosten2010}.
 
-To show that speed can been obtained without necessarily sacrificing the quality of the feature detector, in Chapter \ref{cha:evaluation}, we compare our detector, to a variety of well-known detectors. A number of the detectors described below compute a corner response, (1) Edge based corner detectors, corresponds to the boundary between two regions; (2) Greylevel derivative based detectors, the assumption that corners exist along edges is an inadequate model for patches of texture and point like features, and is difficult to use at junctions. Therefore a large number of detectors operate directly on greylevel images without requiring edge detection; and (3) Direct greylevel detectors, Another major class of corner detectors work by examining a small patch of an image to see if it ``looks'' like a corner \cite{Rosten2010}.
+To show that speed can been obtained without necessarily sacrificing the quality of the feature detector, in Chapter \ref{cha:evaluation}, we compare our detector, to a variety of well-known detectors. A number of the detectors described below compute a corner response, (1) Edge based corner detectors, corresponds to the boundary between two regions; (2) Gray level derivative based detectors, the assumption that corners exist along edges is an inadequate model for patches of texture and point like features, and is difficult to use at junctions. Therefore a large number of detectors operate directly on gray level images without requiring edge detection; and (3) Direct gray level detectors, Another major class of corner detectors work by examining a small patch of an image to see if it ``looks'' like a corner \cite{Rosten2010}.
 
-The thesis choice was (3) Direct greylevel detectors. It works by testing a small patch of an image to see if it could be a corner. The detector is evaluated using a circle surrounding the candidate pixel, the test is based on whether the concentric contiguous arcs around the pixel are significantly different from the central pixel $p$ \cite{Rosten2010}. To classify $p$ as a corner should exists a set of $n$ contiguous pixels in the circle which are all brighter than the intensity of the candidate pixel $I_{p} + t$ (threshold), or all darker than $I_{p} - t$ \cite{Rosten2010}.
+The thesis choice was (3) Direct gray level detectors. It works by testing a small patch of an image to see if it could be a corner. The detector is evaluated using a circle surrounding the candidate pixel, the test is based on whether the concentric contiguous arcs around the pixel are significantly different from the central pixel $p$ \cite{Rosten2010}. To classify $p$ as a corner should exists a set of $n$ contiguous pixels in the circle which are all brighter than the intensity of the candidate pixel $I_{p} + t$ (threshold), or all darker than $I_{p} - t$ \cite{Rosten2010}.
 
 The number of contiguous tested pixels could vary accordingly \cite{Rosten2010}, being more common to be FAST-$12$ or FAST-$9$. Empirically, FAST-$9$ showed to have a good repeatability and a better efficiency on the web. The repeatability of found feature points is also important because determines whether the technique is useful in a real-world application.
 
@@ -218,7 +218,7 @@ On Figure \ref{figure:fast}, the highlighted squares are the pixels used in the 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=380pt]{chapters/computer_vision_library_for_the_web/fast.png}
-  \caption{Point segment test corner detection in an image patch \cite{Glass2013}}
+  \caption{Point segment test corner detection in an image patch \cite{Glass2013}.}
   \label{figure:fast}
 \end{figure}
 
@@ -232,7 +232,7 @@ To estimate motion, one can then match sets of interest points \{$m_{i}$\} and \
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{chapters/computer_vision_library_for_the_web/BRIEF.pdf}
-  \caption{BRIEF \cite{Lepetit2005} description and matching for image features (keypoints)}
+  \caption{BRIEF \cite{Lepetit2005} description and matching for image features (keypoints).}
   \label{figure:BRIEF}
 \end{figure}
 
@@ -275,7 +275,7 @@ Where $w_i$ is the weight of the $i$th element. The goal is to learn $w_i,i=1,2\
 
 Typically, homographies are estimated between images by finding feature correspondences in those images. A 2D point $(x,y)$ in an image can be represented as a 3D vector $\textbf{x} = (x_1, x_2, x_3)$ where $x = \frac{x_1}{x_3}$ and $y = \frac{x_2}{x_3}$ \cite{Homography2009}. This is called the homogeneous representation of a point and it lies on the projective plane $P^2$. A homography is an invertible mapping of points and lines on the projective plane $P^2$. Hartley and Zisserman \cite{Hartley2004} provide the specific definition that a homography is a mapping from $P^2$ → $P^2$ is a projectivity if and only if there exists a non-singular $3\times3$ matrix $H$ such that for any point in $P^2$ represented by vector $\textbf{x}$ it is true that its mapped point equals $H\textbf{x}$. It should be noted that $H$ can be changed by multiplying by an arbitrary non-zero constant without altering the projective transformation. Thus $H$ is considered a homogeneous matrix and only has $8$ degrees of freedom even though it contains $9$ elements.
 
-The method choose to solve the homography estimation was the Direct Linear Transformation (DLT) \cite{Impa2009,Hartley2004} algorithm. The DLT algorithm is a simple algorithm used to solve for the homography matrix $H$ given a sufficient set of point correspondences \cite{Homography2009}.
+The method chosen to solve the homography estimation was the Direct Linear Transformation (DLT) \cite{Impa2009,Hartley2004} algorithm. The DLT algorithm is a simple algorithm used to solve for the homography matrix $H$ given a sufficient set of point correspondences \cite{Homography2009}.
 
 Since we are working in homogeneous coordinates, the relationship between two corresponding points $\textbf{x}$ and $\textbf{x'}$ can be re-written as \cite{Homography2009}:
 
@@ -326,14 +326,14 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 \section{Rapid Object Detection (Viola Jones)} % (fold)
 \label{sec:ar_library_for_the_web:rapid_object_detection}
 
-Rapid Object Detection \cite{Viola2001} technique, much known as Viola Jones \cite{Viola2001}, brings together new algorithms and insights to construct a framework for robust and extremely rapid object detection. What has motivated this technique to be added to \textit{tracking.js} library was the task of face detection. Surprisingly, the algorithm became robust enough to detect any training data \cite{Viola2001}, not only for faces. Currently, \textit{tracking.js} supports, face, eyes, upper body and palm detection.
+Rapid Object Detection \cite{Viola2001} technique, much known as Viola Jones \cite{Viola2001}, brings together new algorithms and insights to construct a library for robust and extremely rapid object detection. What has motivated this technique to be added to \textit{tracking.js} library was the task of face detection. Surprisingly, the algorithm became robust enough to detect any training data \cite{Viola2001}, not only for faces. Currently, \textit{tracking.js} supports, face, eyes, upper body and palm detection.
 
-In order to scan faces, eyes or palm from images, a training phase is required. The training phase generate cascading stages. The cascade are constructed by training classifiers using AdaBoost \cite{Viola2001} and then adjusting the threshold to minimize false negatives. OpenCV library \cite{Bradski2000} have some open-source training data, therefore doubling efforts on training is unnecessary, \ie\ the face training set consisted of 4916 faces, extracted from images downloaded during a random crawl of the world wide web \cite{Viola2001}. Those faces were scaled and aligned to a base resolution of $24$ by $24$ pixels \cite{Viola2001}, see Figure \ref{figure:viola_training}. Training is not the focus of this work, the algorithm to scan the faces is. The training data itself is useless if a Scanning Detector \cite{Viola2001} is not available, the scanning is what makes the rapid object detection.
+In order to scan faces, eyes or palm from images, a training phase is required. The training phase generate cascading stages. The cascade are constructed by training classifiers using AdaBoost \cite{Viola2001} and then adjusting the threshold to minimize false negatives. OpenCV library \cite{Bradski2000} has some open-source training data, therefore doubling efforts on training is unnecessary, \ie\ the face training set consisted of 4916 faces, extracted from images downloaded during a random crawl of the world wide web \cite{Viola2001}. Those faces were scaled and aligned to a base resolution of $24$ by $24$ pixels \cite{Viola2001}, see Figure \ref{figure:viola_training}. Training is not the focus of this work, the algorithm to scan the faces is. The training data itself is useless if a Scanning Detector \cite{Viola2001} is not available, the scanning is what makes the rapid object detection.
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=240pt]{chapters/computer_vision_library_for_the_web/viola_training.png}
-  \caption{Example of frontal upright face images used for training \cite{Viola2001}}
+  \caption{Example of frontal upright face images used for training \cite{Viola2001}.}
   \label{figure:viola_training}
 \end{figure}
 
@@ -347,7 +347,7 @@ The overall idea of the detection process is that it uses a degenerate decision 
   \item For each squared block location, loop the decision tree and evaluate each stage;
   \item A positive result of the stage \cite{Viola2001} triggers the next stage, otherwise stops the stages loop;
   \item If all stages were positively evaluated store that rectangle as a possible face;
-  \item Once the the decision tree is done, group the overlapping rectangles;
+  \item Once the decision tree is done, group the overlapping rectangles;
   \item Find the best rectangle of each the group to represent the face. This phase is also known as ``merging phase''.
 \end{enumerate}
 
