@@ -5,7 +5,7 @@
 \label{sec:basic_concepts:web}
 
 \subsection{Contextualization} % (fold)
-\label{sub:basic_concepts:web:contextualization}
+\label{sub:basic_concepts:web:web:contextualization}
 
 Using concepts from existing hypertext systems, Tim Berners-Lee, computer scientist and at that time employee of CERN, wrote a proposal in March 1989 for what would eventually become the World Wide Web (WWW) \cite{WC2006}.
 
@@ -220,7 +220,7 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order 
 \label{sec:basic_concepts:visual_tracking}
 
 \subsection{Contextualization} % (fold)
-\label{sub:basic_concepts:contextualization}
+\label{sub:basic_concepts:visual_tracking:contextualization}
 
 Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving \cite{Lepetit2005}. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application \cite{Lepetit2005,Teichrieb2007}.
 2D tracking typically aims at following the image projection of objects or parts of objects whose 3D displacement results in a motion that can be modeled as a 2D transformation \cite{Lepetit2005}.
@@ -234,10 +234,8 @@ It is therefore much more desirable to rely on naturally present features, such 
 
 % subsection contextualization (end)
 
-% section visual_tracking (end)
-
-\section{Augmented Reality} % (fold)
-\label{sec:basic_concepts:augmented_reality}
+\subsection{Tracking in Augmented Reality Applications} % (fold)
+\label{sub:basic_concepts:visual_tracking:tracking_in_augmented_reality_applications}
 
 Imagine a technology in which you could see more than others see, hear more than others hear, and even touch things that others cannot \cite{Krevelen2010}. A technology able to perceive computational elements and objects within our real world experience that help us in our daily activities, while interacting almost unconsciously through mere gestures and speech \cite{Krevelen2010,Teichrieb2007}.
 
@@ -269,6 +267,9 @@ The first AR prototypes, shown in Figure \ref{figure:first_head_mount}, created 
   \label{figure:first_head_mount}
 \end{figure}
 
+\subsection{Which devices could use tracking.js?} % (fold)
+\label{sub:basic_concepts:visual_tracking:which_devices_could_use_trackingjs}
+
 By the late 1990s, as AR became a distinct field of research \cite{Krevelen2010}. Displays, trackers, graphics computers and software remain essential in many AR experiences \cite{Krevelen2010,Benford1998}. There are several displays devices that could be used on AR applications, the major ones could be divided as follows \cite{Benford1998}:
 
 \begin{enumerate}
@@ -298,6 +299,10 @@ By the late 1990s, as AR became a distinct field of research \cite{Krevelen2010}
 
 In this thesis, it was designed and implemented tracking library for the web aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them \cite{MDN2013,International2009}. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (\ie\ Google Glass \cite{Glass2013}) \cite{Benford1998} are browser ready \cite{Hickson2013}. They all could benefit from a reusable, cross-platform library for AR applications.
 
-% section augmented_reality (end)
+% subsection which_devices_could_use_tracking_js_ (end)
+
+% subsection tracking_in_augmented_reality_applications (end)
+
+% section visual_tracking (end)
 
 % chapter basic_concepts (end)
