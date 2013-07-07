@@ -232,34 +232,46 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order 
 \subsection{Contextualization} % (fold)
 \label{sub:basic_concepts:visual_tracking:contextualization}
 
-Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving \cite{Lepetit2005}. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application \cite{Lepetit2005,Teichrieb2007}.
-2D tracking typically aims at following the image projection of objects or parts of objects whose 3D displacement results in a motion that can be modeled as a 2D transformation \cite{Lepetit2005}.
+Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving \cite{Lepetit2005}. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application \cite{Lepetit2005,Teichrieb2007}. Figure \ref{figure:tracking_oclusion} shows a person walking on the street being tracked despite its level of occlusion by another object that is not of interest for the tracking.
 
-One of the major responsibility of tracking algorithms is to extract information that allows superposing computer generated images on real scenes \cite{Lepetit2005}. Many potential AR applications have been explored, such as medical visualization, maintenance and repair, annotation, entertainment, aircraft navigation and targeting \cite{Lepetit2005,Krevelen2010}. The objects in the real and virtual worlds must be properly aligned and the system latency should also be low, lest the illusion that the two worlds coexist be compromised. \cite{Lepetit2005} Due to the importance of tracking in AR, this area owns the biggest number of publications and challenge requests on the International Symposium on Mixed and Augmented Reality (ISMAR) \cite{Zhou2008}.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/basic_concepts/tracking_oclusion.png}
+  \caption{Example of an accurate object tracking robust to occlusion.}
+  \label{figure:tracking_oclusion}
+\end{figure}
 
-There are a variety of ways to track a real environment: \eg\ global positioning system (GPS) \cite{Krevelen2010}, mechanical trackers \cite{Krevelen2010}, magnetic trackers \cite{Krevelen2010} and ultrasonic trackers \cite{Krevelen2010}, but they all have their weaknesses \cite{Krevelen2010}. Mechanical trackers are accurate enough, although they tether the user to a limited working. Magnetic trackers are vulnerable to distortions by metal in the environment. Ultrasonic trackers suffer from noise and tend to be inaccurate at long ranges because of variations in the ambient temperature \cite{Lepetit2005}.
-By contrast, vision has the potential to yield non-invasive, accurate and low-cost solutions to this problem, provided that one is willing to invest the effort required to develop sufficiently robust algorithms \cite{Lepetit2005}. Bringing video tracking based techniques on the web are the focus of this work \cite{Lepetit2005}.
-In some cases, it is acceptable to add fiducials \cite{Cho1998}, such as special markers, to the scene or target object \cite{Cho1998,Lepetit2005}. The addition of fiducials in the scene, also called landmarks or markers \cite{Cho1998}, greatly helps since they constitute image features easy to extract, and they provide reliable, easy to exploit measurements for the pose estimation \cite{Cho1998,Lepetit2005}.
-It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture \cite{Lepetit2005}. The latter, makes tracking far more difficult because finding and following feature points or edges can be difficult \cite{Lepetit2005}. There are too few of them on many typical objects.
+When 2D tracking is used, the goal is to retrieve a 2D transformation from the object projected on the captured image that best represents the motion that occurred \cite{Li2008}. Many models can be applied in order to handle appearance changes due to perspective effects or deformations. The homography is one of the most used transformations regarding 2D tracking of planar objects, since it is generic enough to deal with all possible perspective effects \cite{CMei2008}. This thesis focuses on tracking of planar objects since it serves as basis for more complex tracking approaches (for example, 3D tracking).
+
+In computer vision, general video analysis can be broken down into three different steps: detection of interesting moving objects, frame to frame tracking of those objects and analysis of their tracks to recognize possible behaviors \cite{Yilmaz2006}. Because of such use in computer vision, object tracking is important in the following major areas:
+
+\begin{enumerate}
+  \item 3D reconstruction \cite{Zhou2008};
+  \item motion-based recognition \cite{Cedras1995};
+  \item automated surveillance \cite{Javed2002};
+  \item video indexing \cite{Javed2002};
+  \item human-computer interaction \cite{Ren2010};
+  \item traffic monitoring \cite{Gloyer1994};
+  \item vehicle navigation \cite{Jia2009}.
+\end{enumerate}
+
+Examples of computer vision applications in each of the previously described areas is shown in Figure \ref{figure:cv_applications}. Besides these areas, object tracking algorithms can also be used in AR systems that require real-time registration of the object to be augmented.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/basic_concepts/cv_applications.png}
+  \caption{Computer vision applications: motion-based recognition (top left) \cite{Cedras1995}; automated surveillance (top center) \cite{Javed2002}; video indexing (top right) \cite{Javed2002}; human-computer interaction (bottom left) \cite{Ren2010}; traffic monitoring (bottom center) \cite{Gloyer1994}; vehicle navigation (bottom right) \cite{Jia2009}.}
+  \label{figure:cv_applications}
+\end{figure}
+
+Vision has the potential to yield non-invasive, accurate and low-cost solutions for tracking objects. This thesis introduce a tracking library for the web, that provides visual tracking techniques. Currently, the library provides three main modules, they are: markerless tracking (Section \ref{sec:tracking_library_for_the_web:marker_less_tracking_algorithm}), rapid object detection (Section \ref{sec:tracking_library_for_the_web:rapid_object_detection}) and color tracking (Section \ref{sec:tracking_library_for_the_web:color_tracking_algorithm}).
 
 % subsection contextualization (end)
 
 \subsection{Tracking in Augmented Reality Applications} % (fold)
 \label{sub:basic_concepts:visual_tracking:tracking_in_augmented_reality_applications}
 
-Imagine a technology in which you could see more than others see, hear more than others hear, and even touch things that others cannot \cite{Krevelen2010}. A technology able to perceive computational elements and objects within our real world experience that help us in our daily activities, while interacting almost unconsciously through mere gestures and speech \cite{Krevelen2010,Teichrieb2007}.
-
-With such technology, mechanics could see instructions what to do next when repairing an unknown piece of equipment, surgeons could take advantage of Augmented Reality (AR) while performing surgery on them and we could read reviews for each restaurant in the street we're walking in on the way to work \cite{Krevelen2010}.
-
-AR is this technology to create a ``next generation, reality-based interface'' \cite{Krevelen2010} and is moving from laboratories around the world into various industries and consumer markets. AR supplements the real world with virtual (computer-generated) objects that appear to coexist in the same space as the real world. AR was recognized as an emerging technology of 2007 \cite{Krevelen2010}, and with today's smart-phones and AR browsers we are starting to embrace this very new and exciting kind of human-computer interaction. Three important aspects of an AR system \cite{Krevelen2010,Benford1998}:
-
-\begin{enumerate}
-  \item Combines real and virtual objects in a real environment \cite{Krevelen2010,Benford1998}.
-  \item Aligns real and virtual objects with each other \cite{Krevelen2010,Benford1998}.
-  \item Runs interactively, in three dimensions, and in real time \cite{Krevelen2010,Benford1998}.
-\end{enumerate}
-
-On the reality-virtuality \textit{continuum} by Milgram and Ki \cite{Mistry2009}, AR is one part of the general area of mixed reality. Both virtual environments (or virtual reality) and augmented virtuality, in which real objects are added to virtual ones, replace the surrounding environment by a virtual one. In contrast, AR provides local virtuality. The reality-virtuality \textit{continuum} is shown on Figure \ref{figure:reality_continuum}.
+Imagine a technology in which you could see more than others see, hear more than others hear, and even touch things that others cannot \cite{Krevelen2010}. A technology able to perceive computational elements and objects within our real world experience that help us in our daily activities, while interacting almost unconsciously through mere gestures \cite{Krevelen2010,Teichrieb2007}. With such technology, mechanics could see instructions what to do next when repairing an unknown piece of equipment, surgeons could take advantage of Augmented Reality (AR) while performing surgery on them and we could read reviews for each restaurant in the street we're walking in on the way to work \cite{Krevelen2010}. On the reality-virtuality \textit{continuum} by Milgram and Ki \cite{Mistry2009}, AR is one part of the general area of mixed reality. Both virtual environments (or virtual reality) and augmented virtuality, in which real objects are added to virtual ones, replace the surrounding environment by a virtual one. In contrast, AR provides local virtuality. The reality-virtuality \textit{continuum} is shown on Figure \ref{figure:reality_continuum}.
 
 \begin{figure}[!htb]
   \centering
@@ -268,50 +280,48 @@ On the reality-virtuality \textit{continuum} by Milgram and Ki \cite{Mistry2009}
   \label{figure:reality_continuum}
 \end{figure}
 
-The first AR prototypes, shown in Figure \ref{figure:first_head_mount}, created by computer graphics pioneer Ivan Sutherland and his students at Harvard University and the University of Utah, appeared in the 1960s and used a see-through to present 3D graphics \cite{Benford1998}. It took until the early 1990s before the term ``augmented reality'' was proposed by Caudell and Mizell \cite{Benford1998}, scientists at Boeing Corporation who were developing an experimental AR system to help workers put together wiring harnesses \cite{Benford1998}.
+AR applications involve superimposing computer-generated content on real scenes in real-time \cite{Azuma1997}. Tracking is a critical component of most AR applications, since the objects in both real and virtual worlds must be properly aligned with respect to each other in order to preserve the idea of the two worlds coexisting.
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=380pt]{chapters/basic_concepts/first_head_mount.png}
-  \caption{The world's first head-mounted display with the ``Sword of Damocles''.}
-  \label{figure:first_head_mount}
-\end{figure}
+Traditionally used in AR, vision-based tracking described as two main steps: extract information from the input video using image processing algorithms and perform the pose estimation itself, or, in other words, find the transformation that best maps the object model from one frame to the next one \cite{Joma2013}.
+
+The information that comes from the input image is basically composed of image features that are easy to extract from the scene. Both Marker-based AR and Markerless AR \cite{Lima2009a} are based on this principle, with the difference that the first one adds artificial templates, such as special markers that do not originally belong in the scene in order to enable the tracking \cite{Joma2013}. These templates are often called fiducials and they constitute image features easy to extract as well as reliable measurements for the pose estimation \cite{Cho1998,Lepetit2005}. It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture \cite{Lepetit2005}, those are known as Markerless AR. In this case, the template to be used is the object to be tracked itself, using its natural features.
+
+Other tracking approaches can be used as well, such as approaches that rely on edge information \cite{Lima2009a}, feature information \cite{Wendt2008} and those that do not consider any object model a priori \cite{Lepetit2005,Joma2013}. This thesis will provide more detail regarding the template-based approaches developed and optimized aiming web environment.
+The template-based tracking techniques do not necessarily rely on local features such as edges or other features, but rather on global region tracking through the use of the whole pattern of the object to be tracked. These methods can be useful in handling more complex objects that are difficult to model using local features due to their repeatability, for example. Such scenarios can be computationally expensive, but in some cases effectively formulated \cite{Yilmaz2006}.
+
+% subsection tracking_in_augmented_reality_applications (end)
 
 \subsection{Which devices could use tracking.js?} % (fold)
 \label{sub:basic_concepts:visual_tracking:which_devices_could_use_trackingjs}
 
-By the late 1990s, as AR became a distinct field of research \cite{Krevelen2010}. Displays, trackers, graphics computers and software remain essential in many AR experiences \cite{Krevelen2010,Benford1998}. There are several displays devices that could be used on AR applications, the major ones could be divided as follows \cite{Benford1998}:
+Different devices such as mobile phones, notebooks, and even head-worn \cite{Benford1998} (Google Project Glass \cite{Glass2013}) provides an embedded web browser with capapability to run JavaScript \cite{International2009} and HTML5 \cite{Hickson2013}. There are several displays devices that could be used on visual tracking or AR applications, Benford \cite{Benford1998}, describe that the major ones could be divided as follows \cite{Benford1998}:
 
 \begin{enumerate}
-  \item Visual display: video see-through, optical see-through, projective and monitor.
+  \item Visual display \cite{Benford1998};
     \begin{enumerate}
-      \item Video see-through: is the closest to virtual reality, where the virtual environment is replaced by a video feed of reality and the AR is placed on the video frames \cite{Benford1998}.
-      \item Optical see-through: systems combine computer-generated imagery with holographic optical elements (HOEs), providing a ``through the glasses'' image of the real world \cite{Benford1998}.
-      \item Projective: these displays have the advantage that they do not require special eye-wear, it projects the information into a surface, wall or even the human palm \cite{Benford1998}.
-      \item Monitor: the use of a regular computer monitor has become popular as a visual display since AR techniques are now available on the \cite{Benford1998}.
+      \item Video see-through \cite{Benford1998};
+      \item Projective \cite{Benford1998};
+      \item Monitor \cite{Benford1998}.
     \end{enumerate}
 
-  \item Display positioning: head-worn, hand-held and spatial \cite{Benford1998}.
+  \item Display positioning \cite{Benford1998};
     \begin{enumerate}
-      \item Head-worn: is a visual displays attached to the head include the video or optical see-through head-mounted display (HMD), virtual retinal display (VRD), and head-mounted projective display (HMPD) \cite{Benford1998}. Google Inc. released a first-class optical HDM called Project Glass shown on Figure \ref{figure:google_glass} \cite{Glass2013}.
-
-        \begin{figure}[!htb]
-          \centering
-          \includegraphics[width=240pt]{chapters/basic_concepts/google_glass.png}
-          \caption{Optical head-mounted display Google Glass \cite{Glass2013} \textit{(Photo credit: CBS).}}
-          \label{figure:google_glass}
-        \end{figure}
-
-      \item Hand-held: includes hand-held video or optical see-through displays as well as hand-held projectors, it is currently the best choice to introduce AR to a mass market due to low production costs and ease of use since it may be based on existing consumer products, such as mobile phones \cite{Benford1998}.
-      \item Spatial: those are displays that could placed statically within the environment and include screen-based video see-through displays \cite{Benford1998}.
+      \item Head-worn \cite{Benford1998};
+      \item Hand-held \cite{Benford1998};
+      \item Spatial \cite{Benford1998}.
     \end{enumerate}
 \end{enumerate}
 
-In this thesis, it was designed and implemented tracking library for the web aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them \cite{MDN2013,International2009}. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (\ie\ Google Glass \cite{Glass2013}) \cite{Benford1998} are browser ready \cite{Hickson2013}. They all could benefit from a reusable, cross-platform library for AR applications.
+The possibility to use this work as a cross-platform tacking library is a reality. In a near future, other devices are going to have embedded browser versions as well and they could all benefit from \textit{tracking.js} library.
 
 % subsection which_devices_could_use_tracking_js_ (end)
 
-% subsection tracking_in_augmented_reality_applications (end)
+\subsection{Discussion} % (fold)
+\label{sub:basic_concepts:visual_tracking:discussion}
+
+In this thesis, it was designed and implemented tracking library for the web aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them \cite{MDN2013,International2009}. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (\ie\ Google Glass \cite{Glass2013}) \cite{Benford1998} are browser ready \cite{Hickson2013}. They all could benefit from a reusable, cross-platform library for AR applications.
+
+% subsection discussion (end)
 
 % section visual_tracking (end)
 
