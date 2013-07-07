@@ -1,14 +1,55 @@
 \chapter{Tracking Library for the Web (tracking.js)} % (fold)
 \label{cha:tracking_library_for_the_web}
 
-\section{Introduction} % (fold)
-\label{sec:tracking_library_for_the_web:introduction}
+\section{Contextualization} % (fold)
+\label{sec:tracking_library_for_the_web:Contextualization}
 
 The desktop platform is the target environment most commonly addressed when developing AR systems. However, depending on the requirements of an AR application, the use of different execution platforms may be necessary. If the system has to be published to several users, the web platform shows to be more adequate, where the application is executed through the Internet in a web browser \cite{Pablo2013}.
 The use of markerless tracking, which is based on natural features of the scene, has also been gaining more space on web targeted AR applications for advertising. The media used in this kind of application needs to be as appealing as possible in order to catch consumers' attention. Markerless tracking satisfies this requirement, since the idea of having a real scene augmented with virtual objects without any artificial elements such as markers added to the environment is very attractive \cite{Pablo2013}. In addition, the product being advertised can be tracked and augmented with virtual elements \cite{Pablo2013}.
 Browsers are evolving very fast when compared to the the previous decade \cite{Hickson2013}. JavaScript language \cite{International2009,MDN2013} wasn't prepared to handle typed data structures \cite{TypedArray2013} able to manipulate raw binary data safely \cite{Canvas2013}, all the computational complexity required by AR algorithms was too much for that growing environment. Browsers weren't able to capture audio and video \cite{MediaCapture2013,WebRTC2013} natively, without plugin installation \cite{Flash2013}, an essential feature for AR applications. This reality has changed, this involves the use of several modern browser specifications \cite{Hickson2013,WC2006} as well as implementation of different computer vision algorithms and techniques into the browser environment taking advantage of all those modern APIs \cite{Hickson2013,WC2006}.
 
 In this context, this thesis aims to present the implementation and evaluation of a solution regarding tracking techniques for web targeted AR. The available algorithms and techniques can be used for different applications, such as, detect faces, identify objects and colors and track moving objects. The solution is called \textit{tracking.js}. Some optimizations are discussed and implemented on this work in order to achieve good results when compared with similar implementations in compiled languages.
+
+\subsection{Related Work} % (fold)
+\label{sub:tracking_library_for_the_web:related_work}
+
+There are not many web based RA solutions available and registered in the literature. The ones available are mainly focused on fiducial markers \cite{Cho1998}, such as FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011}, they both are ports of ARToolKit \cite{Hirokazu2002}. ARToolKit is a desktop library which is useful to make vision-based AR applications \cite{Hirokazu2002}. The Metaio company developed Unifeye Viewer \cite{Metaio2009}, a proprietary plug-in for Flash \cite{Flash2013} that allows the utilization of markerless AR applications on the web. In order to run Flash \cite{Flash2013} based applications, the installation of its plugin is required. Third-party plugins, such as Flash \cite{Flash2013}, are in decadency on modern and mobile web browsers, instead JavaScript \cite{International2009} based solutions are preferred, since they can run in any modern browser without requiring any user effort of installing external software. Some smart-phones don't even support Flash \cite{Flash2013} plugin into their browsers, \eg\ Safari for mobile \cite{Safari2013} is one example of a mobile browser that has banned Flash \cite{Flash2013}.
+
+\begin{enumerate}
+    \item FLARToolKit: is a port of the well-known ARToolKit \cite{Hirokazu2002} marker tracking library to ActionScript \cite{Flash2013}, which is the language utilized in the development of Flash \cite{Flash2013} applications for the web. This was the first initiative towards AR solutions for the web \cite{Pablo2013}. Using FLARToolKit \cite{Yan2011}, is possible to develop AR applications that runs on client's browser. A marker based AR example for the web, developed for a marketing campaign of General Electric's company using FLARToolKit, is shown on Figure \ref{figure:flartoolkit}.
+
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=240pt]{chapters/tracking_library_for_the_web/flartoolkit.png}
+      \caption{Marker based AR for the web using FLARToolKit.}
+      \label{figure:flartoolkit}
+    \end{figure}
+
+    \item JSARToolkit: is a JavaScript \cite{International2009} port of FLARToolKit \cite{Yan2011}, operating on canvas images \cite{Canvas2013} and
+video element \cite{Hickson2013} contents, provides another marker tracking library. This was the first, open-source, JavaScript \cite{International2009} based, AR solution available for the web. A marker based AR example for the web using JSARToolKit is shown on Figure \ref{figure:jsartoolkit}.
+
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=240pt]{chapters/tracking_library_for_the_web/jsartoolkit.png}
+      \caption{Marker based AR for the web using JSARToolKit.}
+      \label{figure:jsartoolkit}
+    \end{figure}
+
+    \item Unifeye Viewer: from Metaio company, offers a robust markerless tracking solution for the web. Unifeye \cite{Metaio2009} also depends on Flash \cite{Flash2013} plugin in order to run on web browsers. A similar example of General Electric's marker based solution, this time markerless based, is shown on Figure \ref{figure:unifeyeviewer}. Note that the 3D image is projected over a magazine cover instead of a fiducial marker \cite{Cho1998}.
+
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=240pt]{chapters/tracking_library_for_the_web/unifeyeviewer.png}
+      \caption{Markerless example of image projected over a magazine cover using Unifeye Viewer solution.}
+      \label{figure:unifeyeviewer}
+    \end{figure}
+\end{enumerate}
+
+There is a disadvantage of using marker based AR. Depend on a artificial marker in order to augment the scene with virtual elements is counterintuitive. Commonly, web applications are utilized by novice users that do not have sufficient technical knowledge to perform manual setup, such as print fiducial markers or perform manual initialization for the tracking. FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011} are both marker based techniques, using Flash \cite{Flash2013} and JavaScript \cite{International2009}, respectively. FLARToolKit has one more issue which is dependency on Flash \cite{Flash2013} plugin installation. Unifeye Viewer by Metaio, was the only existing solution that provided markerless tracking for the web, although it uses Flash \cite{Flash2013}, excluding it from a potential competitor of \textit{tracking.js}. Markerless tracking techniques do not depend on any artificial marker or advanced user initialization. The space on web targeted AR applications for advertising is gaining more space and the media used in this kind of application needs to be as appealing as possible \cite{Pablo2013}. Making markerless tracking a suitable technique to such applications.
+
+The solution proposed in this thesis, \textit{tracking.js}, provides the first known, open-source, markerless tracking solution for the web that runs entirely in JavaScript \cite{International2009} and HTML5 \cite{Hickson2013}.
+
+% subsection related_work (end)
 
 \subsection{Library Modules} % (fold)
 \label{sub:tracking_library_for_the_web:library_modules}
@@ -31,8 +72,8 @@ The two main available packages splits Base from AR classes. Furthermore, each c
 Visual tracking classes includes several computer vision algorithms, such as FAST \cite{RostenFaster2010}, BRIEF \cite{Calonder2010} implementations, homography estimation and others. As the library grows, many other computer vision algorithms are going to be added to the library, such as 3D pose calculation.
 
 \begin{enumerate}
-  \item FAST: provides an implementation of Features from Accelerated Segment Test (FAST) \cite{Rosten2010} for interest points detection via \textit{findCorners(data, threshold)} method, where $data$ is the \textit{ImageData} of the canvas \cite{Canvas2013} frame. It also depends on a $threshold$ argument. The pixel at $p$, see Figure \ref{figure:fast}, is the center of a candidate corner and they are classified if brighter than $p$ by more than the $threshold$.
-  \item BRIEF: provides an implementation of Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} for feature description via \textit{getDescriptors(data, corners)} method and matching via \textit{match(c1, d1, c2, d2)}, where $data$ is an \textit{ImageData}, and $c1$ and $c2$ are the found corners array return by \textit{FAST.findCorners} method and $d1$ and $d2$ are feature descriptors array return by \textit{BRIEF.getDescriptors} method.
+  \item FAST: provides an implementation of Features from Accelerated Segment Test (FAST) \cite{Rosten2010} for features detection via \textit{findCorners(data, threshold)} method, where $data$ is the \textit{ImageData} of the canvas \cite{Canvas2013} frame. It also depends on a $threshold$ argument. The pixel at $p$, see Figure \ref{figure:fast}, is the center of a candidate corner and they are classified if brighter than $p$ by more than the $threshold$.
+  \item BRIEF: provides an implementation of Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} for feature extraction via \textit{getDescriptors(data, corners)} method and matching via \textit{match(c1, d1, c2, d2)}, where $data$ is an \textit{ImageData}, and $c1$ and $c2$ are the found corners array return by \textit{FAST.findCorners} method and $d1$ and $d2$ are feature descriptors array return by \textit{BRIEF.getDescriptors} method.
   \item RANSAC: provides an interface used to achieve robust estimation method for homographies and camera pose. There are two available estimation methods implemented that inherits from RANSAC \cite{Hartley2004}, Homography and Pose.
   \item Homography: provides an API to estimate a homography matrix $H$ between images by finding feature correspondences in those images.
   \item Pose: TODO.
@@ -148,58 +189,20 @@ Visual tracking classes includes several computer vision algorithms, such as FAS
 
 % subsection library_modules (end)
 
-% section introduction (end)
-
-\section{Related Work} % (fold)
-\label{sec:tracking_library_for_the_web:related_work}
-
-There are not many web based RA solutions available and registered in the literature. The ones available are mainly focused on fiducial markers \cite{Cho1998}, such as FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011}, they both are ports of ARToolKit \cite{Hirokazu2002}. ARToolKit is a desktop library which is useful to make vision-based AR applications \cite{Hirokazu2002}. The Metaio company developed Unifeye Viewer \cite{Metaio2009}, a proprietary plug-in for Flash \cite{Flash2013} that allows the utilization of markerless AR applications on the web. In order to run Flash \cite{Flash2013} based applications, the installation of its plugin is required. Third-party plugins, such as Flash \cite{Flash2013}, are in decadency on modern and mobile web browsers, instead JavaScript \cite{International2009} based solutions are preferred, since they can run in any modern browser without requiring any user effort of installing external software. Some smart-phones don't even support Flash \cite{Flash2013} plugin into their browsers, \eg\ Safari for mobile \cite{Safari2013} is one example of a mobile browser that has banned Flash \cite{Flash2013}.
-
-\begin{enumerate}
-    \item FLARToolKit: is a port of the well-known ARToolKit \cite{Hirokazu2002} marker tracking library to ActionScript \cite{Flash2013}, which is the language utilized in the development of Flash \cite{Flash2013} applications for the web. This was the first initiative towards AR solutions for the web \cite{Pablo2013}. Using FLARToolKit \cite{Yan2011}, is possible to develop AR applications that runs on client's browser. A marker based AR example for the web, developed for a marketing campaign of General Electric's company using FLARToolKit, is shown on Figure \ref{figure:flartoolkit}.
-
-    \begin{figure}[!htb]
-      \centering
-      \includegraphics[width=240pt]{chapters/tracking_library_for_the_web/flartoolkit.png}
-      \caption{Marker based AR for the web using FLARToolKit.}
-      \label{figure:flartoolkit}
-    \end{figure}
-
-    \item JSARToolkit: is a JavaScript \cite{International2009} port of FLARToolKit \cite{Yan2011}, operating on canvas images \cite{Canvas2013} and
-video element \cite{Hickson2013} contents, provides another marker tracking library. This was the first, open-source, JavaScript \cite{International2009} based, AR solution available for the web. A marker based AR example for the web using JSARToolKit is shown on Figure \ref{figure:jsartoolkit}.
-
-    \begin{figure}[!htb]
-      \centering
-      \includegraphics[width=240pt]{chapters/tracking_library_for_the_web/jsartoolkit.png}
-      \caption{Marker based AR for the web using JSARToolKit.}
-      \label{figure:jsartoolkit}
-    \end{figure}
-
-    \item Unifeye Viewer: from Metaio company, offers a robust markerless tracking solution for the web. Unifeye \cite{Metaio2009} also depends on Flash \cite{Flash2013} plugin in order to run on web browsers. A similar example of General Electric's marker based solution, this time markerless based, is shown on Figure \ref{figure:unifeyeviewer}. Note that the 3D image is projected over a magazine cover instead of a fiducial marker \cite{Cho1998}.
-
-    \begin{figure}[!htb]
-      \centering
-      \includegraphics[width=240pt]{chapters/tracking_library_for_the_web/unifeyeviewer.png}
-      \caption{Markerless example of image projected over a magazine cover using Unifeye Viewer solution.}
-      \label{figure:unifeyeviewer}
-    \end{figure}
-\end{enumerate}
-
-There is a disadvantage of using marker based AR. Depend on a artificial marker in order to augment the scene with virtual elements is counterintuitive. Commonly, web applications are utilized by novice users that do not have sufficient technical knowledge to perform manual setup, such as print fiducial markers or perform manual initialization for the tracking. FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011} are both marker based techniques, using Flash \cite{Flash2013} and JavaScript \cite{International2009}, respectively. FLARToolKit has one more issue which is dependency on Flash \cite{Flash2013} plugin installation. Unifeye Viewer by Metaio, was the only existing solution that provided markerless tracking for the web, although it uses Flash \cite{Flash2013}, excluding it from a potential competitor of \textit{tracking.js}. Markerless tracking techniques do not depend on any artificial marker or advanced user initialization. The space on web targeted AR applications for advertising is gaining more space and the media used in this kind of application needs to be as appealing as possible \cite{Pablo2013}. Making markerless tracking a suitable technique to such applications.
-
-The solution proposed in this thesis, \textit{tracking.js}, provides the first known, open-source, markerless tracking solution for the web that runs entirely in JavaScript \cite{International2009} and HTML5 \cite{Hickson2013}.
-
-% section related_work (end)
+% section contextualization (end)
 
 \section{Markerless Tracking Algorithm} % (fold)
 \label{sec:tracking_library_for_the_web:marker_less_tracking_algorithm}
 
+\subsection{Contextualization} % (fold)
+\label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:contextualization}
+
 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 
-% section marker_less_tracking_algorithm (end)
+% subsection contextualization (end)
 
-\section{Interest Point Detection} % (fold)
-\label{sec:tracking_library_for_the_web:interest_point_detection}
+\subsection{Feature Detector} % (fold)
+\label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:feature_detector}
 
 This technique relies on matching individual features across images and are therefore easy to increase robustness against partial occlusions or matching errors. Illumination invariance is also simple to achieve. Feature points detection is used as the first step of many vision tasks such as tracking, localization, image matching and recognition. In this article we call ``feature'' or ``keypoint'' to refer to a point of interest in two dimensions.
 
@@ -222,21 +225,21 @@ On Figure \ref{figure:fast}, the highlighted squares are the pixels used in the 
   \label{figure:fast}
 \end{figure}
 
-% section interest_point_detection (end)
+% subsection feature_detector (end)
 
-\section{Interest Point Description and Matching} % (fold)
-\label{sec:tracking_library_for_the_web:interest_point_matching}
+\subsection{Feature Extractors} % (fold)
+\label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:feature_extractors}
 
-To estimate motion, one can then match sets of interest points \{$m_{i}$\} and \{$m'_{j}$\} extracted from two images taken from similar, and often successive, viewpoints. A classical procedure \cite{Calonder2010} runs as follows. For each point \{$m_{i}$\} in the first image, search in a region of the second image around location \{$m_{i}$\} for point \{$m'_{j}$\}. The search is based on the similarity of the local image windows, also knowns as kernel windows, centered on the points, which strongly characterizes the points when the images are sufficiently close \cite{Lepetit2005}.
+To estimate motion, one can then match sets of features \{$m_{i}$\} and \{$m'_{j}$\} extracted from two images taken from similar, and often successive, viewpoints. A classical procedure \cite{Calonder2010} runs as follows. For each point \{$m_{i}$\} in the first image, search in a region of the second image around location \{$m_{i}$\} for point \{$m'_{j}$\}. The search is based on the similarity of the local image windows, also knowns as kernel windows, centered on the points, which strongly characterizes the points when the images are sufficiently close \cite{Lepetit2005}.
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{chapters/tracking_library_for_the_web/BRIEF.pdf}
-  \caption{BRIEF \cite{Lepetit2005} description and matching for image features (keypoints).}
+  \caption{BRIEF \cite{Lepetit2005} feature extractor.}
   \label{figure:BRIEF}
 \end{figure}
 
-The feature matching used in the case studies performed in this work search for correspondent points in the current frame. Only points that are highly descriptive invariant features, called keypoints, are tested. Those keypoints were detected using FAST \cite{Rosten2010} in Section \ref{sec:tracking_library_for_the_web:interest_point_detection}. After the keypoints are detected they need to be described and the respective matching point should be found. Since web and handled devices have limited computational power having local descriptors that are fast to compute, to match and being memory efficient are important aspects, for that reason, was used an efficient method called Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010}.
+The feature matching used in the case studies performed in this work search for correspondent points in the current frame. Only points that are highly descriptive invariant features, called keypoints, are tested. Those keypoints were detected using FAST \cite{Rosten2010} in Section \ref{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:feature_detector}. After the keypoints are detected they need to be described and the respective matching point should be found. Since web and handled devices have limited computational power having local descriptors that are fast to compute, to match and being memory efficient are important aspects, for that reason, was used an efficient method called Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010}.
 
 To generate the binary string for each key-point found in the smoothed frame, the individual bits are obtained by comparing the intensities of pairs of points, $(\textbf{p}; x, y)$, represented by $\ast$ symbol on Figure \ref{figure:BRIEF}, along the kernel window centered on each key-point without requiring a training phase.
 Empirically, this technique shows that $256$ or even $128$ bits \cite{Calonder2010}, often suffice to obtain very good matching results. The best spatial arrangement of the tested (\textbf{x}, \textbf{y})-pairs of points are reach when selected based on an isotropic Gaussian distribution \cite{Calonder2010}. To compute the Gaussian distribution can be time consuming. As an optimization proposed by this article, the Gaussian distribution could be simply replaced by a random function due to its random characteristics.
@@ -257,7 +260,7 @@ In \cite{Calonder2010}, $n_{d}= 128, 256, 512$ were used in the tests and any of
 
 Once each keypoint is described with its binary string \cite{Calonder2010}, they need to be compared with the closest matching point. Distance metric is critical to the performance of intrusion detection systems. Thus using binary strings reduces the size of the descriptor and provides an interesting data structure that is fast to operate with whose similarity can be measured by the Hamming distance which, on desktop implementations, the computation time could be driven almost to zero using the POPCNT instruction from SSE4.2 \cite{Intel2007}. Only the latest Intel Core i7 CPUs support this instruction.
 
-The Hamming distance is an important step on interest point matching, it provides a fast and memory-efficient way to calculate distance between binary strings. Given two image patches $x$ and $y$, denote their binary descriptors as $b(x) \in \{0,1\}^n$ and $b(y) \in \{0,1\}^n$ respectively. Then their Hamming distance is computed by:
+The Hamming distance is an important step on feature matching, it provides a fast and memory-efficient way to calculate distance between binary strings. Given two image patches $x$ and $y$, denote their binary descriptors as $b(x) \in \{0,1\}^n$ and $b(y) \in \{0,1\}^n$ respectively. Then their Hamming distance is computed by:
 
 $$Ham(x, y)=\sum_{i=1}^{n}b_i(x)\otimes b_i(y)$$
 
@@ -267,11 +270,10 @@ $$WHam(x, y)=\sum_{i=1}^{n}w_i(b_i(x)\otimes b_i(y))$$
 
 Where $w_i$ is the weight of the $i$th element. The goal is to learn $w_i,i=1,2\cdots,n$ for the binary descriptor (BRIEF) based on a set of feature points. By assigning different weights to binary codes, what we expect is to obtain a distance space in which the distances of matching patches are less than those of non-matching patches.
 
-% section interest_point_matching (end)
+% subsection feature_extractors (end)
 
-
-\section{Homography Estimation} % (fold)
-\label{sec:tracking_library_for_the_web:homography_estimation}
+\subsection{Homography Estimation} % (fold)
+\label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:homography_estimation}
 
 Typically, homographies are estimated between images by finding feature correspondences in those images. A 2D point $(x,y)$ in an image can be represented as a 3D vector $\textbf{x} = (x_1, x_2, x_3)$ where $x = \frac{x_1}{x_3}$ and $y = \frac{x_2}{x_3}$ \cite{Homography2009}. This is called the homogeneous representation of a point and it lies on the projective plane $P^2$. A homography is an invertible mapping of points and lines on the projective plane $P^2$. Hartley and Zisserman \cite{Hartley2004} provide the specific definition that a homography is a mapping from $P^2$ → $P^2$ is a projectivity if and only if there exists a non-singular $3\times3$ matrix $H$ such that for any point in $P^2$ represented by vector $\textbf{x}$ it is true that its mapped point equals $H\textbf{x}$. It should be noted that $H$ can be changed by multiplying by an arbitrary non-zero constant without altering the projective transformation. Thus $H$ is considered a homogeneous matrix and only has $8$ degrees of freedom even though it contains $9$ elements.
 
@@ -302,9 +304,10 @@ $$\textbf{h}=\begin{pmatrix}h1 & h2 & h3 & h4 & h5 & h6 & h7 & h8 & h9\end{pmatr
 
 Since each point correspondence provides $2$ equations, $4$ correspondences are sufficient to solve for the $8$ degrees of freedom of $H$. JavaScript typed arrays, defined in Section \ref{sub:basic_concepts:web:javascript_typed_arrays}, were used in the homography estimation implementation for better performance results.
 
-% section homography_estimation (end)
+% subsection homography_estimation (end)
 
-\section{Random Sample Consensus (RANSAC)} % (fold)
+\subsection{Random Sample Consensus (RANSAC)} % (fold)
+\label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:ransac}
 
 RANSAC (Random Sample Consensus) \cite{Hartley2004} is the most commonly used robust estimation method for homographies according to \cite{Homography2009}. The idea of the algorithm is pretty simple; For a number of iterations, a random sample of $4$ correspondences is selected and a homography $H$ is computed from those four correspondences. Each other correspondence is then classified as an inlier or outlier depending on its concurrence with $H$. After all of the iterations are done, the iteration that contained the largest number of inliers is selected. $H$ can then be recomputed from all of the correspondences that were consider as inliers in that iteration \cite{Homography2009}.
 
@@ -312,19 +315,15 @@ One important step when applying the RANSAC algorithm described above is to deci
 
 Another issue is to decide how many iterations to run the algorithm, it's not required to try every combination of 4 correspondences. The goal becomes to determine the number of iterations, $N$, that ensures with a probability $p$ that at least one of the random samples will be free from outliers. $N=100$ was used on the web implementation.
 
-\label{sec:tracking_library_for_the_web:ransac}
+% subsection ransac (end)
 
-% section ransac (end)
-
-\section{Pose Estimation} % (fold)
-\label{sec:tracking_library_for_the_web:pose_estimation}
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-
-% section pose_estimation (end)
+% section marker_less_tracking_algorithm (end)
 
 \section{Rapid Object Detection (Viola Jones)} % (fold)
 \label{sec:tracking_library_for_the_web:rapid_object_detection}
+
+\subsection{Contextualization} % (fold)
+\label{sub:tracking_library_for_the_web:rapid_object_detection:contextualization}
 
 Rapid Object Detection \cite{Viola2001} technique, much known as Viola Jones \cite{Viola2001}, brings together new algorithms and insights to construct a library for robust and extremely rapid object detection. What has motivated this technique to be added to \textit{tracking.js} library was the task of face detection. Surprisingly, the algorithm became robust enough to detect any training data \cite{Viola2001}, not only for faces. Currently, \textit{tracking.js} supports, face, eyes, upper body and palm detection.
 
@@ -357,12 +356,19 @@ Viola and Jones \cite{Viola2001} proposed that for each found possible rectangle
 
 For more information about the JavaScript \cite{International2009} implementation, such as evaluation and results, see Chapter \ref{cha:evaluation}.
 
+% subsection contextualization (end)
+
 % section rapid_object_detection (end)
 
 \section{Color Tracking Algorithm} % (fold)
 \label{sec:tracking_library_for_the_web:color_tracking_algorithm}
 
+\subsection{Contextualization} % (fold)
+\label{sub:tracking_library_for_the_web:color_tracking_algorithm:contextualization}
+
 Colors are part of our lives, they are everywhere in every single object. Being able to use colored objects to control your browser using the user camera is very appealing. For that reason, \textit{training.js} implemented a basic color tracking algorithm that resulted in an real-time frame rate trough a simple and intuitive API.
+
+% subsection contextualization (end)
 
 % section color_tracking_algorithm (end)
 
