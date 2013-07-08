@@ -30,7 +30,7 @@
 
 %% `vi' and `upcase' document style options.
 \newcount\vithesis
-\DeclareOption{vi}{\typeout{Course VI/VIII thesis style.}\advance\vithesis by1}
+\DeclareOption{vi}{\typeout{Course VI/VIII dissertation style.}\advance\vithesis by1}
 \vithesis=0
 
 \DeclareOption{upcase}{\typeout{Uppercase cover page.}
@@ -43,7 +43,7 @@
 \DeclareOption{leftblank}{\typeout{Intentionally Leaving Pages Blank}
 \@leftblanktrue}
 
-%  Thesis looks much like report
+%  Dissertation looks much like report
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions
 \LoadClass{report}
@@ -221,7 +221,7 @@ reserved.\par\permission}}
 \def\@copyrightnotice{\copyright\ \CIn\ \@degreeyear.  All rights reserved.}
 
 %% `vi' documentclass option: Specifying this option automatically
-%% copyrights the thesis to the author and gives UFPE permission to copy and
+%% copyrights the dissertation to the author and gives UFPE permission to copy and
 %% distribute the document.  If you want, you can still specify
 %% \copyrightnotice{stuff} to copyright to someone else, or
 %% \copyrightnoticetext{stuff} to specify the exact text of the copyright
@@ -232,7 +232,7 @@ reserved.\par\permission}}
 %%\@degreeyear}}
 \typeout{Copyright given to author,
 	permission to copy/distribute given to UFPE.}
-\else \typeout{Thesis document copyright UFPE unless otherwise (manually) specified}
+\else \typeout{Dissertation document copyright UFPE unless otherwise (manually) specified}
 \fi
 
 \def\thesisdate#1{\gdef\@thesisdate{#1}}
@@ -253,12 +253,12 @@ reserved.\par\permission}}
 \def\supervisor#1#2{\setbox\@titlesupervisor\vbox
   {\unvbox\@titlesupervisor \vskip 10pt% plus 1fil minus 1fil
   \def\baselinestretch{1}\large
-  \signature{Certified by}{#1 \\ #2 \\ Thesis Supervisor}}
+  \signature{Certified by}{#1 \\ #2 \\ Dissertation Supervisor}}
   \setbox\@abstractsupervisor\vbox{\unvbox\@abstractsupervisor
   \vskip\baselineskip \def\baselinestretch{1}\@normalsize
-  \par\noindent Thesis Supervisor: #1 \\ Title: #2}}
+  \par\noindent Dissertation Supervisor: #1 \\ Title: #2}}
 
-% department chairman, not thesis committee chairman
+% department chairman, not dissertation committee chairman
 \def\chairman#1#2{\gdef\@chairmanname{#1}\gdef\@chairmantitle{#2}}
 
 %% `upcase' documentclass option: \choosecase is defined either as a dummy or
@@ -340,7 +340,7 @@ requirements for the \@degreeword\ of \\
 
 \def\permission{\par\noindent{\centering
    The author hereby grants to UFPE permission to reproduce and to
-   distribute publicly paper and electronic copies of this thesis
+   distribute publicly paper and electronic copies of this dissertation
    document in whole or in part in any medium now known or hereafter
    created.}\par}
 
