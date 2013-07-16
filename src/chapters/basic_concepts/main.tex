@@ -28,7 +28,7 @@ For any result or information presented in this work related to the browser envi
   \item Rendering engine: performs parsing and layout for HTML documents \cite{Grosskurth2005,Rocks2013}.
   \item Networking subsystem: used for network calls, like HTTP requests. It has platform independent interface and underneath implementations for each platform \cite{Grosskurth2005,Rocks2013}.
   \item JavaScript parser: parses and executes the JavaScript \cite{International2009} code \cite{Grosskurth2005}.
-  \item XML Parser: parse the HTML markup into a parse tree \cite{Hickson2013}, HTML is rather close to XML \cite{Rocks2013,Hickson2013}.
+  \item XML Parser: parses the HTML markup into a parse tree \cite{Hickson2013}, HTML is rather close to XML \cite{Rocks2013,Hickson2013}.
   \item UI backend: provides drawing and windowing primitives, user interface widgets, and fonts. Underneath it uses the operating system user interface methods \cite{Grosskurth2005}.
   \item Data persistence: stores various data associated with the browsing session on disk, including bookmarks, cookies, and cache \cite{Grosskurth2005,Rocks2013}.
 \end{enumerate}
@@ -40,7 +40,7 @@ For any result or information presented in this work related to the browser envi
   \label{figure:web_architecture}
 \end{figure}
 
-Browser subsystem are swappable \cite{Grosskurth2005} and could vary for each browser vendor, platform or operational system. The browsers mostly differ between different vendors in subsystems (2) the Browser engine, (3) the Rendering engine, and (5) the JavaScript parser  \cite{Firefox2013,Safari2013,WebKit2013,Chrome2010}. In Firefox, subsystems (2) and (3) are known as Gecko \cite{Firefox2013,Gecko2013}, Safari as WebKit \cite{Safari2013,WebKit2013} and Chrome uses a fork of WebKit project called Blink \cite{Chrome2010,Blink2013}. Those browsers subsystems, often called Browser engines, are shown on Figure \ref{figure:web_architecture_engines}.
+Browser subsystems are swappable \cite{Grosskurth2005} and could vary for each browser vendor, platform or operational system. The browsers mostly differ between different vendors in subsystems (2) the Browser engine, (3) the Rendering engine, and (5) the JavaScript parser  \cite{Firefox2013,Safari2013,WebKit2013,Chrome2010}. In Firefox, subsystems (2) and (3) are known as Gecko \cite{Firefox2013,Gecko2013}, Safari as WebKit \cite{Safari2013,WebKit2013} and Chrome uses a fork of WebKit project called Blink \cite{Chrome2010,Blink2013}. Those browsers subsystems, often called Browser engines, are shown on Figure \ref{figure:web_architecture_engines}.
 
 Another common swappable subsystem is (5) the JavaScript parser. JavaScript \cite{International2009} is a lightweight, interpreted, object-oriented language with first-class functions, most known as the scripting language for Web pages \cite{Gecko2013}. The JavaScript standard is ECMAScript \cite{Gecko2013,International2009}. As of 2013, all modern browsers fully support ECMAScript 5.1. Older browsers support at least ECMAScript 3 \cite{Gecko2013,International2009}.
 
@@ -82,13 +82,13 @@ The microphone and camera hardware access can be used in combination with the HT
 </script>
 \end{lstlisting}
 
-In Section \ref{sub:basic_concepts:web:canvas_element}, a new HTML5 \cite{Hickson2013} called canvas \cite{Canvas2013} is introduced. Trough the canvas element \cite{Canvas2013} the video frames can be read, thus providing access to the raw binary data information of each frame \cite{Canvas2013,Hickson2013}. This raw binary data, also known as array of pixels \cite{Gonzalez2007}, is extremely useful for visual tracking applications \cite{Teichrieb2007}. Since the area of study performed on this dissertation is based on visual tracking, from now on, it will focus on camera and video. There are several integration steps required from capturing video to reading the array of pixels \cite{Gonzalez2007}. In order to enable the browser to capture the user camera \cite{MediaCapture2013}, stream the information into a video element \cite{Hickson2013}, connect the video to a canvas element \cite{Canvas2013}, to finally access the array of pixels of each video frame is a long run. The access flow of raw binary data captured from videos on modern browsers is shown on Figure \ref{figure:get_user_media} and comprises four major steps \cite{WebRTC2013,Rocks2013}:
+In Section \ref{sub:basic_concepts:web:canvas_element}, a new HTML5 \cite{Hickson2013} called canvas \cite{Canvas2013} is introduced. Trough the canvas element \cite{Canvas2013} video frames can be read, thus providing access to the raw binary data information of each frame \cite{Canvas2013,Hickson2013}. This raw binary data, also known as array of pixels \cite{Gonzalez2007}, is extremely useful for visual tracking applications \cite{Teichrieb2007}. Since the area of study performed on this dissertation is based on visual tracking, from now on, it will focus on camera and video. There are several integration steps required from capturing video to reading the array of pixels \cite{Gonzalez2007}. In order to enable the browser to capture the user camera \cite{MediaCapture2013}, stream the information into a video element \cite{Hickson2013}, connect the video to a canvas element \cite{Canvas2013}, to finally access the array of pixels of each video frame is a long run. The access flow of raw binary data captured from videos on modern browsers is shown on Figure \ref{figure:get_user_media} and comprises four major steps \cite{WebRTC2013,Rocks2013}:
 
 \begin{enumerate}
   \item  Hardware access: using HTML5 \cite{Hickson2013} new media capture and streams specification \cite{MediaCapture2013}, the browser microphone and camera hardware is accessed \cite{WebRTC2013}.
   \item Streaming: hardware streams audio and video to the browser UI elements \cite{WebRTC2013}.
-  \item UI elements: using HTML5 \cite{Hickson2013} video element displays the data stream into the browser viewport \cite{WC2006}.
-  \item Raw binary data: using HTML5 \cite{Hickson2013} canvas element \cite{Canvas2013} reads the video frames, providing access to the array of pixels.
+  \item UI elements: displays the video data stream into the browser viewport trough a HMTL5 video element \cite{WC2006}.
+  \item Raw binary data: reads the video frames providing access to the array of pixels trough a HTML5 canvas element \cite{WC2006}.
 \end{enumerate}
 
 \begin{figure}[!htb]
@@ -105,13 +105,13 @@ In Section \ref{sub:basic_concepts:web:canvas_element}, a new HTML5 \cite{Hickso
 
 The canvas \cite{Canvas2013} is an HTML5 \cite{Hickson2013} element that provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly \cite{Canvas2013}.
 
-Authors should not use the canvas element \cite{Canvas2013} in a document when a more suitable element is available, \eg\ it is inappropriate to use a canvas element \cite{Canvas2013} to render a page heading. The usage of canvas conveys essentially the same function or purpose as the canvas bitmap. Listing \ref{lst:canvas_element_markup} shows an example of a basic canvas element \cite{Canvas2013} HTML markup given a width and height in pixels.
+Authors should not use the canvas element in a document when a more suitable element is available, \eg\ it is inappropriate to use a canvas element to render a page heading. The usage of canvas conveys essentially the same function or purpose as the canvas bitmap. Listing \ref{lst:canvas_element_markup} shows an example of a basic canvas element HTML markup given a width and height in pixels.
 
 \begin{lstlisting}[language=HTML,label={lst:canvas_element_markup},caption=The HTML canvas element markup]
 <canvas width="200" height="200"></canvas>
 \end{lstlisting}
 
-The canvas \cite{Canvas2013} is a two-dimensional grid that could be described as a simple computer graphics coordinate system \cite{Hartley2004}. Normally one unit in the grid corresponds to one pixel on the canvas \cite{Canvas2013}. The origin of this grid is positioned in the top left corner coordinate $(0,0)$ \cite{Canvas2013}. All elements are placed relative to this origin \cite{Canvas2013}. So the position of the top left corner of the blue square shown on Figure \ref{figure:canvas_axis} becomes $x$ pixels from the left and $y$ pixels from the top coordinate $(x,y)$ \cite{Canvas2013}. The canvas coordinate space is shown on Figure \ref{figure:canvas_axis} \cite{MDN2013}.
+The canvas \cite{Canvas2013} is a two-dimensional grid that could be described as a simple computer graphics coordinate system \cite{Hartley2004}. Normally one unit in the grid corresponds to one pixel on the canvas. The origin of this grid is positioned in the top left corner coordinate $(0,0)$. All elements are placed relative to this origin. So the position of the top left corner of the blue square shown on Figure \ref{figure:canvas_axis} becomes $x$ pixels from the left and $y$ pixels from the top coordinate $(x,y)$. The canvas coordinate space is shown on Figure \ref{figure:canvas_axis} \cite{MDN2013}.
 
  \begin{figure}[!htb]
    \centering
@@ -120,25 +120,25 @@ The canvas \cite{Canvas2013} is a two-dimensional grid that could be described a
    \label{figure:canvas_axis}
  \end{figure}
 
-For each canvas element \cite{Canvas2013} a ``context'' is available. The canvas context provides the drawing context that can be accessed and JavaScript \cite{International2009} commands can be invoked to draw or read data \cite{Canvas2013}. Browsers can implement multiple canvas contexts and the different APIs provide the drawing functionality \cite{Canvas2013}. Most of the major browsers include the 2D canvas context capabilities. Individual vendors have experimented with their own three-dimensional canvas APIs \cite{Canvas2013}, but none of them have been standardized. The HTML5 \cite{Hickson2013} specification notes, ``A future version of this specification will probably define a 3D context'' \cite{Canvas2013}. Even though 3D context is not available in most part of the major browsers, three-dimensional applications are already being developed based on the 2D canvas context.
+For each canvas element a ``context'' is available. The canvas context provides the drawing context that can be accessed and JavaScript \cite{International2009} commands can be invoked to draw or read data \cite{Canvas2013}. Browsers can implement multiple canvas contexts and the different APIs provide the drawing functionality. Most of the major browsers include the 2D canvas context capabilities. Individual vendors have experimented with their own three-dimensional canvas APIs, but none of them have been standardized. The HTML5 \cite{Hickson2013} specification notes, ``A future version of this specification will probably define a 3D context''. Even though 3D context is not available in most part of the major browsers, three-dimensional applications are already being developed based on the 2D canvas context.
 
-Is mandatory the use of the canvas element \cite{Canvas2013} to develop visual tracking applications on the web, since it's the only way to read video frames array of pixels without any plugin in the browser environment. For more information about HTML5 \cite{Hickson2013} video element see Section \ref{sub:basic_concepts:web:audio_and_video}. Canvas provides APIs to: draw basic shapes, images, videos frames, Bezier \cite{piegl1993fundamental} and quadratic curves \cite{piegl1993fundamental,Hartley2004}; apply transformations, translate, rotate, scale and read the array of pixels information.
+Is mandatory the use of the canvas element \cite{Canvas2013} to develop visual tracking applications on the web, since it's the only way to read video frames array of pixels without any plugin in the browser environment. For more information about HTML5 \cite{Hickson2013} video element see Section \ref{sub:basic_concepts:web:audio_and_video}. Canvas provides APIs to: draw basic shapes, images, videos frames, Bézier \cite{piegl1993fundamental} and quadratic curves \cite{piegl1993fundamental,Hartley2004}; apply transformations, translate, rotate, scale and read the array of pixels information.
 
 % subsection canvas_element (end)
 
 \subsection{JavaScript Typed Arrays} % (fold)
 \label{sub:basic_concepts:web:javascript_typed_arrays}
 
-The JavaScript language \cite{International2009} is intended to be used within some larger environment, be it a browser, server-side scripts, or similar \cite{Grosskurth2005}. JavaScript \cite{International2009} core language features comprises few major features \cite{MDN2013}:
+The JavaScript language \cite{International2009} is intended to be used within some larger environment, be it a browser, server-side scripts, or similar \cite{Grosskurth2005}. JavaScript \cite{International2009} core language features comprises few major features:
 
 \begin{enumerate}
-\item Functions and function scope: function is a subprogram that can be called by external code \cite{MDN2013}, functions have a scope they reference for execution \cite{MDN2013}.
-\item Global objects: refer to objects in the global scope \cite{MDN2013}, such as general-purpose constructors (\textit{Array, Boolean, Date} \etc\ \cite{MDN2013}) and typed array constructors (\textit{Float32Array, Int32Array, Uint32Array} \etc\ \cite{MDN2013}).
-\item Statements: consist of keywords used with the appropriate syntax (\textit{function, if...else, block, break, const, continue, debugger \etc}) \cite{MDN2013}.
+\item Functions and function scope: function is a subprogram that can be called by external code, functions have a scope they reference for execution.
+\item Global objects: refer to objects in the global scope, such as general-purpose constructors (\textit{Array, Boolean, Date} \etc) and typed array constructors (\textit{Float32Array, Int32Array, Uint32Array} \etc).
+\item Statements: consist of keywords used with the appropriate syntax (\textit{function, if...else, block, break, const, continue, debugger \etc}).
 \item Operators and keywords: arithmetic operators, bitwise operators, assignment operators, comparison operators, logical operators, string operators, member operators and conditional operator \cite{MDN2013}.
 \end{enumerate}
 
-As web applications become more and more powerful, adding features such as audio and video manipulation, access to raw data using canvas \cite{Canvas2013} (Section \ref{sub:basic_concepts:web:audio_and_video}), and so forth, it has become clear that there are times when it would be helpful for JavaScript \cite{International2009} code to be able to quickly and easily manipulate raw binary data \cite{Canvas2013,TypedArray2013}. In the past, this had to be simulated by treating the raw data as a string and using the \textit{charCodeAt()} method to read the bytes from the data buffer \cite{MDN2013,TypedArray2013}. However, this is slow and error-prone \cite{MDN2013}, due to the need for multiple conversions, especially if the binary data is not actually byte-format data, but, for example, 32-bit integers or floats. Superior, and typed data structures were added to JavaScript specification \cite{International2009}, such as JavaScript typed arrays \cite{MDN2013,International2009}.
+As web applications become more and more powerful, adding features such as audio and video manipulation, access to raw data using canvas (Section \ref{sub:basic_concepts:web:audio_and_video}), and so forth, it has become clear that there are times when it would be helpful for JavaScript \cite{International2009} code to be able to quickly and easily manipulate raw binary data \cite{Canvas2013,TypedArray2013}. In the past, this had to be simulated by treating the raw data as a string and using the \textit{charCodeAt()} method to read the bytes from the data buffer \cite{MDN2013,TypedArray2013}. However, this is slow and error-prone, due to the need for multiple conversions, especially if the binary data is not actually byte-format data, but, for example, 32-bit integers or floats. Superior, and typed data structures were added to JavaScript specification, such as JavaScript typed arrays \cite{MDN2013,International2009}.
 
 JavaScript typed arrays provide a mechanism for accessing raw binary data much more efficiently \cite{MDN2013,TypedArray2013}. This dissertation takes advantage of typed arrays in order to achieve acceptable performance and robustness on the web of complex algorithms implementations.
 
@@ -202,16 +202,16 @@ As conclusion, typed arrays provides faster read and write operations than regul
 \subsubsection{What's the relation between Typed Arrays and Canvas?} % (fold)
 \label{subsub:basic_concepts:web:javascript_typed_arrays:relation_between_typed_and_canvas}
 
-Reading and writing raw binary data \cite{Canvas2013,TypedArray2013} using typed arrays only solves part of the problem of manipulating video and images data. The other missing feature was solved by HTML5 \cite{Hickson2013} canvas element \cite{Canvas2013}, which one important feature is to provide access to the array of pixels of those medias \cite{Canvas2013,Hickson2013}. The raw binary data is used by visual tracking algorithms. For more information see Section \ref{sub:basic_concepts:web:audio_and_video}.
+Reading and writing raw binary data \cite{Canvas2013,TypedArray2013} using typed arrays only solves part of the problem of manipulating video and images data. The other missing feature was solved by HTML5 \cite{Hickson2013} canvas element, which one important feature is to provide access to the array of pixels of those medias \cite{Canvas2013,Hickson2013}. The raw binary data is used by visual tracking algorithms. For more information see Section \ref{sub:basic_concepts:web:audio_and_video}.
 
- Videos and images pixels can be drew on a canvas bitmap \cite{Canvas2013}. Canvas raw binary data can be accessed from the canvas JavaScript \cite{International2009} API as an object of type \textit{ImageData} \cite{Canvas2013}. Each object has three properties: width, height and data \cite{Canvas2013,MDN2013}. The data property is of type \textit{Uint8ClampedArray} \cite{TypedArray2013} that is a one-dimensional array containing the data in RGBA \cite{Gonzalez2007} order, as integers in the range $0$ to $255$. The \textit{Uint8ClampedArray} \cite{TypedArray2013} interface type is specifically used in the definition of the canvas element's 2D API and its structure is  similar to the previous shown typed array \textit{Uint8Array} \cite{Canvas2013,TypedArray2013}.
+ Videos and images pixels can be draw on a canvas bitmap \cite{Canvas2013}. Canvas raw binary data can be accessed from the canvas JavaScript \cite{International2009} API as an object of type \textit{ImageData}. Each object has three properties: width, height and data \cite{Canvas2013,MDN2013}. The data property is of type \textit{Uint8ClampedArray} \cite{TypedArray2013} that is a one-dimensional array containing the data in RGBA \cite{Gonzalez2007} order, as integers in the range $0$ to $255$. The \textit{Uint8ClampedArray} interface type is specifically used in the definition of the canvas element's 2D API and its structure is  similar to the previous shown typed array \textit{Uint8Array}.
 
 The \textit{ImageData} data property, or array of pixels, is in row-major order \cite{Canvas2013,MDN2013}, a multidimensional array in linear memory. For example, consider the $2\times3$ array $\begin{bmatrix}
 1 & 2 & 3\\
 4 & 5 & 6
 \end{bmatrix}$, in row-major order it is laid out contiguously in linear memory as $\begin{bmatrix}
 1 & 2 & 3 & 4 & 5 & 6
-\end{bmatrix}$. Each array value is represented as integers between $0$ and $255$ \cite{Canvas2013,MDN2013}, where each four-integer group represents the four color channels of one pixel: red, green, blue and alpha (RGBA). While RGBA \cite{Gonzalez2007} is sometimes described as a color space, it is actually simply a use of the RGB \cite{Gonzalez2007} color model. This array linear typed structure improves read and write performance, since JavaScript \cite{International2009} is as an interpreted language \cite{International2009,MDN2013}, previous knowledge of the type results in faster language execution \cite{TypedArray2013,MDN2013}. An example of the canvas \cite{Canvas2013} image data array of pixels is shown on Figure \ref{figure:imagedata_array}.
+\end{bmatrix}$. Each array value is represented as integers between $0$ and $255$ \cite{Canvas2013,MDN2013}, where each four-integer group represents the four color channels of one pixel: red, green, blue and alpha (RGBA). While RGBA \cite{Gonzalez2007} is sometimes described as a color space, it is actually simply a use of the RGB color model. This array linear typed structure improves read and write performance, since JavaScript \cite{International2009} is as an interpreted language \cite{MDN2013}, previous knowledge of the type results in faster language execution \cite{TypedArray2013}. An example of the canvas image data array of pixels is shown on Figure \ref{figure:imagedata_array}.
 
 \begin{figure}[!htb]
   \centering
@@ -232,7 +232,7 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order 
 \subsection{Contextualization} % (fold)
 \label{sub:basic_concepts:visual_tracking:contextualization}
 
-Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving \cite{Lepetit2005}. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application \cite{Lepetit2005,Teichrieb2007}. Figure \ref{figure:tracking_oclusion} shows a person walking on the street being tracked despite its level of occlusion by another object that is not of interest for the tracking.
+Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application \cite{Lepetit2005,Teichrieb2007}. Figure \ref{figure:tracking_oclusion} shows a person walking on the street being tracked despite its level of occlusion by another object that is not of interest for the tracking.
 
 \begin{figure}[!htb]
   \centering
