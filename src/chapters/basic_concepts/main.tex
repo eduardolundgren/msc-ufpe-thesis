@@ -193,7 +193,7 @@ As conclusion, typed arrays provides faster read and write operations than regul
           \legend{Array,Float32Array,Uint8Array}
       \end{axis}
   \end{tikzpicture}
-  \caption{Regular \textit{vs} typed arrays performance benchmark.}
+  \caption{Regular \textit{vs} typed arrays performance benchmark \cite{TypedArrayPerformance2013}.}
   \label{figure:typed_arrays_performance}
 \end{figure}
 
@@ -237,15 +237,16 @@ Tracking an object in a video sequence means continuously identifying its locati
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{chapters/basic_concepts/tracking_oclusion.png}
-  \caption{Example of an accurate object tracking robust to occlusion.}
+  \caption{Example of an accurate object tracking robust to occlusion \cite{Jia2012}.}
   \label{figure:tracking_oclusion}
 \end{figure}
 
-When 2D tracking is used, the goal is to retrieve a 2D transformation from the object projected on the captured image that best represents the motion that occurred \cite{Li2008}. Many models can be applied in order to handle appearance changes due to perspective effects or deformations. The homography is one of the most used transformations regarding 2D tracking of planar objects, since it is generic enough to deal with all possible perspective effects \cite{CMei2008}. This dissertation focuses on tracking of planar objects since it serves as basis for more complex tracking approaches (for example, 3D tracking).
+When 2D tracking is used, the goal is to retrieve a 2D transformation from the object projected on the captured image that best represents the motion that occurred. 2D tracking happens on the image space, ignoring the deepness of 3D world \cite{Li2008}. Many models can be applied in order to handle appearance changes due to perspective effects or deformations. The homography is one of the most used transformations regarding 2D tracking of planar objects, since it is generic enough to deal with all possible perspective effects \cite{CMei2008}. This dissertation focuses on tracking of planar objects since it serves as basis for more complex tracking approaches (for example, 3D tracking).
 
 In computer vision, general video analysis can be broken down into three different steps: detection of interesting moving objects, frame to frame tracking of those objects and analysis of their tracks to recognize possible behaviors \cite{Yilmaz2006}. Because of such use in computer vision, object tracking is important in the following major areas:
 
 \begin{enumerate}
+  \item augmented reality \cite{Azuma1997};
   \item 3D reconstruction \cite{Zhou2008};
   \item motion-based recognition \cite{Cedras1995};
   \item automated surveillance \cite{Javed2002};
@@ -280,13 +281,13 @@ Imagine a technology in which you could see more than others see, hear more than
   \label{figure:reality_continuum}
 \end{figure}
 
-AR applications involve superimposing computer-generated content on real scenes in real-time \cite{Azuma1997}. Tracking is a critical component of most AR applications, since the objects in both real and virtual worlds must be properly aligned with respect to each other in order to preserve the idea of the two worlds coexisting.
+AR applications involve superimposing computer-generated content on real scenes in real-time \cite{Azuma1997}. Tracking is a critical component of most AR applications, since the objects in both real and virtual worlds must be properly aligned with respect to each other in order to preserve the idea of the two worlds coexisting \cite{Zhou2008}.
 
-Traditionally used in AR, vision-based tracking described as two main steps: extract information from the input video using image processing algorithms and perform the pose estimation itself, or, in other words, find the transformation that best maps the object model from one frame to the next one \cite{Joma2013}.
+Traditionally used in AR, vision-based tracking is described as two main steps: extract information from the input video using image processing algorithms and perform the pose estimation itself, or, in other words, find the transformation that best maps the object model from one frame to the next one \cite{Joma2013}.
 
-The information that comes from the input image is basically composed of image features that are easy to extract from the scene. Both Marker-based AR and Markerless AR \cite{Lima2009a} are based on this principle, with the difference that the first one adds artificial templates, such as special markers that do not originally belong in the scene in order to enable the tracking \cite{Joma2013}. These templates are often called fiducials and they constitute image features easy to extract as well as reliable measurements for the pose estimation \cite{Cho1998,Lepetit2005}. It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture \cite{Lepetit2005}, those are known as Markerless AR. In this case, the template to be used is the object to be tracked itself, using its natural features.
+The information that comes from the input image is basically composed of image features that simplifies extraction from the scene. Both Marker-based AR and Markerless AR \cite{Lima2009a} are based on this principle, with the difference that the first one adds artificial templates, such as special markers that do not originally belong in the scene in order to enable the tracking \cite{Joma2013}. These templates are often called fiducials and they constitute image features easy to extract as well as reliable measurements for the pose estimation \cite{Cho1998,Lepetit2005}. It is therefore much more desirable to rely on naturally present features, such as edges, corners, or texture \cite{Lepetit2005}, those are known as Markerless AR. In this case, the template to be used is the object to be tracked itself, using its natural features.
 
-Other tracking approaches can be used as well, such as approaches that rely on edge information \cite{Lima2009a}, feature information \cite{Wendt2008} and those that do not consider any object model a priori \cite{Lepetit2005,Joma2013}. This dissertation will provide more detail regarding the template-based approaches developed and optimized aiming web environment.
+This dissertation will provide more detail regarding the template-based approaches developed and optimized aiming web environment.
 The template-based tracking techniques do not necessarily rely on local features such as edges or other features, but rather on global region tracking through the use of the whole pattern of the object to be tracked. These methods can be useful in handling more complex objects that are difficult to model using local features due to their repeatability, for example. Such scenarios can be computationally expensive, but in some cases effectively formulated \cite{Yilmaz2006}.
 
 % subsection tracking_in_augmented_reality_applications (end)
@@ -312,14 +313,15 @@ Different devices such as mobile phones, notebooks, and even head-worn \cite{Ben
     \end{enumerate}
 \end{enumerate}
 
-The possibility to use this work as a cross-platform tacking library is a reality. The browser environment is evolving fast and due to the cross-platform ability, JavaScript \cite{International2009} is becoming a popular solution for multiple devices and platforms. In a near future, other devices and visual displays could, potentially, have embedded browser versions as well and they could all benefit from \textit{tracking.js} library.
+The possibility to use this work as a cross-platform tracking library is a reality. The browser environment is evolving fast and due to the cross-platform ability, JavaScript \cite{International2009} is becoming a popular solution for multiple devices and platforms. In a near future, other devices and visual displays could, potentially, have embedded browser versions as well and they could all benefit from \textit{tracking.js} library.
 
 % subsection which_devices_could_use_tracking_js_ (end)
 
 \subsection{Discussion} % (fold)
 \label{sub:basic_concepts:visual_tracking:discussion}
 
-In this dissertation, it was designed and implemented tracking library for the web aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them \cite{MDN2013,International2009}. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (\ie\ Google Glass \cite{Glass2013}) \cite{Benford1998} are browser ready \cite{Hickson2013}. They all could benefit from a reusable, cross-platform library for AR applications.
+In this dissertation, it was designed and implemented tracking library for the web aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. Thus, the techniques implemented in this work were chosen aiming to cover common use-cases, such as: facilitate user interaction with the computer trough color tracking (Section \ref{sec:tracking_library_for_the_web:color_tracking_algorithm}); Tracking complex objects in a scene trough markerless tracking (Section \ref{sec:tracking_library_for_the_web:marker_less_tracking_algorithm}); and track humans body parts, \eg\ faces and eyes, trough rapid object detection (Section \ref{sec:tracking_library_for_the_web:rapid_object_detection}).
+It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them \cite{MDN2013,International2009}. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (\ie\ Google Glass \cite{Glass2013}) \cite{Benford1998} are browser ready \cite{Hickson2013}. They all could benefit from a reusable, cross-platform library for AR applications.
 
 % subsection discussion (end)
 
