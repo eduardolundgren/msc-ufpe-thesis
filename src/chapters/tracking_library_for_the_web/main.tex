@@ -377,9 +377,107 @@ For more information about the JavaScript \cite{International2009} implementatio
 \subsection{Contextualization} % (fold)
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:contextualization}
 
-Colors are part of our lives, they are everywhere in every single object. Being able to use colored objects to control your browser using the user camera is very appealing. For that reason, \textit{training.js} implemented a basic color tracking algorithm that resulted in an real-time frame rate trough a simple and intuitive API.
+Colors are everywhere in every single object. Being able to use colored objects to control your browser using the user camera is very appealing. For that reason, \textit{tracking.js} implemented a basic color tracking algorithm that resulted in an real-time frame rate trough a simple and intuitive API.
+Color has been widely used in real-time tracking systems \cite{Paschos2001}. It offers several significant advantages over geometric cues such as computational simplicity, robustness under partial occlusion, rotation, scale and resolution changes.
+
+In the tracking system implemented, the color blobs are being tracked. The notion of blobs as a representation for image features has a long history in computer vision and has had many different mathematical definitions. It may be a compact set of pixels that share a visual property that is not shared by the surrounding pixels \cite{Kravtchenko1999}. This property could be color, texture, brightness, motion, shading, a combination of these, or any other salient spatio-temporal property derived from the signal, in our case the image sequence.
+Colour perception is a difficult and little understood problem, which seems to defy even the most ingenious mathematical expressions. Evaluating color differences is subjective: when asked to pick the ``closest'' match for a specific color from a small palette, the selections by the test persons differ, therefore automatize a color tracking technique is not as trivial as find the specific RGB \cite{Gonzalez2007} value to be classified as a pixel of interest.
 
 % subsection contextualization (end)
+
+\subsection{Color Difference Evaluation} % (fold)
+\label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_difference_evaluation}
+
+When a true color (photographic) image is mapped to a reduced palette, every true-color pixel must be mapped to the palette entry that comes closest to original color. The difference between the original color and the quantized color should remain below some threshold. For that reason, this work determines whether the color is close to the tracked color based on Euclidean distance.
+
+Mapping a RGB color in an orthogonal three-dimensional space, the distance between two colors is denoted by the Euclidean distance $\|C_1-C2\|$. For a three-dimensional space (with dimensions R, G and B) the Euclidean distance between two points is calculated as follows:
+
+$$\|C_1-C2\|=\sqrt{(C_{1,R}-C_{2,R})^2 + (C_{1,G}-C_{2,G})^2 + (C_{1,B}-C_{2,B})^2}.$$
+
+Graphic applications for computers usually employ the Red-Green-Blue (RGB) color space. This model maps well to the way the common Cathode Ray Tube (CRT) and Liquid-Crystal Display (LCD) display works. These displays have three kinds of elements that emit red, green or blue light. Another advantage of the RGB model is that it is a three-dimensional orthogonal space, precisely what we need for the Euclidean distance function.
+
+To determine if the pixel is a possible color it should be inside the tracked color neighborhood, $\|C_1-C2\|$ must be lower than a configurable $threshold=100$. Imagine that the tracked color $C_1$ is the center of a sphere in a three-dimensional space, any point $C_2$ around $C_1$ that its Euclidean distance is lower than a $threshold$ is considered a color that ``looks like'' $C_1$. Figure \ref{figure:rgb_space} exemplifies a green color neighborhood represented in a RGB orthogonal three-dimensional color space. The mentioned technique resulted in a robust and simple color tracking algorithm, since considering multiple values around $C_1$ as the tracked color increase robustness against illumination changes.
+
+\begin{figure}[!htb]
+  \centering
+  \begin{tikzpicture}
+    \def \radi{3}
+    \def \x{3}
+    \def \y{3}
+    \def \z{3}
+
+    \begin{scope}
+     \begin{scope}[color=gray, thin]
+      \foreach \xi in {0,...,\radi}{ \draw (\xi,\radi,0) -- (\xi,0,0) -- (\xi,0,\radi); }%
+      \foreach \yi in {1,...,\radi}{ \draw (0,\yi,\radi) -- (0,\yi,0) -- (\radi,\yi,0); }%
+      \foreach \zi in {0,...,\radi}{ \draw (0,\radi,\zi) -- (0,0,\zi) -- (\radi,0,\zi); }%
+     \end{scope}
+
+     \draw[-latex, thick, color=black] (0,0,0) -- (4,0,0) node[anchor=west] {R};%
+     \draw[-latex, thick, color=black] (0,0,0) -- (0,4,0) node[anchor=east] {B};%
+     \draw[-latex, thick, color=black] (0,0,0) -- (0,0,4) node[anchor=east] {G};%
+
+     \draw[color=black, ultra thick]
+     (0,\y,\z) -- (\x,\y,\z) -- (\x,\y,0) (\x,\y,\z) -- (\x,0,\z);
+    \end{scope}
+
+    \draw (-1,0) arc (180:360:1cm and 0.5cm);
+    \draw[dashed] (-1,0) arc (180:0:1cm and 0.5cm);
+    \draw (0,1) arc (90:270:0.5cm and 1cm);
+    \draw[dashed] (0,1) arc (90:-90:0.5cm and 1cm);
+    \draw (0,0) circle (1cm);
+    \shade[ball color=green,opacity=1] (0,0) circle (0.1cm);
+    \shade[ball color=green,opacity=0.20] (0,0) circle (0.4cm);
+    \shade[ball color=green,opacity=0.30] (0,0) circle (0.7cm);
+    \shade[ball color=green,opacity=0.40] (0,0) circle (0.9cm);
+    \shade[ball color=green,opacity=0.50] (0,0) circle (1cm);
+   \end{tikzpicture}
+   \caption{Green color neighborhood represented in a RGB orthogonal three-dimensional color space.}
+   \label{figure:rgb_space}
+\end{figure}
+
+% subsection color_difference_evaluation (end)
+
+\subsection{Color Blob Detection} % (fold)
+\label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection}
+
+Once all pixels of the tracked color are collected two steps are still required: (1) Detect outliers; and (3) Find the coordinates that represents the color blob.
+
+\subsubsection{Detecting Outliers}
+\label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection:detecting_outliers}
+
+Outliers pixels are determined if they are not close enough to other pixels with the same characteristics. For each pixel $p=(x,y)$, the mean distance with the other found pixels is calculated as follows:
+
+$$meanDistance=\frac{\sum_{1}^{n}\sqrt{(x_n-x)^2 + (y_n-y)^2}} {n},$$
+
+If the $meanDistance$ is greater than a $blobThreshold=30$ the tested pixel is considered ``too far'' from the color blob and is discarded (outlier). The non-discarded pixels (inliers) are in average closer than $blobThreshold$ from each other, representing the tracked color blob.
+
+% subsubsection detecting_outliers (end)
+
+\subsubsection{Finding Color Blob Coordinates}
+\label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection:finding_color_blobs_coordinates}
+
+After the color blob is detected, the found pixels are close enough to represent a color blob. To determine the blob central coordinates $C_b=(x_b,y_b)$, the value for each axis is determined based on the average of each pixel axis value $p_n=(x_n,y_n)$, the values of $x_b$ and $y_b$ are calculated as follows:
+
+$$x_b=\frac{\sum_{1}^{n}x_n}{n}, y_b=\frac{\sum_{1}^{n}y_n}{n}.$$
+
+% subsubsection finding_color_blobs_coordinates)
+
+\subsubsection{Discussion}
+\label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection:discussion}
+
+The described color technique results in a fast and robust solution for color blob detection on the web. On Figure \ref{figure:color_tracking} is shown the result running on the browser with and without possible outliers interference in the scene.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/tracking_library_for_the_web/color_tracking.png}
+  \caption{Example of color tracking technique. The black square represents the central color blob coordinate $C_b$. On the left, the magenta circle is tracked without outliers interference. On the right an outlier object of the same color is introduced in the scene without causing issues to the found circle.}
+  \label{figure:color_tracking}
+\end{figure}
+
+% subsubsection discussion)
+
+% subsection color_blob_detection (end)
 
 % section color_tracking_algorithm (end)
 
