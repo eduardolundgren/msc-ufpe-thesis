@@ -54,11 +54,11 @@ The solution proposed in this dissertation, \textit{tracking.js}, provides the f
 \subsection{Library Modules} % (fold)
 \label{sub:tracking_library_for_the_web:library_modules}
 
-The proposed library is divided in modules in order to allow extension and addition of new features, such as new RA techniques or math utilities. For a better understanding of the library architecture, the current implementation is divided in two packages separating Base from AR classes. Base classes modules are shown in Figure \ref{figure:base_classes} and AR classes in Figure \ref{figure:ar_classes}.
+The proposed library is divided in modules in order to allow extension and addition of new features, such as new RA techniques or math utilities. For a better understanding of the library architecture, the current implementation is divided in two packages separating base from visual tracking classes. Base classes modules are shown in Figure \ref{figure:base_classes} and visual tracking classes in Figure \ref{figure:visual_tracking_classes}.
 
 To develop AR applications using only raw JavaScript \cite{International2009} APIs \cite{MDN2013} could be too verbose and complex, \eg\ capturing users' camera and reading its array of pixels. The big amount of steps required for a simple task makes web developers life hard when the goal is to achieve complex implementations. Some level of encapsulation is needed in order to simplify development. The proposed library provides encapsulation for common tasks on the web platform.
 
-The two main available packages splits Base from AR classes. Furthermore, each class of those packages are described. Let's start with the base classes:
+The two main available packages splits base from visual tracking classes. Furthermore, each class of those packages are described. Let's start with the base classes:
 
 \begin{enumerate}
   \item Math: provides common math utilities optimized for the web, such as geometry, linear algebra \cite{Hartley2004} and hamming operations. Typed arrays \cite{TypedArray2013} are used in order to optimize performance, see subsection \ref{sub:basic_concepts:web:javascript_typed_arrays} for more information about typed arrays.
@@ -183,7 +183,7 @@ Visual tracking classes includes several computer vision algorithms, such as FAS
         \umlinherit[geometry=-|]{Pose}{RANSAC}
     \end{tikzpicture}
     \caption{Visual tracking classes of tracking.js library.}
-    \label{figure:ar_classes}
+    \label{figure:visual_tracking_classes}
 \end{figure}
 
 \newpage
