@@ -51,7 +51,6 @@ Augmented reality and tracking applications for advertising and entertainment ar
 \end{figure}
 
 \begin{lstlisting}[language=C++,label={lst:viola},caption=Example of \textit{tracking.js} API of augmenting users faces with objects using Viola Jones eyes detection.]
-<script>
   var img = new Image();
   img.src = 'img/glasses.png';
   var videoCamera = new tracking.VideoCamera();
@@ -62,7 +61,6 @@ Augmented reality and tracking applications for advertising and entertainment ar
           videoCamera.canvas.context.drawImage(img, track[0].x, track[0].y, track[0].size, track[0].size);
       }
   });
-</script>
 \end{lstlisting}
 
 % subsubsection discussion (end)
