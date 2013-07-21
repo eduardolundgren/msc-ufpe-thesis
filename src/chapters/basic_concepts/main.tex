@@ -232,13 +232,13 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order 
 \subsection{Contextualization} % (fold)
 \label{sub:basic_concepts:visual_tracking:contextualization}
 
-Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application \cite{Lepetit2005,Teichrieb2007}. Figure \ref{figure:tracking_oclusion} shows a person walking on the street being tracked despite its level of occlusion by another object that is not of interest for the tracking.
+Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving. There are a variety of approaches, depending on the type of object, the degrees of freedom of the object and the camera, and the target application \cite{Lepetit2005,Teichrieb2007}. Figure \ref{figure:tracking_occlusion} shows a person walking on the street being tracked despite its level of occlusion by another object that is not of interest for the tracking.
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=\linewidth]{chapters/basic_concepts/tracking_oclusion.png}
+  \includegraphics[width=\linewidth]{chapters/basic_concepts/tracking_occlusion.png}
   \caption{Example of an accurate object tracking robust to occlusion \cite{Jia2012}.}
-  \label{figure:tracking_oclusion}
+  \label{figure:tracking_occlusion}
 \end{figure}
 
 When 2D tracking is used, the goal is to retrieve a 2D transformation from the object projected on the captured image that best represents the motion that occurred. 2D tracking happens on the image space, ignoring the deepness of 3D world \cite{Li2008}. Many models can be applied in order to handle appearance changes due to perspective effects or deformations. The homography is one of the most used transformations regarding 2D tracking of planar objects, since it is generic enough to deal with all possible perspective effects \cite{CMei2008}. This dissertation focuses on tracking of planar objects since it serves as basis for more complex tracking approaches (for example, 3D tracking).
