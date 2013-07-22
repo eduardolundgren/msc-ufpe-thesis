@@ -155,7 +155,7 @@ On Figure \ref{figure:color_games}, the two bottom images are examples of how ga
   \label{figure:color_games}
 \end{figure}
 
-Another example of color tracking on user interactions is demonstrated on Figure \ref{figure:color_volume}. Using a HTML5 audio element \cite{International2009} a music is played and trough any colored object, the user can control the volume of the player sliding the object from the left to right, left most coordinates means volume set to zero, right most coordinates means volume set to maximum.
+Another example of color tracking on user interactions is demonstrated on Figure \ref{figure:color_volume}. Using a HTML5 audio element \cite{International2009} a music is played and trough any colored object, the user can control the volume of the player sliding the object from the left to right and vice-versa, left most coordinates means volume set to zero, right most coordinates means volume set to maximum.
 
 \begin{figure}[!htb]
   \centering
@@ -500,17 +500,269 @@ Color tracking technique implementation of \textit{tracking.js} shows good resul
 \subsection{Markerless Tracking Algorithm} % (fold)
 \label{sec:evaluation:results:markerless_tracking_algorithm}
 
-\subsubsection{Matching Robustness} % (fold)
-\label{subsub:evaluation:results:markerless_tracking_algorithm:matching_robustness}
+\subsubsection{Discussion} % (fold)
+\label{subsub:evaluation:results:markerless_tracking_algorithm:discussion}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+Being able to use track any objects based on invariant natural features characteristics is also demonstrated by the markerless tracking technique. On Figure \ref{figure:keypoints_building} is shown features extracted from different scenes. Note that most part of the keypoints are invariant to the camera rotation. Based on the features detected, the best $H$ homography matrix is estimated. All found points in the first frame is multiplied by $H$ in order to be plotted in the second frame. The found $H$ is defined as follows:
 
-% subsubsection matching_robustness (end)
+$$H=\begin{pmatrix}1.6101363130102753 & -0.5346783206945362 & -33.21640286774384\\ 0.18027586959550446 & 0.8414271531603306 & -7.530803625100701\\ 0.0021658540103673164 & -0.0025444273054841503 & 1\\\end{pmatrix}.$$
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/evaluation/keypoints_building.png}
+  \caption{Library implementation of markerless tracking technique. Features are extracted from different scenes. On the first frame, $49$ features were detected by FAST \cite{RostenFaster2010}, on the second frame $17$ of those were matched by BRIEF \cite{Calonder2010} and plotted by the $H$ matrix.}
+  \label{figure:keypoints_building}
+\end{figure}
+
+The markerless tracking web implementation have also showed to be robust for illumination and scaling differences. On Figure \ref{figure:keypoints_fast_brief} is shown the features detected by FAST (top images) and features extracted by BRIEF (bottom images) plotted based on the estimated homography $H$.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/evaluation/keypoints_fast_brief.png}
+  \caption{Library implementation of markerless tracking technique. Illumination and scaling robustness for features detected using FAST (top images) and extracted using BRIEF (bottom images) plotted on the second frame by the homography matrix $H$.}
+  \label{figure:keypoints_fast_brief}
+\end{figure}
+
+% subsubsection discussion (end)
+
+\subsubsection{FPS} % (fold)
+\label{subsub:evaluation:results:markerless_tracking_algorithm:fps}
+
+On Figure \ref{figure:markerless_fps}, the markerless tracking implementation were tested between different frames. The FPS average for this technique is 6 FPS, which is not ideal for real-time applications yet. Some optimizations could be applied on future work, such as implementing FAST-ER \cite{RostenFaster2010} for feature detection.
+
+\begin{figure}[!htb]
+  \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        enlarge x limits=0.03,
+        minor tick num=1,
+        xlabel=Elapsed frames,
+        ylabel=Frames per second (FPS)]
+
+        \addplot[wblue,mark=x] coordinates {
+        (0,25)
+        (5,5)
+        (10,4)
+        (15,4)
+        (20,4)
+        (25,5)
+        (30,4)
+        (35,5)
+        (40,4)
+        (45,5)
+        (50,4)
+        (55,4)
+        (60,4)
+        (65,4)
+        (70,5)
+        (75,5)
+        (80,5)
+        (85,5)
+        (90,4)
+        (95,5)
+        (100,4)
+        (105,5)
+        (110,4)
+        (115,4)
+        (120,5)
+        (125,4)
+        (130,4)
+        (135,4)
+        (140,5)
+        (145,5)
+        (150,4)
+        (155,5)
+        (160,4)
+        (165,5)
+        (170,4)
+        (175,5)
+        (180,4)
+        (185,5)
+        (190,5)
+        (195,4)
+        (200,4)
+        (205,5)
+        (210,5)
+        (215,4)
+        (220,5)
+        (225,5)
+        (230,5)
+        (235,4)
+        (240,5)
+        (245,4)
+        (250,4)
+        (255,4)
+        (260,5)
+        (265,5)
+        (270,5)
+        (275,5)
+        (280,5)
+        (285,4)
+        (290,4)
+        (295,5)
+        (300,4)
+        (305,4)
+        (310,4)
+        (315,4)
+        (320,4)
+        (325,4)
+        (330,5)
+        (335,4)
+        (340,4)
+        (345,5)
+        (350,5)
+        (355,5)
+        (360,4)
+        (365,4)
+        (370,5)
+        (375,4)
+        (380,5)
+        (385,4)
+        (390,4)
+        (395,4)
+        (400,4)
+        (405,5)
+        (410,4)
+        (415,5)
+        (420,5)
+        (425,5)
+        (430,4)
+        (435,5)
+        (440,5)
+        (445,4)
+        (450,4)
+        (455,5)
+        (460,5)
+        (465,4)
+        (470,5)
+        (475,5)
+        (480,4)
+        (485,4)
+        (490,5)
+        (495,4)
+        (500,5)
+        (505,4)
+        (510,4)
+        (515,5)
+        (520,4)
+        (525,4)
+        (530,5)
+        (535,4)
+        (540,5)
+        (545,5)
+        (550,5)
+        (555,4)
+        (560,4)
+        (565,4)
+        (570,5)
+        (575,5)
+        (580,4)
+        (585,5)
+        (590,5)
+        (595,5)
+        (600,4)
+        (605,5)
+        (610,4)
+        (615,4)
+        (620,4)
+        (625,5)
+        (630,5)
+        (635,5)
+        (640,4)
+        (645,4)
+        (650,4)
+        (655,4)
+        (660,5)
+        (665,4)
+        (670,5)
+        (675,5)
+        (680,4)
+        (685,4)
+        (690,4)
+        (695,4)
+        (700,5)
+        (705,4)
+        (710,4)
+        (715,5)
+        (720,4)
+        (725,5)
+        (730,4)
+        (735,5)
+        (740,5)
+        (745,5)
+        (750,5)
+        (755,5)
+        (760,5)
+        (765,5)
+        (770,5)
+        (775,5)
+        (780,5)
+        (785,4)
+        (790,4)
+        (795,5)
+        (800,5)
+        (805,5)
+        (810,5)
+        (815,4)
+        (820,5)
+        (825,4)
+        (830,4)
+        (835,4)
+        (840,4)
+        (845,4)
+        (850,5)
+        (855,4)
+        (860,4)
+        (865,4)
+        (870,5)
+        (875,4)
+        (880,5)
+        (885,4)
+        (890,5)
+        (895,4)
+        (900,5)
+        (905,5)
+        (910,4)
+        (915,5)
+        (920,5)
+        (925,4)
+        (930,4)
+        (935,5)
+        (940,5)
+        (945,4)
+        (950,4)
+        (955,5)
+        (960,4)
+        (965,5)
+        (970,4)
+        (975,5)
+        (980,4)
+        (985,4)
+        (990,4)
+        (995,4)
+        (1000,4)
+         };
+
+         \draw [red] ({rel axis cs:0,0}|-{axis cs:15,25}) -- ({rel axis cs:1,0}|-{axis cs:15,25}) node [pos=0.0, above] {};
+    \end{axis}
+    \end{tikzpicture}
+   \caption{Library implementation of markerless tracking FPS metric. Maximum rate using this technique on the web is 6 FPS.}
+   \label{figure:markerless_fps}
+\end{figure}
+
+% subsubsection fps (end)
 
 \subsubsection{Oclusion Robustness} % (fold)
 \label{subsub:evaluation:results:markerless_tracking_algorithm:occlusion_robustness}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+Markerless tracking technique implementation of \textit{tracking.js} shows good results for partial occlusions. Figure \ref{figure:keypoints_occlusion} demonstrates occlusions variations that still allows the object to be detected.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{chapters/evaluation/keypoints_occlusion.png}
+  \caption{Library implementation of markerless tracking technique partial occlusion robustness.}
+  \label{figure:keypoints_occlusion}
+\end{figure}
 
 % subsubsection occlusion_robustness (end)
 
