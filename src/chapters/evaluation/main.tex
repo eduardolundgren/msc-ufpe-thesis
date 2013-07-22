@@ -128,7 +128,7 @@ Viola Jones implementation of \textit{tracking.js} shows good results for partia
 \subsubsection{Discussion} % (fold)
 \label{subsub:evaluation:results:color_tracking_algorithm:discussion}
 
-Being able to use colored objects to control your browser using the user camera is very appealing. Any colored object could be used to enable user interaction with your web application using \textit{tracking.js} color tracking technique trough a simple and intuitive JavaScript API. On Figure \ref{figure:color_object} is shown different colored objects being tracked.
+Being able to use colored objects to control your browser using the user camera is very appealing. Any colored object could be used to enable user interaction with your web application using \textit{tracking.js} color tracking technique trough a simple and intuitive JavaScript API (Listing \ref{lst:color}). On Figure \ref{figure:color_object} is shown different colored objects being tracked.
 
 \begin{figure}[!htb]
   \centering
@@ -136,6 +136,17 @@ Being able to use colored objects to control your browser using the user camera 
   \caption{Library implementation of color tracking for different objects: On the left a red pencil marker; on the center a Rubik's magic cube \cite{Rubiks2013} from the red face; and on the right a red Ball of Whacks \cite{Whack2013}.}
   \label{figure:color_object}
 \end{figure}
+
+\begin{lstlisting}[language=C++,label={lst:color},caption=Example of \textit{tracking.js} color API.]
+  var videoCamera = new tracking.VideoCamera();
+  videoCamera.track({
+      type: 'color',
+      color: 'magenta',
+      onFound: function(track) {
+        // do your logic here.
+      }
+  });
+\end{lstlisting}
 
 Enable entertainment web applications is also possible using color tracking. Few examples were implemented using color tracking and a PlayStation move controller (Figure \ref{figure:psmove}) that is basically a colored sphere that can emit light, the color of the sphere can be set via Bluetooth. This controller have four buttons, square, triangle, cross, circle, which are color coded as pink, green, blue and red. The controller has also three types of built-in sensors, temperature, accelerometer, gyroscope and magnetometer. In this work only the emitted light is used to track the scene.
 
