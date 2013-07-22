@@ -539,7 +539,7 @@ The markerless tracking web implementation have also showed to be robust for ill
 \subsubsection{FPS} % (fold)
 \label{subsub:evaluation:results:markerless_tracking_algorithm:fps}
 
-On Figure \ref{figure:markerless_fps}, the markerless tracking implementation were tested between different frames. The FPS average for this technique is 6 FPS, which is not ideal for real-time applications yet. Some optimizations could be applied on future work, such as implementing FAST-ER \cite{RostenFaster2010} for feature detection.
+On Figure \ref{figure:markerless_fps}, the markerless tracking implementation were tested in an interval of $1000$ seconds. The FPS average for this technique is 6 FPS, which is not ideal for real-time applications yet. Some optimizations could be applied on future work, such as implementing FAST-ER \cite{RostenFaster2010} for feature detection.
 
 \begin{figure}[!htb]
   \centering
@@ -547,8 +547,8 @@ On Figure \ref{figure:markerless_fps}, the markerless tracking implementation we
     \begin{axis}[
         enlarge x limits=0.03,
         minor tick num=1,
-        xlabel=Elapsed frames,
-        ylabel=Frames per second (FPS)]
+        xlabel=Time (seconds),
+        ylabel=Frames]
 
         \addplot[wblue,mark=x] coordinates {
         (0,25)
