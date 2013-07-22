@@ -779,6 +779,35 @@ Markerless tracking technique implementation of \textit{tracking.js} shows good 
 
 % subsection markerless_tracking_algorithm (end)
 
+\subsection{Benefits of a JavaScript tracking solution} % (fold)
+\label{sec:evaluation:results:js_tracking_solution}
+
+\subsubsection{Discussion} % (fold)
+\label{subsub:evaluation:results:js_tracking_solution:discussion}
+
+On Markerless Tracking Solutions for Augmented Reality on the Web \cite{Pablo2013}, a server-side tracking solution was implemented and the developed solution showed to be not scalable, causing a delay in the exhibition of the AR result when having more than five simultaneous users. This way, the adopted distributed approach turned out to be not adequate to web targeted applications, where hundreds of simultaneous users should be capable of using it. In the same work \cite{Pablo2013}, Pablo et al., proposed a client-side solution that requires a third-party plugin installation called OSAKit \cite{OSAKit2013}. The OSAKit plugin allows desktop applications to run without loss of performance inside most current browsers on the Windows platform. The results were promising in terms of FPS reached (25 FPS), although the average load time of the application was $11$ minutes (due to the size of the precomputed data, $22$ MB), considering a broadband connection of $256$ Kbps. Using a pure JavaScript tracking solution has shown to be very effective since the FPS average is the same with a smaller size. On Table \ref{table:comparison_with_osakit}, a comparison between the size, loading time and FPS between the OSAKit solution and \textit{tracking.js} is presented.
+
+\begin{table}[!htb]
+    \centering % here
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        & OSAKit & \textit{tracking.js} + color & \textit{tracking.js} + face \\
+        \hline
+        Average frame rate & 25 FPS & 30 FPS & 25 FPS\\
+        \hline
+        Average file size & 22 MB & 8 KB & 187 KB\\
+        \hline
+        Average load time (256 Kbps) & 11 min & 0.25 seconds & 5 seconds\\
+        \hline
+    \end{tabular}
+    \caption{Comparison between \textit{tracking.js} and OSAKit client-side tracking solution.}
+    \label{table:comparison_with_osakit}
+\end{table}
+
+% subsubsection discussion (end)
+
+% subsection js_tracking_solution (end)
+
 % section results (end)
 
 % chapter evaluation (end)
