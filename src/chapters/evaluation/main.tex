@@ -41,7 +41,7 @@ Having Viola Jones rapid object detection as part of the library resulted in int
   \label{figure:viola_multiple_faces}
 \end{figure}
 
-Augmented reality and tracking applications for advertising and entertainment are gaining more space on the web enviroment. The media used in this kind of application needs to be as appealing as possible in order to catch consumers' attention, thus detecting faces, or augmenting the scene with objects are attractive possibilities. In order to demonstrate that concept, a simple chat application was created. In this chat application, while talking in real-time, the users could augment their faces with objects, such as a fake glass with mustache. In order to extract the users eyes coordinates Viola Jones was used. Listing \ref{lst:viola} shows the simplified JavaScript API provided by \textit{tracking.js} in order to extract eyes coordinates and draw the image. The fake glasses are positioned over $x$ and $y$ coordinates on the canvas axis based on the extracted values. Figure \ref{figure:viola_glass_face} demonstrates the described example.
+Augmented reality and tracking applications for advertising and entertainment are gaining more space on the web enviroment. The media used in this kind of application needs to be as appealing as possible in order to catch consumers' attention, thus detecting faces, or augmenting the scene with objects are attractive possibilities. In order to demonstrate that concept, a simple chat application was created. In this chat application, while talking in real-time, the users could augment their faces with objects, such as a fake glass with mustache. In order to extract the users face coordinates Viola Jones was used. Listing \ref{lst:viola} shows the simplified JavaScript API provided by \textit{tracking.js} in order to extract face coordinates and draw the image. The fake glasses are positioned over $x$ and $y$ coordinates on the canvas axis based on the extracted values. Figure \ref{figure:viola_glass_face} demonstrates the described example.
 
 \begin{figure}[!htb]
   \centering
@@ -50,7 +50,7 @@ Augmented reality and tracking applications for advertising and entertainment ar
   \label{figure:viola_glass_face}
 \end{figure}
 
-\begin{lstlisting}[language=C++,label={lst:viola},caption=Example of \textit{tracking.js} API of augmenting users faces with objects using Viola Jones eyes detection.]
+\begin{lstlisting}[language=C++,label={lst:viola},caption=Example of \textit{tracking.js} API of augmenting users faces with objects using Viola Jones face detection.]
   var img = new Image();
   img.src = 'img/glasses.png';
   var videoCamera = new tracking.VideoCamera();
