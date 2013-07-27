@@ -378,7 +378,7 @@ For more information about the JavaScript \cite{International2009} implementatio
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:contextualization}
 
 Colors are everywhere in every single object. Being able to use colored objects to control your browser using the user camera is very appealing. For that reason, \textit{tracking.js} implemented a basic color tracking algorithm that resulted in an real-time frame rate trough a simple and intuitive API.
-Color has been widely used in real-time tracking systems \cite{Paschos2001}. It offers several significant advantages over geometric cues such as computational simplicity, robustness under partial occlusion, rotation, scale and resolution changes.
+Color has been widely used in real-time tracking systems \cite{Paschos2001}. It offers several significant advantages over geometric cues such as computational simplicity, robustness under partial occlusion and illumination, rotation, scale and resolution changes.
 
 In the tracking system implemented, the color blobs are being tracked. The notion of blobs as a representation for image features has a long history in computer vision and has had many different mathematical definitions. It may be a compact set of pixels that share a visual property that is not shared by the surrounding pixels \cite{Kravtchenko1999}. This property could be color, texture, brightness, motion, shading, a combination of these, or any other salient spatio-temporal property derived from the signal, in our case the image sequence.
 Colour perception is a difficult and little understood problem, which seems to defy even the most ingenious mathematical expressions. Evaluating color differences is subjective: when asked to pick the ``closest'' match for a specific color from a small palette, the selections by the test persons differ, therefore automatize a color tracking technique is not as trivial as find the specific RGB \cite{Gonzalez2007} value to be classified as a pixel of interest.
@@ -388,7 +388,8 @@ Colour perception is a difficult and little understood problem, which seems to d
 \subsection{Color Difference Evaluation} % (fold)
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_difference_evaluation}
 
-When a true color (photographic) image is mapped to a reduced palette, every true-color pixel must be mapped to the palette entry that comes closest to original color. The difference between the original color and the quantized color should remain below some threshold. For that reason, this work determines whether the color is close to the tracked color based on Euclidean distance.
+When a true color (photographic) image is mapped to a reduced palette, every true-color pixel must be mapped to the palette entry that comes closest to original color.
+There are different ways to evaluate color difference, \ie\ large color difference (LCD), small color difference (SCD), and threshold color difference (TCD), they can use ratio judgment, pair comparison, and threshold \cite{Li2003}. In the latter, the difference between the original color and the quantized color should remain below some threshold. The quantization method implemented in this work determines whether the color is close to the tracked color by a threshold based on Euclidean distance.
 
 Mapping a RGB color in an orthogonal three-dimensional space, the distance between two colors is denoted by the Euclidean distance $\|C_1-C2\|$. For a three-dimensional space (with dimensions R, G and B) the Euclidean distance between two points is calculated as follows:
 
