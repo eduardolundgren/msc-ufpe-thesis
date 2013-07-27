@@ -75,11 +75,10 @@ Visual tracking classes includes several computer vision algorithms, such as FAS
   \item FAST: provides an implementation of Features from Accelerated Segment Test (FAST) \cite{Rosten2010} for features detection via \textit{findCorners(data, threshold)} method, where $data$ is the \textit{ImageData} of the canvas \cite{Canvas2013} frame. It also depends on a $threshold$ argument. The pixel at $p$ is the center of a candidate corner classified if the concentric contiguous arcs around $p$ are different by more than the $threshold$, see Figure \ref{figure:fast}.
 
   \item BRIEF: provides an implementation of Binary Robust Independent Elementary Features (BRIEF) \cite{Calonder2010} for feature extraction via \textit{getDescriptors(data, corners)} method and matching via \textit{match(c1, d1, c2, d2)}, where $data$ is an \textit{ImageData}, and $c1$ and $c2$ are the found corners array return by \textit{FAST.findCorners} method and $d1$ and $d2$ are feature descriptors array return by \textit{BRIEF.getDescriptors} method.
-  \item RANSAC: provides an interface used to achieve robust estimation method for homographies and camera pose. There are two available estimation methods implemented that inherits from RANSAC \cite{Hartley2004}, Homography and Pose.
+  \item RANSAC: provides an interface used to achieve robust estimation method for homographies and camera pose. There are two available estimation methods implemented that inherits from RANSAC \cite{Hartley2004} and Homography.
   \item Homography: provides an API to estimate a homography matrix $H$ between images by finding feature correspondences in those images.
-  \item Pose: TODO.
-  \item ViolaJones: TODO.
-  \item Color: TODO.
+  \item ViolaJones: provides scanning detector algorithms for robust and extremely rapid object detection.
+  \item Color: provides a fast and robust solution for color blob detection.
 \end{enumerate}
 
 \begin{figure}[!htb]
@@ -173,14 +172,9 @@ Visual tracking classes includes several computer vision algorithms, such as FAS
                 score(H, matches) : Number\\
             }
 
-            \umlclass[y=-170pt,x=200pt]{Pose}{}{
-              find(points2d, points3d) : void\\
-            }
-
         \end{umlpackage}
 
         \umlinherit[geometry=-|]{Homography}{RANSAC}
-        \umlinherit[geometry=-|]{Pose}{RANSAC}
     \end{tikzpicture}
     \caption{Visual tracking classes of tracking.js library.}
     \label{figure:visual_tracking_classes}
@@ -198,7 +192,7 @@ Visual tracking classes includes several computer vision algorithms, such as FAS
 \subsection{Contextualization} % (fold)
 \label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:contextualization}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+The basic difference between markerless and marker based tracking is that the first does not require artificial markers put on the environment in order to estimate camera pose. Markerless tracking can, in theory, use any part of the scene as a reference to position virtual objects, in practice, some restrictions may apply, depending on the specific technique used. Several algorithms for markerless tracking are available in the literature \cite{Teichrieb2007}. Some of them require a previous knowledge about the environment, such as a digital model of a real object to be tracked, the texture of a region of the scene, etc. These methods are known as model based. Other techniques can make an online estimate of the topology of the environment, using only different frames captured from the scene by a moving camera for registration of the virtual objects. These techniques are called Structure from Motion (SfM) and are often more complex and require more processing power to achieve real-time frame rates. Since this work aims to develop some web targeted markerless AR solutions, the keypoint based technique was chosen for tracking purposes, which is a model based technique described in \cite{Teichrieb2010}. It is a tracking by detection technique, being able to detect the target object at every frame without any previous estimate of its pose, allowing automatic initialization and recovery from failures.
 
 % subsection contextualization (end)
 
