@@ -1,33 +1,43 @@
 \chapter{Introduction} % (fold)
 \label{cha:introduction}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+This section introduces this master thesis. It will briefly describe the motivation of the work itself, state the problem that we will focus on solving and shortly discuss the proposed solution. In the end, it will explain the structure of the next chapters.
 
 \section{Motivation} % (fold)
 \label{sec:introduction:motivation}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+Vision has the potential to yield non-invasive, accurate and low-cost solutions for tracking objects. Tracking is a critical component of most AR applications, since the objects in both real and virtual worlds must be properly aligned with respect to each other in order to preserve the idea of the two worlds coexisting. Augmented reality and tracking applications for advertising and entertainment are gaining more space on the web enviroment. The media used in this kind of application needs to be as appealing as possible in order to catch consumers' attention, thus detecting faces, or augmenting the scene with objects are attractive possibilities. Until the current date, web browsers counts with very limited researches available in the literature. The web browser environment is evolving fast, providing functionalities that can be explored and trough then attractive modern solutions can be developed. Different devices such as mobile phones, notebooks, and even head-worn \cite{Benford1998} (Google Project Glass \cite{Glass2013}), provides an embedded web browser capable to run JavaScript and HTML5 \cite{International2009,Hickson2013}. The possibility to use this work as a cross-platform tracking library is a reality.
 
 % section motivation (end)
 
 \section{Problem Definition} % (fold)
 \label{sec:introduction:problem_definition}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+The majority of interpreted languages have limited computational power when compared to compiled languages, such as C. The source language of the library is JavaScript \cite{International2009} that is the language interpreted by all modern browsers. The computational complexity involved in visual tracking requires highly optimized implementations. Some optimizations are discussed and implemented on this work in order to achieve good results when compared with similar implementations in compiled languages. A series of evaluation tests were made, to determine how effective these techniques were on the web.
 
 % section problem_definition (end)
 
 \section{Objectives} % (fold)
 \label{sec:introduction:objectives}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+In this dissertation, it was designed and implemented tracking library for the web called \textit{tracking.js}. This work aims to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. Thus, the techniques implemented in this work were chosen aiming to cover common use-cases, such as: facilitate user interaction with the computer trough color tracking; Tracking complex objects in a scene trough markerless tracking; and track humans body parts, \eg\ faces and eyes, trough rapid object detection. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. The possibility to use \textit{tracking.js} as a cross-platform library is a reality. The browser environment is evolving fast and due to the cross-platform ability, JavaScript \cite{International2009} is becoming a popular solution for multiple devices and platforms. In a near future, other devices and visual displays could, potentially, have embedded browser versions as well and they could all benefit from \textit{tracking.js} library.
 
 % section objectives (end)
 
 \section{Dissertation Structure} % (fold)
 \label{sec:introduction:dissertation_structure}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+This dissertation is formed by five chapers that could be divided as: Introduction, Basic Concepts, Tracking Library for the Web (tracking.js), Evaluation and Conclusion. More details of each chapter is presented below.
+
+Chapter \ref{cha:introduction}, has shortly described what will be discussed in this thesis, which problem will be solved and the chosen approach to solve it.
+
+Chapter \ref{cha:basic_concepts}, introduces basic concepts required for a better understanding of the tracking library solution proposed on this work.
+
+Chapter \ref{cha:tracking_library_for_the_web}, introduces the library concepts, explaining its base and advanced functionalities and modules. Three main techniques were covered, a Markerless Tracking Algorithm on Section \ref{sec:tracking_library_for_the_web:marker_less_tracking_algorithm}, a Rapid Object Detection (Viola Jones) on Section \ref{sec:tracking_library_for_the_web:rapid_object_detection} and a Color Tracking Algorithm on Section \ref{sec:tracking_library_for_the_web:color_tracking_algorithm}.
+
+Chapter \ref{cha:evaluation}, presents evaluations about the library techniques and is divided in subsections that describes, present results and discuss each of them.
+
+Chapter \ref{cha:conclusion}, the last chapter, presents overall conclusions of this work, contributions and future work.
 
 % section dissertation_structure (end)
 
