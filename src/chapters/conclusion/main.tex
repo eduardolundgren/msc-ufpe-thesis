@@ -1,7 +1,21 @@
 \chapter{Conclusion} % (fold)
 \label{cha:conclusion}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+In this dissertation, it was designed and implemented tracking library for the web called \textit{tracking.js}. This work aims to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products.
+
+In a second moment, several basic concepts were introduced for a better understanding of the tracking library solution proposed on this work.
+
+Later on, a description of \textit{tracking.js} were presented, such as the library concepts, explaining its base and advanced functionalities and modules. Three main techniques were explored, a Markerless Tracking Algorithm on Section \ref{sec:tracking_library_for_the_web:marker_less_tracking_algorithm}, a Rapid Object Detection (Viola Jones) on Section \ref{sec:tracking_library_for_the_web:rapid_object_detection} and a Color Tracking Algorithm on Section \ref{sec:tracking_library_for_the_web:color_tracking_algorithm}.
+
+In the evaluation of the library, were presented for each available library technique a description, results, performance metrics and discussions. Some real-world applications were prototyped in order to test the library running on the web browser.
+
+For Rapid Object Detection, was shown different examples of training data being used by the library implementation of Viola Jones, and a simple chat application was created. In this chat application, while talking in real-time, the users could augment their faces with objects, such as a fake glass with mustache.
+
+For the Color Tracking Algorithm, were presented its usage for different colored objects, such as a red pencil marker, a Rubik’s magic cube \cite{Rubiks2013} and a red Ball of Whacks \cite{Whack2013}. Also few examples were implemented using color tracking and a PlayStation move controller, such as a multi-player game that allows the user to draw using the camera, controlling a 3D environment trough user interactions and a application that the user can control the volume of the browser audio player sliding the colored object in front of the camera.
+
+For the Markerless Tracking Algorithm, were demonstrated that the user is able to track any object based on invariant natural features characteristics is also demonstrated by the markerless tracking technique. Then, benefits of a JavaScript tracking solution is presented.
+
+All the proposed modules, runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. The possibility to use \textit{tracking.js} as a cross-platform library is a reality. The browser environment is evolving fast and due to the cross-platform ability, JavaScript \cite{International2009} is becoming a popular solution for multiple devices and platforms. In a near future, other devices and visual displays could, potentially, have embedded browser versions as well and they could all benefit from \textit{tracking.js} library.
 
 \section{Contributions} % (fold)
 \label{sec:conclusion:contributions}
