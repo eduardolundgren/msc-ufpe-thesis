@@ -253,10 +253,10 @@ reserved.\par\permission}}
 \def\supervisor#1#2{\setbox\@titlesupervisor\vbox
   {\unvbox\@titlesupervisor \vskip 10pt% plus 1fil minus 1fil
   \def\baselinestretch{1}\large
-  \signature{Certified by}{#1 \\ #2 \\ Dissertation Supervisor}}
+  \signature{Certified by}{#1 \\ #2}}
   \setbox\@abstractsupervisor\vbox{\unvbox\@abstractsupervisor
   \vskip\baselineskip \def\baselinestretch{1}\@normalsize
-  \par\noindent Dissertation Supervisor: #1 \\ Title: #2}}
+  \par\noindent #2: #1 \\ Title: #2}}
 
 % department chairman, not dissertation committee chairman
 \def\chairman#1#2{\gdef\@chairmanname{#1}\gdef\@chairmantitle{#2}}
@@ -337,6 +337,7 @@ requirements for the \@degreeword\ of \\
 \def\CIn{Center for Informatics}
 \def\UFPE{FEDERAL UNIVERSITY OF PERNAMBUCO}
 \def\ufpe{Federal University of Pernambuco}
+\def\ufrpe{Federal Rural University of Pernambuco}
 
 \def\permission{\par\noindent{\centering
    The author hereby grants to UFPE permission to reproduce and to
