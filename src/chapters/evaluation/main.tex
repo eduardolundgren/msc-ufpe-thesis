@@ -4,14 +4,14 @@
 \section{Evaluation Methodology} % (fold)
 \label{sec:evaluation:evaluation_methodology}
 
-This chapter present the results of each technique described on Chapter \ref{cha:tracking_library_for_the_web}. Two metrics were utilized to analyze the solutions available on \textit{tracking.js} library:
+This chapter presents the results of each technique described on Chapter \ref{cha:tracking_library_for_the_web}. Two metrics were utilized to analyze the solutions available on \textit{tracking.js} library:
 
 \begin{enumerate}
-	\item Performance: frames per second (FPS) metric of how the implemented techniques performs on the web environment in order to reach real-time capability. On the United Kingdom popular video format known as Phase Alternating Line (PAL) \cite{PAL1962}, real time video is represented by 25 FPS, therefore this value is used to define whether the tests can or cannot be considered real-time. The FPS metric were extracted from the frames rendered in the last second for the canvas element being tested only, that way only the important data were being computed in order to not affect the result numbers. Browsers have intrinsic performance limitations (Section \ref{sec:basic_concepts:web}), utilizing performance as a metric is important in order to proof that tracking techniques could be a reality on the web environment. All performance tests were run inside the web browser. The browser JavaScript code interpretation latency is computed in the numbers presented, thus respecting the real usage performance running from the web environment.
-	\item Partial occlusion robustness: present tests how the implemented techniques reacts to partial occlusions. The web users are usually novice, from those users, requiring some training or calibration before using tracking solutions is overwhelming. The web users can potentially have unexpected behaviors when using a tracking application in front of a computer, and partial occlusion is one of them. Therefore the importance of measuring random partial occlusions on web techniques is to understand how the implementation reacts to that situations. This work considered robust to a partial occlusion situations that the tracked object was still able to be identified with the addition of random occlusions caused by the user fingers.
+	\item Performance: frames per second (FPS) metric of how the implemented techniques perform on the web environment in order to reach real-time capability. On the United Kingdom popular video format known as Phase Alternating Line (PAL) \cite{PAL1962}, real time video is represented by 25 FPS, therefore this value is used to define whether the tests can or cannot be considered real-time. The FPS metric were extracted from the frames rendered in the last second for the canvas element being tested only, that way only the important data were being computed in order to not affect the result numbers. Browsers have intrinsic performance limitations (Section \ref{sec:basic_concepts:web}), utilizing performance as a metric is important in order to prove that tracking techniques could be a reality on the web environment. All performance tests were executed inside the web browser. The browser JavaScript code interpretation latency is computed in the numbers presented, thus respecting the real usage performance running from the web environment.
+	\item Partial occlusion robustness: examples of how the visual tracking techniques behaves under partial occlusion. Web users are usually novice, therefore, for those users, requiring some training or calibration before using tracking solutions is overwhelming. Web users can potentially have unexpected behaviors when using a tracking application in front of a computer, and partial occlusion is one of them. Therefore the importance of measuring random partial occlusions on web techniques is to understand how the implementation reacts to those situations. This work considered robustness to a partial occlusion situations that the tracked object was still able to be identified with the addition of random occlusions caused by the user fingers.
 \end{enumerate}
 
-Several tracking techniques are already available in server-side languages, such as C/C++, OpenCV \cite{Bradski2000} is an example of a library with those capabilities. Integrating existing libraries in tracking solutions on the web was, at first glance, much doable, since the code base was already available, on the other hand the web browsers are not able to run C/C++ directly. In order to run those existing technologies, several approached were tested on \cite{Pablo2013}: using client to server requests in order to process video frames; or trough platform dependent plugins, such as OSAKit \cite{OSAKit2013}, that allowed OpenCV library to run on the client-side \cite{Pablo2013}. A comparison between \textit{tracking.js} and those existing solutions involving client and server-side tracking is discussed on subsection \ref{sec:evaluation:js_tracking_solution}, showing some benefits of a pure JavaScript client-side tracking solution.
+Several tracking techniques are already available in server-side languages, such as C/C++; OpenCV is an example of a library with those capabilities. Integrating existing libraries in tracking solutions on the web was, at first glance, much doable, since the code base was already available, on the other hand the web browsers are not able to run C/C++ directly. In order to run those existing technologies, several approached were tested in \cite{Pablo2013}: using client-to-server requests in order to process video frames; or trough platform dependent plugins, such as OSAKit \cite{OSAKit2013}, that allowed OpenCV library to run on the client-side \cite{Pablo2013}. A comparison between \textit{tracking.js} and those existing solutions involving client and server-side tracking is discussed in subsection \ref{sec:evaluation:js_tracking_solution}, showing some benefits of a pure JavaScript client-side tracking solution.
 
 Google Chrome browser is the current most popular web browser, for that reason, all tests were executed on Google Chrome browser version 28.0.1500.71 \cite{Chrome2010}, running on Mac OS X 10.8.3, 2.6 GHz Intel Core i7 16 GB 1600 MHz RAM.
 
@@ -23,7 +23,7 @@ Google Chrome browser is the current most popular web browser, for that reason, 
 \subsection{Description} % (fold)
 \label{sub:evaluation:rapid_object_detection:description}
 
-Having Viola Jones rapid object detection as part of the library resulted in interesting examples for web applications, such as detecting faces, mouths, eyes and any other training data \cite{Viola2001}. All training data tested were imported from OpenCV \cite{Bradski2000} and converted to JSON \cite{Crockford2013}. On Figure \ref{figure:viola_overview} is shown different examples of training data being used by the library implementation of Viola Jones.
+Having Viola Jones rapid object detection as part of the library resulted in interesting examples for web applications, such as detecting faces, mouths, eyes and any other training data \cite{Viola2001}. All training data tested were imported from OpenCV and converted to JSON. Figure \ref{figure:viola_overview} illustrates different examples of training data being used by the library implementation of Viola Jones.
 
 \begin{figure}[!htb]
   \centering
@@ -39,7 +39,7 @@ Having Viola Jones rapid object detection as part of the library resulted in int
   \label{figure:viola_multiple_faces}
 \end{figure}
 
-Augmented reality and tracking applications for advertising and entertainment are gaining more space on the web enviroment. The media used in this kind of application needs to be as appealing as possible in order to catch consumers' attention, thus detecting faces, or augmenting the scene with objects are attractive possibilities. In order to demonstrate that concept, a simple chat application was created. In this chat application, while talking in real-time, the users could augment their faces with objects, such as a fake glass with mustache. In order to extract the users face coordinates Viola Jones was used. Listing \ref{lst:viola} shows the simplified JavaScript API provided by \textit{tracking.js} in order to extract face coordinates and draw the image. The fake glasses are positioned over $x$ and $y$ coordinates on the canvas axis based on the extracted values. Figure \ref{figure:viola_glass_face} demonstrates the described example.
+Augmented reality and tracking applications for advertising and entertainment are gaining more space on the web enviroment. The medium used in this kind of application needs to be as appealing as possible in order to catch consumers' attention, thus detecting faces, or augmenting the scene with objects are attractive possibilities. In order to demonstrate that concept, a simple chat application was created. In this chat application, while talking in real-time, the users could augment their faces with objects, such as a fake glass with mustache. In order to extract the users face coordinates Viola Jones was used. Listing \ref{lst:viola} shows the simplified JavaScript API provided by \textit{tracking.js} in order to extract face coordinates and draw the image. The fake glasses are positioned over $x$ and $y$ coordinates on the canvas axis based on the extracted values. Figure \ref{figure:viola_glass_face} demonstrates the described example.
 
 \begin{figure}[!htb]
   \centering
@@ -47,6 +47,8 @@ Augmented reality and tracking applications for advertising and entertainment ar
   \caption{Augmenting users faces with objects using \textit{tracking.js} Viola Jones eyes detection.}
   \label{figure:viola_glass_face}
 \end{figure}
+
+\newpage
 
 \begin{lstlisting}[language=C++,label={lst:viola},caption=Example of \textit{tracking.js} API of augmenting users faces with objects using Viola Jones face detection.]
   var img = new Image();
@@ -69,7 +71,7 @@ Augmented reality and tracking applications for advertising and entertainment ar
 \subsubsection{Performance} % (fold)
 \label{subsub:evaluation:rapid_object_detection:results:performance}
 
-The United Kingdom popular video format known as Phase Alternating Line (PAL) \cite{PAL1962} defines that real time video is represented by 25 FPS, therefore this value is used to define whether the tests can or cannot be considered real-time. On Figure \ref{figure:viola_fps}, the Viola Jones implementation were tested with different numbers of detected faces. Fifteen faces were gradually added, for each addition the FPS average was recorded. Note that, until five faces detected the web implementation still runs inside the real-time limit defined by PAL \cite{PAL1962}.
+The United Kingdom popular video format known as Phase Alternating Line (PAL) \cite{PAL1962} defines that real time video is represented by 25 FPS, therefore this value is used to define whether the tests can or cannot be considered real-time. In Figure \ref{figure:viola_fps}, the Viola Jones implementation were tested with different numbers of detected faces. Fifteen faces were gradually added, for each addition the FPS average was recorded. Note that, until five faces detected the web implementation still runs inside the real-time limit defined by PAL.
 
 \begin{figure}[!htb]
   \centering
@@ -124,7 +126,7 @@ Viola Jones implementation of \textit{tracking.js} is robust for random partial 
 \subsection{Discussion} % (fold)
 \label{sub:evaluation:rapid_object_detection:discussion}
 
-The this section shows rapid object detection as an interesting technique to be available on \textit{tracking.js}. It provides ways to detect user faces, eyes and any other training data available, resulting in attractive tracking and AR solutions on the web. Future work is required in order to leverage this technique to be robust enough in order to be used in real large applications. The first improvement that could be done is on performance. The average result performance is inside the real-time limit defined by PAL \cite{PAL1962}, although an optimization on the training JSON data structure can be still made in order to avoid nested arrays, where each array contains float numbers. That optimization allows the usage of typed float arrays to store the training numbers, resulting in a overall FPS speed improvement of $30\%$. The second improvement is apply a Double Exponential Smoothing technique to the detection. It's an Alternative to Kalman Filter-Based Predictive Tracking \cite{LaViola2003}. Predictive tracking algorithms represent an important component of any tracking or AR system. Without these algorithms, tracking and AR systems must use image processing or pose calculation for each frame. This naive approach can cause problems, such as display-to-user-motion synchronization mismatch. This mismatch degrades the user experience because dynamic tracking error produces perceived latency and possible cybersickness \cite{LaViolaJr.2000}.
+This section shows rapid object detection as an interesting technique to be available in \textit{tracking.js}. It provides ways to detect user faces, eyes and any other training data available, resulting in attractive tracking and AR solutions on the web. Future work is required in order to leverage this technique to be robust enough in order to be used in real large applications. The first improvement that could be done is on performance. The average result performance is inside the real-time limit defined by PAL, although an optimization on the training JSON data structure can be still made in order to avoid nested arrays, where each array contains float numbers. That optimization allows the usage of typed float arrays to store the training numbers, resulting in a overall FPS speed improvement of $30\%$. The second improvement is to apply a Double Exponential Smoothing technique to the detection. It is an Alternative to Kalman Filter-Based Predictive Tracking \cite{LaViola2003}. Predictive tracking algorithms represent an important component of any tracking or AR system. Without these algorithms, tracking and AR systems must use image processing or pose calculation for each frame. This naïve approach can cause problems, such as display-to-user-motion synchronization mismatch. This mismatch degrades the user experience because dynamic tracking error produces perceived latency and possible cybersickness \cite{LaViolaJr.2000}.
 
 % subsection discussion (end)
 
@@ -136,7 +138,7 @@ The this section shows rapid object detection as an interesting technique to be 
 \subsection{Description} % (fold)
 \label{sub:evaluation:results:color_tracking_algorithm:description}
 
-Being able to use colored objects to control your browser using the user camera is very appealing. Any colored object could be used to enable user interaction with your web application using \textit{tracking.js} color tracking technique trough a simple and intuitive JavaScript API (Listing \ref{lst:color}). On Figure \ref{figure:color_object} is shown different colored objects being tracked.
+Being able to use colored objects to control your browser trough the camera is very appealing. Any colored object could serve as a tool for the user interaction trough a simple and intuitive JavaScript API (Listing \ref{lst:color}). Figure \ref{figure:color_object} illustrates different colored objects being tracked.
 
 \begin{figure}[!htb]
   \centering
@@ -144,6 +146,8 @@ Being able to use colored objects to control your browser using the user camera 
   \caption{Library implementation of color tracking for different objects: On the left a red pencil marker; on the center a Rubik's magic cube \cite{Rubiks2013} from the red face; and on the right a red Ball of Whacks \cite{Whack2013}.}
   \label{figure:color_object}
 \end{figure}
+
+\newpage
 
 \begin{lstlisting}[language=C++,label={lst:color},caption=Example of \textit{tracking.js} color API.]
   var videoCamera = new tracking.VideoCamera();
@@ -156,7 +160,7 @@ Being able to use colored objects to control your browser using the user camera 
   });
 \end{lstlisting}
 
-Enable entertainment web applications is also possible using color tracking. Few examples were implemented using color tracking and a PlayStation move controller (Figure \ref{figure:psmove}) that is basically a colored sphere that can emit light, the color of the sphere can be set via Bluetooth. This controller have four buttons, square, triangle, cross, circle, which are color coded as pink, green, blue and red. The controller has also three types of built-in sensors, temperature, accelerometer, gyroscope and magnetometer. In this work only the emitted light is used to track the scene.
+Enabling entertainment web applications is also possible by using color tracking. Few examples were implemented using color tracking and a PlayStation move controller (Figure \ref{figure:psmove}) that is basically a colored sphere that can emit light, the color of the sphere can be set via Bluetooth. This controller have four buttons, square, triangle, cross, circle, which are color coded as pink, green, blue and red. The controller has also three types of built-in sensors, temperature, accelerometer, gyroscope and magnetometer. In this work only the emitted light is used to track the scene.
 
 \begin{figure}[!htb]
   \centering
@@ -174,7 +178,7 @@ On Figure \ref{figure:color_games}, the two bottom images are examples of how ga
   \label{figure:color_games}
 \end{figure}
 
-Another example of color tracking on user interactions is demonstrated on Figure \ref{figure:color_volume}. Using a HTML5 audio element \cite{International2009} a music is played and trough any colored object, the user can control the volume of the player sliding the object from the left to right and vice-versa, left most coordinates means volume set to zero, right most coordinates means volume set to maximum.
+Another example of color tracking on user interactions is demonstrated in Figure \ref{figure:color_volume}. Using a HTML5 audio element \cite{International2009} a music is played and trough any colored object, the user can control the volume of the player sliding the object from the left to right and vice-versa, left most coordinates mean volume set to zero, right most coordinates mean volume set to maximum.
 
 \begin{figure}[!htb]
   \centering
@@ -501,12 +505,14 @@ On Figure \ref{figure:color_fps}, the color tracking implementation were tested 
    \label{figure:color_fps}
 \end{figure}
 
+\newpage
+
 % subsubsection performance (end)
 
 \subsubsection{Oclusion Robustness} % (fold)
 \label{subsub:evaluation:color_tracking_algorithm:results:occlusion_robustness}
 
-Color tracking technique implementation of \textit{tracking.js} is robust for random partial occlusions. Figure \ref{figure:color_occlusion} demonstrates occlusions variations that still allows the colored object to be detected.
+Color tracking technique implementation of \textit{tracking.js} is robust for random partial occlusions. Figure \ref{figure:color_occlusion} demonstrates occlusions variations that still allow the colored object to be detected.
 
 \begin{figure}[!htb]
   \centering
@@ -520,7 +526,7 @@ Color tracking technique implementation of \textit{tracking.js} is robust for ra
 \subsection{Discussion} % (fold)
 \label{sub:evaluation:color_tracking_algorithm:discussion}
 
-The color tracking technique could use any colored object to control your web browser in an simple and fast way, the results seems to be very attractive. Future work is required in order to leverage this technique to be robust enough in order to be used in real large applications. An important improvement is to automatic calculate colors threshold. In the current implementation, the distance threshold value for each color was empirically defined, when drastic illumination changes happens the detection quality can be reduced since colors are directly affected by illumination variations. A threshold iteration test could be executed during the algorithm initialization in order to find the value that provides the highest number pixels from the set color.
+The color tracking technique could use any colored object to control your web browser in an simple and fast way, the results seem to be very attractive. Future work is required to leverage this technique to be robust enough in order to be used in real large applications. An important improvement is to automatic calculate colors threshold. In the current implementation, the distance threshold value for each color was empirically defined, and when drastic illumination changes happen the detection quality can be reduced since colors are directly affected by illumination variations. A threshold iteration test could be executed during the algorithm initialization in order to find the value that provides the highest number of pixels from the set color.
 
 % subsection discussion (end)
 
@@ -532,18 +538,18 @@ The color tracking technique could use any colored object to control your web br
 \subsection{Description} % (fold)
 \label{sub:evaluation:markerless_tracking_algorithm:description}
 
-Being able to track any object based on invariant natural features characteristics is also demonstrated by the markerless tracking technique. On Figure \ref{figure:keypoints_building} is shown features extracted from different scenes. Note that most part of the keypoints are invariant to the camera rotation. Based on the features detected, the best $H$ homography matrix is estimated. All found points in the first frame is multiplied by $H$ in order to be plotted in the second frame. The found $H$ is defined as follows:
+Being able to track any object based on invariant natural features characteristics is also demonstrated by the markerless tracking technique. Figure \ref{figure:keypoints_building} shows features extracted from different scenes. Note that most part of the keypoints are invariant to the camera rotation. Based on the features detected, the best $H$ homography matrix is estimated. All found points in the first frame are multiplied by $H$ in order to be plotted in the second frame. The found $H$ is defined as follows:
 
 $$H=\begin{pmatrix}1.6101363130102753 & -0.5346783206945362 & -33.21640286774384\\ 0.18027586959550446 & 0.8414271531603306 & -7.530803625100701\\ 0.0021658540103673164 & -0.0025444273054841503 & 1\\\end{pmatrix}.$$
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{chapters/evaluation/keypoints_building.png}
-  \caption{Library implementation of markerless tracking technique. Features are extracted from different scenes. On the first frame, $49$ features were detected by FAST \cite{RostenFaster2010}, on the second frame $17$ of those were matched by BRIEF \cite{Calonder2010} and plotted by the $H$ matrix.}
+  \caption{Library implementation of markerless tracking technique. Features are extracted from different scenes. On the first frame, $49$ features were detected by FAST, on the second frame $17$ of those were matched by BRIEF and plotted by the $H$ matrix.}
   \label{figure:keypoints_building}
 \end{figure}
 
-The markerless tracking web implementation have also showed to be robust for illumination and scaling differences. On Figure \ref{figure:keypoints_fast_brief} is shown the features detected by FAST (top images) and features extracted by BRIEF (bottom images) plotted based on the estimated homography $H$.
+The markerless tracking web implementation has also showed to be robust for illumination and scaling differences. Figure \ref{figure:keypoints_fast_brief} shows the features detected by FAST (top images) and features extracted by BRIEF (bottom images) plotted based on the estimated homography $H$.
 
 \begin{figure}[!htb]
   \centering
@@ -551,6 +557,8 @@ The markerless tracking web implementation have also showed to be robust for ill
   \caption{Library implementation of markerless tracking technique. Illumination and scaling robustness for features detected using FAST (top images) and extracted using BRIEF (bottom images) plotted on the second frame by the estimated homography matrix $H$.}
   \label{figure:keypoints_fast_brief}
 \end{figure}
+
+\clearpage
 
 % subsection description (end)
 
@@ -560,7 +568,7 @@ The markerless tracking web implementation have also showed to be robust for ill
 \subsubsection{Performance} % (fold)
 \label{subsub:evaluation:markerless_tracking_algorithm:results:performance}
 
-On Figure \ref{figure:markerless_fps}, the markerless tracking implementation were tested in an interval of $1000$ seconds. The FPS average for this technique is 6 FPS, which is not ideal for real-time applications yet. Some optimizations could be applied on future work, such as implementing FAST-ER \cite{RostenFaster2010} for feature detection.
+Figure \ref{figure:markerless_fps}, the markerless tracking implementation were tested in an interval of $1000$ seconds. The FPS average for this technique is 6 FPS, which is not ideal for real-time applications yet. Some optimizations could be applied in future work, such as implementing FAST-ER \cite{RostenFaster2010} for feature detection.
 
 \begin{figure}[!htb]
   \centering
@@ -784,10 +792,10 @@ On Figure \ref{figure:markerless_fps}, the markerless tracking implementation we
 
 % subsubsection performance (end)
 
-\subsubsection{Oclusion Robustness} % (fold)
+\subsubsection{Occlusion Robustness} % (fold)
 \label{subsub:evaluation:markerless_tracking_algorithm:results:occlusion_robustness}
 
-Markerless tracking technique implementation of \textit{tracking.js} is robust for random partial occlusions. Figure \ref{figure:keypoints_occlusion} demonstrates occlusions variations that still allows the object to be detected.
+The markerless tracking technique implementation of \textit{tracking.js} is robust for random partial occlusions. Figure \ref{figure:keypoints_occlusion} demonstrates occlusions variations that still allow the object to be detected.
 
 \begin{figure}[!htb]
   \centering
@@ -796,6 +804,8 @@ Markerless tracking technique implementation of \textit{tracking.js} is robust f
   \label{figure:keypoints_occlusion}
 \end{figure}
 
+\newpage
+
 % subsubsection occlusion_robustness (end)
 
 % subsection results (end)
@@ -803,7 +813,7 @@ Markerless tracking technique implementation of \textit{tracking.js} is robust f
 \subsection{Discussion} % (fold)
 \label{sub:evaluation:markerless_tracking_algorithm:discussion}
 
-Tracking based on natural features characteristics is promising since it doesn't require any artificial marker in order to facilitate tracking. Future work is required in order to leverage this technique to be robust enough in order to be used in real large applications. The first improvement is to improve overall performance of the feature detection phase. For feature detection FAST-ER can be used in replacement of the existing FAST detector in order to improve repeatability, resulting in better performance \cite{RostenFaster2010}. On the results subsection \ref{sub:evaluation:markerless_tracking_algorithm:results}, this technique implementation on the web has presented average of 6 FPS, which is below the PAL threshold of real-time rate. The second improvement is to provide a Perspective-$n$-Point problem (P$n$P) calculation. The aim of the P$n$P is to determine the position and orientation of a camera given its intrinsic parameters and a set of $n$ correspondences between 3D points and their 2D projections. It has many applications in Computer Vision, Robotics, AR and Computer Vision \cite{Hartley2004} communities. One strong candidate algorithm is called EP$n$P proposed by Lepetit et al. on \cite{Lepetit2008}, as a non-iterative solution to the P$n$P problem, which is the estimation of the pose of a calibrated camera from $n$ 3D-to-2D point correspondences, whose computational complexity grows linearly with $n$. This is in contrast to state-of-the-art methods that are $O(n^5)$ or even $O(n^8)$. Lepetit's method handles properly both planar and non-planar configurations and also have low computational complexity \cite{Lepetit2008}.
+Tracking based on natural features characteristics is promising since it does not require any artificial marker to facilitate tracking. Future work is required to leverage this technique to be robust enough in order to be used in real large applications. The first enhancement is to improve the overall performance of the feature detection phase. For feature detection FAST-ER can be used in replacement of the existing FAST detector in order to improve repeatability, resulting in better performance \cite{RostenFaster2010}. In the results subsection \ref{sub:evaluation:markerless_tracking_algorithm:results}, this technique implementation on the web has presented an average of 6 FPS, which is below the PAL threshold of real-time rate. The second improvement is to provide a Perspective-$n$-Point problem (P$n$P) calculation. The aim of the P$n$P is to determine the position and orientation of a camera given its intrinsic parameters and a set of $n$ correspondences between 3D points and their 2D projections. It has many applications in Computer Vision, Robotics, AR and Computer Vision \cite{Hartley2004} communities. One strong candidate algorithm is called EP$n$P proposed by Lepetit et al. on \cite{Lepetit2008}, as a non-iterative solution to the P$n$P problem, which is the estimation of the pose of a calibrated camera from $n$ 3D-to-2D point correspondences, whose computational complexity grows linearly with $n$. This is in contrast to state-of-the-art methods that are $O(n^5)$ or even $O(n^8)$. Lepetit's method handles properly both planar and non-planar configurations and also has low computational complexity \cite{Lepetit2008}.
 
 % subsection discussion (end)
 
