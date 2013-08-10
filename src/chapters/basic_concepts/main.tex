@@ -1,4 +1,4 @@
-\chapter{Basic Concepts} % (fold)
+\chapter{Basic concepts} % (fold)
 \label{cha:basic_concepts}
 
 \section{Web} % (fold)
@@ -17,7 +17,7 @@ The browser main functionality is to present a web resource, by requesting it fr
 
 % subsection contextualization (end)
 
-\subsection{Browser Architecture} % (fold)
+\subsection{Browser architecture} % (fold)
 \label{sub:basic_concepts:web:browser_architecture}
 
 For any result or information presented in this work related to the browser environment, three mature browser implementations were selected. For each browser, a conceptual architecture was described based on domain knowledge and available documentation. Firefox version $16.0$, Safari version $6.0.4$ and Chrome version $25.0.1364$ were used to derive the reference architecture because they are mature systems, have reasonably large developer communities and user bases, provide good support for web standards, and are entirely open source \cite{WC2006,Grosskurth2005}. The reference architecture for web browsers is shown in Figure \ref{figure:web_architecture}. It comprises eight major subsystems plus the dependencies between them \cite{Grosskurth2005}:
@@ -53,7 +53,7 @@ Another common swappable subsystem is (5) the JavaScript parser. JavaScript \cit
 
 % subsection browser_architecture (end)
 
-\subsection{Audio and Video} % (fold)
+\subsection{Audio and video} % (fold)
 \label{sub:basic_concepts:web:audio_and_video}
 
 Audio and video elements were introduced into the browsers by HTML5 specification \cite{Hickson2013}. Audio and video are HTML5 features that attract a lot of attention. Often presented as an alternative to Flash \cite{Flash2013} in the media, the video element has advantages due to its natural integration with the other layers of the web development stack such as CSS \cite{CSS2013} and JavaScript as well as the other HTML elements \cite{WC2006}. The three video formats supported are webm (VP8 Vorbis) \cite{Vorbis2012}, mp4 (H.264 AAC) \cite{AAC2006} and ogv (Theora Vorbis) \cite{Theora2011}. The audio formats available are ogg (Theora Vorbis) and mp4 (H.264 AAC).
@@ -100,7 +100,7 @@ In Section \ref{sub:basic_concepts:web:canvas_element}, a new HTML5 called canva
 
 % subsection audio_and_video (end)
 
-\subsection{Canvas Element} % (fold)
+\subsection{Canvas element} % (fold)
 \label{sub:basic_concepts:web:canvas_element}
 
 The canvas is an HTML5 element that provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly \cite{Canvas2013}.
@@ -122,7 +122,7 @@ It is mandatory the use of the canvas element to develop visual tracking applica
 
 % subsection canvas_element (end)
 
-\subsection{JavaScript Typed Arrays} % (fold)
+\subsection{JavaScript typed arrays} % (fold)
 \label{sub:basic_concepts:web:javascript_typed_arrays}
 
 The JavaScript language \cite{International2009} is intended to be used within some larger environment, be it a browser, server-side scripts, or similar \cite{Grosskurth2005}. JavaScript core language features comprises few major features:
@@ -138,7 +138,7 @@ As web applications become more and more powerful, adding features such as audio
 
 JavaScript-typed arrays provide a mechanism for accessing raw binary data much more efficiently \cite{MDN2013,TypedArray2013}. This dissertation takes advantage of typed arrays in order to achieve acceptable performance and robustness on the web of complex algorithms implementations.
 
-\subsubsection{Typed Arrays Performance Benchmark} % (fold)
+\subsubsection{Typed arrays performance benchmark} % (fold)
 \label{subsub:basic_concepts:web:javascript_typed_arrays:typed_arrays_performance_benchmark}
 
 A performance benchmark comparing regular \textit{vs} typed arrays were executed on the three well known open-source browsers, Firefox, Safari and Chrome. The comparison was executed on Mac OS X 10.8.3, 2.6 GHz Intel Core i7 16 GB 1600 MHz RAM. The array types selected were the not strongly typed \textit{Array}; \textit{Float32Array}, which represents an array of 32-bit floating point numbers; and \textit{Uint8Array}, which represents an array of 8-bit unsigned integers \cite{MDN2013}.
@@ -195,7 +195,7 @@ As conclusion, typed arrays provides faster read and write operations than regul
 
 % subsection typed_arrays_performance_benchmark (end)
 
-\subsubsection{What is the relation between Typed Arrays and Canvas?} % (fold)
+\subsubsection{What is the relation between typed arrays and canvas?} % (fold)
 \label{subsub:basic_concepts:web:javascript_typed_arrays:relation_between_typed_and_canvas}
 
 Reading and writing raw binary data using typed arrays only solves part of the problem of manipulating video and images data. The other missing feature was solved by HTML5 canvas element, which one important feature is to provide access to the array of pixels of those media \cite{Canvas2013,Hickson2013}. The raw binary data is used by visual tracking algorithms. For more information see Section \ref{sub:basic_concepts:web:audio_and_video}.
@@ -222,7 +222,7 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order,
 
 % section web (end)
 
-\section{Visual Tracking} % (fold)
+\section{Visual tracking} % (fold)
 \label{sec:basic_concepts:visual_tracking}
 
 \subsection{Contextualization} % (fold)
@@ -242,7 +242,7 @@ When 2D tracking is used, the goal is to retrieve a 2D transformation from the o
 In computer vision, general video analysis can be broken down into three different steps: detection of interesting moving objects, frame to frame tracking of those objects and analysis of their tracks to recognize possible behaviors \cite{Yilmaz2006}. Because of such use in computer vision, object tracking is important in the following major areas:
 
 \begin{enumerate}
-  \item Augmented reality \cite{Azuma1997};
+  \item Augmented Reality (AR) \cite{Azuma1997};
   \item 3D reconstruction \cite{Zhou2008};
   \item Motion-based recognition \cite{Cedras1995};
   \item Automated surveillance \cite{Javed2002};
@@ -265,10 +265,10 @@ Vision has the potential to yield non-invasive, accurate and low-cost solutions 
 
 % subsection contextualization (end)
 
-\subsection{Tracking in Augmented Reality Applications} % (fold)
+\subsection{Tracking in augmented reality applications} % (fold)
 \label{sub:basic_concepts:visual_tracking:tracking_in_augmented_reality_applications}
 
-Imagine a technology in which you could see more than others see, hear more than others hear, and even touch things that others cannot. A technology able to perceive computational elements and objects within our real world experience that helps us in our daily activities, while interacting almost unconsciously through mere gestures \cite{Krevelen2010,Teichrieb2007}. With such technology, mechanics could see instructions on what to do next when repairing an unknown piece of equipment, surgeons could take advantage of Augmented Reality (AR) while performing surgery on them and we could read reviews for each restaurant in the street we are walking in on the way to work. On the reality-virtuality \textit{continuum} by Milgram and Ki \cite{Mistry2009}, AR is one part of the general area of mixed reality. Both virtual environments (or virtual reality) and augmented virtuality, in which real objects are added to virtual ones, replace the surrounding environment by a virtual one. In contrast, AR provides local virtuality. The reality-virtuality \textit{continuum} is shown on Figure \ref{figure:reality_continuum}.
+Imagine a technology in which you could see more than others see, hear more than others hear, and even touch things that others cannot. A technology able to perceive computational elements and objects within our real world experience that helps us in our daily activities, while interacting almost unconsciously through mere gestures \cite{Krevelen2010,Teichrieb2007}. With such technology, mechanics could see instructions on what to do next when repairing an unknown piece of equipment, surgeons could take advantage of AR while performing surgery on them and we could read reviews for each restaurant in the street we are walking in on the way to work. On the reality-virtuality \textit{continuum} by Milgram and Ki \cite{Mistry2009}, AR is one part of the general area of mixed reality. Both virtual environments (or virtual reality) and augmented virtuality, in which real objects are added to virtual ones, replace the surrounding environment by a virtual one. In contrast, AR provides local virtuality. The reality-virtuality \textit{continuum} is shown on Figure \ref{figure:reality_continuum}.
 
 \begin{figure}[!htb]
   \centering
@@ -291,7 +291,7 @@ The template-based tracking techniques do not necessarily rely on local features
 \subsection{Which devices could use tracking.js?} % (fold)
 \label{sub:basic_concepts:visual_tracking:which_devices_could_use_trackingjs}
 
-Different devices such as mobile phones, notebooks, and even head-worn \cite{Benford1998} (Google Project Glass \cite{Glass2013}), provides an embedded web browser capable to run JavaScript and HTML5. There are several displays devices that could be used on visual tracking or AR applications, Benford \cite{Benford1998}, describes that they could be divided as follows:
+Different devices such as mobile phones, notebooks, and even head-worn \cite{Benford1998} (Google Project Glass \cite{Glass2013}), provide an embedded web browser capable to run JavaScript and HTML5. There are several displays devices that could be used on visual tracking or AR applications, Benford \cite{Benford1998}, describes that they could be divided as follows:
 
 \begin{enumerate}
   \item Visual display
@@ -317,7 +317,7 @@ The possibility to use this work as a cross-platform tracking library is a reali
 \label{sub:basic_concepts:visual_tracking:discussion}
 
 In this dissertation, it was designed and implemented tracking library for the web aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. Thus, the techniques implemented in this work were chosen aiming to cover common use-cases, such as: facilitate user interaction with the computer trough color tracking (Section \ref{sec:tracking_library_for_the_web:color_tracking_algorithm}); Tracking complex objects in a scene trough markerless tracking (Section \ref{sec:tracking_library_for_the_web:marker_less_tracking_algorithm}); and track humans body parts, \eg\ faces and eyes, trough rapid object detection (Section \ref{sec:tracking_library_for_the_web:rapid_object_detection}).
-It runs on native web browsers without requiring third-party plugins installation, therefore any browser-ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them \cite{MDN2013,International2009}. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HDM (\ie\ Google Glass \cite{Glass2013}) \cite{Benford1998} are browser-ready \cite{Hickson2013}. They all could benefit from a reusable, cross-platform library for AR applications.
+It runs on native web browsers without requiring third-party plugins installation, therefore any browser-ready device can eventually use the proposed cross-platform code base to develop AR applications. In order to develop for different devices different skills are required, since APIs and programming languages may differ between them \cite{MDN2013,International2009}. In the current day, the most popular devices, such as smart phones, tablets, computers, notebooks and HMD (\ie\ Google Glass \cite{Glass2013}) \cite{Benford1998} are browser-ready \cite{Hickson2013}. They all could benefit from a reusable, cross-platform library for AR applications.
 
 % subsection discussion (end)
 

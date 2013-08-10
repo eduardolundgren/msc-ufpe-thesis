@@ -1,4 +1,4 @@
-\chapter{Tracking Library for the Web (tracking.js)} % (fold)
+\chapter{Tracking library for the web (tracking.js)} % (fold)
 \label{cha:tracking_library_for_the_web}
 
 \section{Contextualization} % (fold)
@@ -10,7 +10,7 @@ Browsers are evolving very fast when compared to the the previous decade \cite{H
 
 In this context, this dissertation aims to present the implementation and evaluation of a solution regarding tracking techniques for web targeted AR. The available algorithms and techniques can be used for different applications, such as, detecting faces, identifying objects and colors and tracking moving objects. The solution is called \textit{tracking.js}. Some optimizations are discussed and implemented in this work in order to achieve good results when compared with similar implementations in compiled languages.
 
-\subsection{Related Work} % (fold)
+\subsection{Related work} % (fold)
 \label{sub:tracking_library_for_the_web:related_work}
 
 There are not many web-based RA solutions available and registered in the literature. The ones available are mainly focused on fiducial markers \cite{Cho1998}, such as FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011}, they both are ports of ARToolKit \cite{Hirokazu2002}. ARToolKit is a desktop library which is useful to make vision-based AR applications. The Metaio company developed Unifeye Viewer \cite{Metaio2009}, a proprietary plug-in for Flash \cite{Flash2013} that allows the utilization of markerless AR applications on the web. In order to run Flash based applications, the installation of its plugin is required. Third-party plugins, such as Flash, are in decadency on modern and mobile web browsers, instead JavaScript based solutions are preferred, since they can run in any modern browser without requiring any user effort of installing external software. Some smart-phones do not even support Flash plugin into their browsers, \eg\ Safari for mobile \cite{Safari2013} is one example of a mobile browser that has banned Flash.
@@ -50,7 +50,7 @@ The solution proposed in this dissertation, \textit{tracking.js}, provides the f
 
 % subsection related_work (end)
 
-\subsection{Library Modules} % (fold)
+\subsection{Library modules} % (fold)
 \label{sub:tracking_library_for_the_web:library_modules}
 
 The proposed library is divided in modules in order to allow extension and addition of new features, such as new RA techniques or math utilities. For a better understanding of the library architecture, the current implementation is divided in two packages separating base from visual tracking classes. Base classes modules are shown in Figure \ref{figure:base_classes} and visual tracking classes in Figure \ref{figure:visual_tracking_classes}.
@@ -185,7 +185,7 @@ Visual tracking classes include several computer vision algorithms, such as FAST
 
 % section contextualization (end)
 
-\section{Markerless Tracking Algorithm} % (fold)
+\section{Markerless tracking algorithm} % (fold)
 \label{sec:tracking_library_for_the_web:marker_less_tracking_algorithm}
 
 \subsection{Contextualization} % (fold)
@@ -195,7 +195,7 @@ The basic difference between markerless and marker-based tracking is that the fi
 
 % subsection contextualization (end)
 
-\subsection{Feature Detector} % (fold)
+\subsection{Feature detector} % (fold)
 \label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:feature_detector}
 
 This technique relies on detecting individual features across images and are therefore easy to increase robustness against partial occlusions or matching errors. Illumination invariance is also simple to achieve. Feature points detection is used as the first step of many vision tasks such as tracking, localization, image matching and recognition \cite{Lepetit2005}. In this work we call ``feature'' or ``keypoint'' to refer to a point of interest in two dimensions (Figure \ref{figure:keypoints}).
@@ -227,8 +227,8 @@ On Figure \ref{figure:fast}, the highlighted squares are the pixels used in the 
 
 % subsection feature_detector (end)
 
-\subsection{Feature Extractors} % (fold)
-\label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:feature_extractors}
+\subsection{Feature extractor} % (fold)
+\label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:feature_extractor}
 
 To estimate motion, one can then match sets of features \{$m_{i}$\} and \{$m'_{j}$\} extracted from two images taken from similar, and often successive, viewpoints. A classical procedure \cite{Calonder2010} runs as follows. For each point \{$m_{i}$\} in the first image, search in a region of the second image around location \{$m_{i}$\} for point \{$m'_{j}$\}. The search is based on the similarity of the local image windows, also knowns as kernel windows, centered on the points, which strongly characterizes the points when the images are sufficiently close \cite{Lepetit2005}.
 
@@ -266,9 +266,9 @@ in which $n$ is the dimension of binary descriptor and $\otimes$ stands for bitw
 $$WHam(x, y)=\sum_{i=1}^{n}w_i(b_i(x)\otimes b_i(y))$$
 where $w_i$ is the weight of the $i$th element. The goal is to learn $w_i,i=1,2\cdots,n$ for the binary descriptor (BRIEF) based on a set of feature points. By assigning different weights to binary codes, what we expect is to obtain a distance space in which the distances of matching patches are less than those of non-matching patches.
 
-% subsection feature_extractors (end)
+% subsection feature_extractor (end)
 
-\subsection{Homography Estimation} % (fold)
+\subsection{Homography estimation} % (fold)
 \label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:homography_estimation}
 
 Typically, homographies are estimated between images by finding feature correspondences on them. A 2D point $(x,y)$ in an image can be represented as a 3D vector $\textbf{x} = (x_1, x_2, x_3)$ where $x = \frac{x_1}{x_3}$ and $y = \frac{x_2}{x_3}$ \cite{Homography2009}. This is called the homogeneous representation of a point and it lies on the projective plane $P^2$. A homography is an invertible mapping of points and lines on the projective plane $P^2$. Hartley and Zisserman \cite{Hartley2004} provide the specific definition that a homography is a mapping from $P^2$ → $P^2$ which is a projectivity if and only if there exists a non-singular $3\times3$ matrix $H$ such that for any point in $P^2$ represented by vector $\textbf{x}$ it is true that its mapped point equals $H\textbf{x}$. It should be noted that $H$ can be changed by multiplying by an arbitrary non-zero constant without altering the projective transformation. Thus $H$ is considered a homogeneous matrix and only has $8$ degrees of freedom even though it contains $9$ elements.
@@ -300,7 +300,7 @@ Since each point correspondence provides $2$ equations, $4$ correspondences are 
 
 % subsection homography_estimation (end)
 
-\subsection{Random Sample Consensus (RANSAC)} % (fold)
+\subsection{Random sample consensus (RANSAC)} % (fold)
 \label{sub:tracking_library_for_the_web:marker_less_tracking_algorithm:ransac}
 
 RANSAC (Random Sample Consensus) \cite{Hartley2004} is an iterative method to estimate parameters of a mathematical model from a set of observed data which contains outliers. It is a non-deterministic algorithm in the sense that it produces a reasonable result only with a certain probability, with this probability increasing as more iterations are allowed. It is the most commonly used robust estimation method for homographies according to \cite{Homography2009}. The idea of the algorithm is pretty simple; for a number of iterations, a random sample of $4$ correspondences is selected and a homography $H$ is computed from those four correspondences. Each other correspondence is then classified as an inlier or outlier depending on its concurrence with $H$. After all of the iterations are done, the iteration that contained the largest number of inliers is selected. The matrix $H$ can then be recomputed from all of the correspondences that were considered as inliers in that iteration \cite{Homography2009}.
@@ -313,7 +313,7 @@ Another issue is to decide how many iterations to run the algorithm, it is not r
 
 % section marker_less_tracking_algorithm (end)
 
-\section{Rapid Object Detection (Viola Jones)} % (fold)
+\section{Rapid object detection (Viola Jones)} % (fold)
 \label{sec:tracking_library_for_the_web:rapid_object_detection}
 
 \subsection{Contextualization} % (fold)
@@ -354,7 +354,7 @@ For more information about the JavaScript implementation, such as evaluation and
 
 % section rapid_object_detection (end)
 
-\section{Color Tracking Algorithm} % (fold)
+\section{Color tracking algorithm} % (fold)
 \label{sec:tracking_library_for_the_web:color_tracking_algorithm}
 
 \subsection{Contextualization} % (fold)
@@ -368,7 +368,7 @@ Colour perception is a difficult and little understood problem, which seems to d
 
 % subsection contextualization (end)
 
-\subsection{Color Difference Evaluation} % (fold)
+\subsection{Color difference evaluation} % (fold)
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_difference_evaluation}
 
 When a true color (photographic) image is mapped to a reduced palette, every true-color pixel must be mapped to the palette entry that comes closest to original color.
@@ -420,12 +420,12 @@ To determine if the pixel represents a possible color it should be inside the tr
 
 % subsection color_difference_evaluation (end)
 
-\subsection{Color Blob Detection} % (fold)
+\subsection{Color blob detection} % (fold)
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection}
 
 Once all pixels of the tracked color are collected two steps are still required: (1) Detect outliers; and (3) Find the coordinates that represent the color blob.
 
-\subsubsection{Detecting Outliers}
+\subsubsection{Detecting outliers}
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection:detecting_outliers}
 
 Outliers pixels are determined if they are not close enough to other pixels with the same characteristics. For each pixel $p=(x,y)$, the mean distance with the other found pixels is calculated as follows:
@@ -436,7 +436,7 @@ If the $meanDistance$ is greater than a $blobThreshold=30$ the tested pixel is c
 
 % subsubsection detecting_outliers (end)
 
-\subsubsection{Finding Color Blob Coordinates}
+\subsubsection{Finding color blob coordinates}
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection:finding_color_blobs_coordinates}
 
 After the color blob is detected, the found pixels are close enough to represent a color blob. To determine the blob central coordinates $C_b=(x_b,y_b)$, the value for each axis is determined based on the average of each pixel axis value $p_n=(x_n,y_n)$, \ie\ the values of $x_b$ and $y_b$ are calculated as follows:

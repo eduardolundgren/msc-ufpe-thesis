@@ -10,21 +10,21 @@ Vision has the potential to yield non-invasive, accurate and low-cost solutions 
 
 % section motivation (end)
 
-\section{Problem Definition} % (fold)
+\section{Problem definition} % (fold)
 \label{sec:introduction:problem_definition}
 
-The majority of interpreted languages have limited computational power when compared to compiled languages, such as C. The source language of the library is JavaScript \cite{International2009} that is the language interpreted by all modern browsers. The computational complexity involved in visual tracking requires highly optimized implementations. Some optimizations are discussed and implemented on this work in order to achieve good results when compared with similar implementations in compiled languages. A series of evaluation tests were made, to determine how effective these techniques were on the web.
+The majority of interpreted languages have limited computational power when compared to compiled languages, such as C. The computational complexity involved in visual tracking requires highly optimized implementations. JavaScript \cite{International2009}  is a language interpreted by all modern browsers. Capturing the user media and processing the captured information are required steps for visual tracking techniques and, on the web, usually require third-party plugins to be performed. Providing a tool for visual tracking without requiring third-party plugins installation is a challenge, it involves usage of new specifications and APIs available on modern browsers and several cross-browser testing, since each browser vendor could have API differences.
 
 % section problem_definition (end)
 
 \section{Objectives} % (fold)
 \label{sec:introduction:objectives}
 
-In this dissertation, it was designed and implemented a tracking library for the web called \textit{tracking.js}. This work aims to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. Thus, the techniques implemented in this work were chosen aiming to cover common use-cases, such as: facilitate user interaction with the computer trough color tracking; tracking complex objects in a scene trough markerless tracking; and track humans body parts, \eg\ faces and eyes, trough rapid object detection. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. The possibility to use \textit{tracking.js} as a cross-platform library is a reality. The browser environment is evolving fast and due to the cross-platform ability, JavaScript \cite{International2009} is becoming a popular solution for multiple devices and platforms. In a near future, other devices and visual displays could, potentially, have embedded browser versions as well and they could all benefit from \textit{tracking.js} library.
+In this dissertation, it was designed and implemented a tracking library for the web called \textit{tracking.js}. This work aims to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products. Thus, the techniques implemented in this work were chosen aiming to cover common use-cases, such as: facilitate user interaction with the computer trough color tracking; tracking complex objects in a scene trough markerless tracking; and track humans body parts, \eg\ faces and eyes, trough rapid object detection. It runs on native web browsers without requiring third-party plugins installation, therefore any browser ready device can eventually use the proposed cross-platform code base to develop AR applications. The possibility to use \textit{tracking.js} as a cross-platform library is a reality. The browser environment is evolving fast and due to the cross-platform ability, JavaScript \cite{International2009} is becoming a popular solution for multiple devices and platforms. In a near future, other devices and visual displays could, potentially, have embedded browser versions as well and they could all benefit from \textit{tracking.js} library. Some optimizations are discussed and implemented on this work in order to achieve good results when compared with similar implementations in compiled languages. A series of evaluation tests were made, to determine how effective these techniques were on the web.
 
 % section objectives (end)
 
-\section{Dissertation Structure} % (fold)
+\section{Dissertation structure} % (fold)
 \label{sec:introduction:dissertation_structure}
 
 This dissertation is formed by five chapers that could be divided as: Introduction, Basic Concepts, Tracking Library for the Web (tracking.js), Evaluation and Conclusion. More details of each chapter is presented below.
