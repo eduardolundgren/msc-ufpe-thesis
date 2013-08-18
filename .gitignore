@@ -5,10 +5,12 @@
 *.fls
 *.lof
 *.log
+*.lol
 *.lot
+*.nav
 *.out
+*.snm
+*.sty
 *.synctex.gz
 *.toc
-*.lol
-*.nav
-*.snm
+*.vrb
