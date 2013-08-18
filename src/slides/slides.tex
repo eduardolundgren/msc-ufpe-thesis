@@ -561,8 +561,66 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 \begin{frame}{Rapid object detection (Viola Jones)}
   \begin{itemize}
-    \item TODO
+    \item Robust and extremely rapid object detection
+    \item Became popular mainly because rapid face detection
+    \item A training phase is required
+    \item A scanning detector is what makes the detection
   \end{itemize}
+\end{frame}
+\begin{frame}{Rapid object detection (Viola Jones)}
+  \begin{block}{Features}
+      Images are classified based on the value of simple features reminiscent of Haar basis functions
+  \end{block}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=100pt]{viola.png}
+    \caption{Example rectangle features shown relative to the enclosing detection window}
+    \label{figure:viola}
+  \end{figure}
+\end{frame}
+\begin{frame}{Rapid object detection (Viola Jones)}
+  \begin{itemize}
+    \item Three kinds of features are used
+    \item Two-rectangle feature is the difference between the sum of the pixels within two rectangular regions
+    \item Three-rectangle feature computes the sum within two outside rectangles subtracted from the sum in a center rectangle
+    \item Four-rectangle feature computes the difference between diagonal pairs of rectangles
+  \end{itemize}
+\end{frame}
+\begin{frame}{Rapid object detection (Viola Jones)}
+  \begin{block}{Integral Image}
+      Rectangle features can be computed very rapidly using an intermediate representation for the image which we call the integral image
+  \end{block}
+  The integral image at location $x, y$ contains the sum of the pixels above and to the left of $x, y$, inclusive
+  $$ii(x,y)=\sum_{x'\leq x,y'\leq y}{i(x',y')}$$
+\end{frame}
+\begin{frame}{Rapid object detection (Viola Jones)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=100pt]{integral_image.pdf}
+    \caption{The sum of the pixels within rectangle $D$ can be computed with four array references. The value of the integral image at location $1$ is the sum of the pixels in rectangle $A$. The value at location $2$ is $A + B$, at location $3$ is $A + C$ and at location $4$ is $A + B + C + D$}
+    \label{figure:integral_image}
+  \end{figure}
+\end{frame}
+\begin{frame}{Rapid object detection (Viola Jones)}
+  \begin{block}{Scanning detector algorithm}
+      \begin{enumerate}
+        \item Create or scale a $20\times20$ squared block by $1.25$ per iteration
+        \item Loop the block by $\Delta$ pixels over the image
+        \item For each block location, loop the tree and evaluate each stage
+        \item Positive stage evaluate next stage, otherwise stops the loop
+        \item If all stages were positive store the rectangle
+        \item Once the tree is done, group the overlapping rectangles
+        \item Find the best rectangle of each the group (merging phase)
+      \end{enumerate}
+  \end{block}
+\end{frame}
+\begin{frame}{Rapid object detection (Viola Jones)}
+  \begin{block}{Optimized merging phase}
+      Rectangles are used partitioned into a disjoint set data structure that was replaced by an alternative that is called Minimum Neighbor Area Grouping
+  \end{block}
+  \begin{block}{Minimum Neighbor Area Grouping}
+      Simple loop trough the possible rectangles comparing the current rectangle with all other not yet compared. If their area overlaps by $\eta=0.5$ the smallest rectangle of the set is selected
+  \end{block}
 \end{frame}
 % \begin{frame}{Color tracking algorithm}
 %   \begin{itemize}
