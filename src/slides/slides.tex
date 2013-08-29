@@ -1187,28 +1187,244 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{figure}
 \end{frame}
 
-% \subsection{Markerless tracking algorithm}
-% \begin{frame}{Contextualization}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
-% \begin{frame}{Results}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
-% \begin{frame}{Oclusion robustness}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
+\subsection{Markerless tracking algorithm}
+
+\begin{frame}{Examples}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=140pt]{../chapters/evaluation/keypoints_fast_brief.png}
+    \caption{Library implementation of markerless tracking technique.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Performance}
+  \begin{figure}[!htb]
+    \centering
+      \begin{tikzpicture}[scale = 0.6]
+      \begin{axis}[
+          enlarge x limits=0.03,
+          minor tick num=1,
+          xlabel=Time (seconds),
+          ylabel=Frames]
+
+          \addplot[wblue,mark=x] coordinates {
+          (0,25)
+          (5,5)
+          (10,4)
+          (15,4)
+          (20,4)
+          (25,5)
+          (30,4)
+          (35,5)
+          (40,4)
+          (45,5)
+          (50,4)
+          (55,4)
+          (60,4)
+          (65,4)
+          (70,5)
+          (75,5)
+          (80,5)
+          (85,5)
+          (90,4)
+          (95,5)
+          (100,4)
+          (105,5)
+          (110,4)
+          (115,4)
+          (120,5)
+          (125,4)
+          (130,4)
+          (135,4)
+          (140,5)
+          (145,5)
+          (150,4)
+          (155,5)
+          (160,4)
+          (165,5)
+          (170,4)
+          (175,5)
+          (180,4)
+          (185,5)
+          (190,5)
+          (195,4)
+          (200,4)
+          (205,5)
+          (210,5)
+          (215,4)
+          (220,5)
+          (225,5)
+          (230,5)
+          (235,4)
+          (240,5)
+          (245,4)
+          (250,4)
+          (255,4)
+          (260,5)
+          (265,5)
+          (270,5)
+          (275,5)
+          (280,5)
+          (285,4)
+          (290,4)
+          (295,5)
+          (300,4)
+          (305,4)
+          (310,4)
+          (315,4)
+          (320,4)
+          (325,4)
+          (330,5)
+          (335,4)
+          (340,4)
+          (345,5)
+          (350,5)
+          (355,5)
+          (360,4)
+          (365,4)
+          (370,5)
+          (375,4)
+          (380,5)
+          (385,4)
+          (390,4)
+          (395,4)
+          (400,4)
+          (405,5)
+          (410,4)
+          (415,5)
+          (420,5)
+          (425,5)
+          (430,4)
+          (435,5)
+          (440,5)
+          (445,4)
+          (450,4)
+          (455,5)
+          (460,5)
+          (465,4)
+          (470,5)
+          (475,5)
+          (480,4)
+          (485,4)
+          (490,5)
+          (495,4)
+          (500,5)
+          (505,4)
+          (510,4)
+          (515,5)
+          (520,4)
+          (525,4)
+          (530,5)
+          (535,4)
+          (540,5)
+          (545,5)
+          (550,5)
+          (555,4)
+          (560,4)
+          (565,4)
+          (570,5)
+          (575,5)
+          (580,4)
+          (585,5)
+          (590,5)
+          (595,5)
+          (600,4)
+          (605,5)
+          (610,4)
+          (615,4)
+          (620,4)
+          (625,5)
+          (630,5)
+          (635,5)
+          (640,4)
+          (645,4)
+          (650,4)
+          (655,4)
+          (660,5)
+          (665,4)
+          (670,5)
+          (675,5)
+          (680,4)
+          (685,4)
+          (690,4)
+          (695,4)
+          (700,5)
+          (705,4)
+          (710,4)
+          (715,5)
+          (720,4)
+          (725,5)
+          (730,4)
+          (735,5)
+          (740,5)
+          (745,5)
+          (750,5)
+          (755,5)
+          (760,5)
+          (765,5)
+          (770,5)
+          (775,5)
+          (780,5)
+          (785,4)
+          (790,4)
+          (795,5)
+          (800,5)
+          (805,5)
+          (810,5)
+          (815,4)
+          (820,5)
+          (825,4)
+          (830,4)
+          (835,4)
+          (840,4)
+          (845,4)
+          (850,5)
+          (855,4)
+          (860,4)
+          (865,4)
+          (870,5)
+          (875,4)
+          (880,5)
+          (885,4)
+          (890,5)
+          (895,4)
+          (900,5)
+          (905,5)
+          (910,4)
+          (915,5)
+          (920,5)
+          (925,4)
+          (930,4)
+          (935,5)
+          (940,5)
+          (945,4)
+          (950,4)
+          (955,5)
+          (960,4)
+          (965,5)
+          (970,4)
+          (975,5)
+          (980,4)
+          (985,4)
+          (990,4)
+          (995,4)
+          (1000,4)
+           };
+
+           \draw [red] ({rel axis cs:0,0}|-{axis cs:15,25}) -- ({rel axis cs:1,0}|-{axis cs:15,25}) node [pos=0.0, above] {};
+      \end{axis}
+      \end{tikzpicture}
+     \caption{Library implementation of markerless tracking FPS metric. Maximum rate using this technique on the web is 6 FPS.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Oclusion robustness}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{../chapters/evaluation/keypoints_occlusion.png}
+    \caption{Library implementation of markerless tracking technique partial occlusion robustness.}
+  \end{figure}
+\end{frame}
 % % -----------------------------------------------------------------------------
 % \section{Conclusions}
 
