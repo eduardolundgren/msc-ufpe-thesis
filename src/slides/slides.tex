@@ -814,16 +814,28 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \section{Evaluation}
 
 \begin{frame}{Evaluation methodology}
-  \begin{block}{1. Performance}
+  \begin{block}{1. Examples}
+  Technique examples.
+  \end{block}
+
+  \begin{block}{2. Performance}
   Frames per second (FPS) metric.
   \end{block}
 
-  \begin{block}{2. Partial occlusion robustness}
+  \begin{block}{3. Partial occlusion robustness}
   Examples of how the visual tracking techniques behaves under partial occlusion.
   \end{block}
 \end{frame}
 
 \subsection{Color tracking algorithm}
+
+\begin{frame}{Examples}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{../chapters/evaluation/color_object.png}
+    \caption{Library implementation of color tracking for different objects: On the left a red pencil marker; on the center a Rubik's magic cube from the red face; and on the right a red Ball of Whacks.}
+  \end{figure}
+\end{frame}
 
 \begin{frame}{Performance}
   \begin{figure}[!htb]
@@ -1143,6 +1155,22 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 
 \subsection{Rapid object detection (Viola Jones)}
+
+\begin{frame}{Examples}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{../chapters/evaluation/viola_overview.png}
+    \caption{Library implementation of Viola Jones using different training datas for detecting faces, eyes and mouth.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Examples}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{../chapters/evaluation/viola.png}
+    \caption{Library implementation of Viola Jones detecting multiple faces inside the real-time limit of 25 FPS.}
+  \end{figure}
+\end{frame}
 
 \begin{frame}{Performance}
   \begin{figure}[!htb]
