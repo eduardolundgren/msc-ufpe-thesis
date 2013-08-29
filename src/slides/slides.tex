@@ -662,11 +662,11 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 
 \begin{frame}{Rapid object detection (Viola Jones)}
-  \begin{block}{Optimized merging phase}
+  \begin{block}{1. Optimization: merging phase}
       Rectangles are used partitioned into a disjoint set data structure. On this work it was replaced by an alternative called Minimum Neighbor Area Grouping.
   \end{block}
-  \begin{block}{Minimum Neighbor Area Grouping}
-      Simple loop trough the possible rectangles comparing the current rectangle with all other not yet compared. If their area overlaps by $\eta=0.5$ the smallest rectangle of the set is selected.
+  \begin{block}{2. Optimization: training data}
+      OpenCV uses XML to store training data. This work proposes the usage of row-major order typed arrays.
   \end{block}
 \end{frame}
 
