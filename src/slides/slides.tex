@@ -1142,28 +1142,50 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{figure}
 \end{frame}
 
-% \subsection{Rapid object detection (Viola Jones)}
-% \begin{frame}{Contextualization}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
-% \begin{frame}{Results}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
-% \begin{frame}{Oclusion robustness}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
+\subsection{Rapid object detection (Viola Jones)}
+
+\begin{frame}{Performance}
+  \begin{figure}[!htb]
+    \centering
+      \begin{tikzpicture}[scale = 0.6]
+      \begin{axis}[
+          enlarge x limits=0.03,
+          minor tick num=1,
+          xlabel=Number of detected faces,
+          ylabel=Frames per second (FPS)]
+
+          \addplot[wblue,mark=x] coordinates {
+               (1,30)
+               (2,29)
+               (3,30)
+               (4,27)
+               (5,25)
+               (6,20)
+               (7,17)
+               (8,16)
+               (9,16)
+               (10,15)
+               (11,15)
+               (12,13)
+               (13,11)
+               (14,9)
+               (15,8)
+           };
+
+           \draw [red] ({rel axis cs:0,0}|-{axis cs:15,25}) -- ({rel axis cs:1,0}|-{axis cs:15,25}) node [pos=0.0, above] {};
+      \end{axis}
+      \end{tikzpicture}
+     \caption{Library implementation of Viola Jones tested with different numbers of detected faces.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Oclusion robustness}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{../chapters/evaluation/viola_occlusion.png}
+    \caption{Library implementation of Viola Jones partial occlusion robustness.}
+  \end{figure}
+\end{frame}
 
 % \subsection{Markerless tracking algorithm}
 % \begin{frame}{Contextualization}
