@@ -748,6 +748,15 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{figure}
 \end{frame}
 
+\begin{frame}{Feature extractor (BRIEF)}
+  \begin{block}{1. Optimization: avoid smoothing kernels}
+      By pre-smoothing the patch, increases the stability and repeatability of the descriptors, but decreases performance.
+  \end{block}
+  \begin{block}{2. Optimization: avoid Gaussian distribution}
+      Computing the Gaussian distribution can be time consuming. Simply replaced by a uniform version of JavaScript Math.random().
+  \end{block}
+\end{frame}
+
 \begin{frame}{Homography estimation}
   \begin{figure}[!htb]
     \centering
