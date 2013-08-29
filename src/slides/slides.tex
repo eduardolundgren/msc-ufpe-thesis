@@ -95,7 +95,7 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \only#2{\begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv}%
 }
 \def\bt@HL@endenv{%
-  \end{btHighlight}%   
+  \end{btHighlight}%
   \egroup
 }
 \newcommand{\bt@HL@box}[2][]{%
@@ -130,36 +130,31 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 \begin{frame}{Problem definition}
   \begin{itemize}
-    \item Modern web browsers can natively capture the user media
+    \item Visual tracking requires video capturing and processing
+    \item Video processing requires high computational complexity
     \item JavaScript is a language interpreted by all web browsers
     \item Interpreted languages have limited computational power
-    \item Capturing and processing user media are required steps for visual tracking
   \end{itemize}
 \end{frame}
 \begin{frame}{Objectives}
   \begin{itemize}
     \item Facilitate user interaction with the web browser
     \item Accelerate the use of visual tracking in commercial products
-    \item Provide a cross-platform tracking library
-    \item Design and implement a tracking library for the web
+    \item Implement a cross-platform tracking library for the web
   \end{itemize}
 \end{frame}
 % -----------------------------------------------------------------------------
 \section{Basic concepts}
 
 \subsection{Web}
-% \begin{frame}{World Wide Web}
-%   \begin{block}{}
-%       The World Wide Web is a shared information system operating on top of the Internet
-%   \end{block}
-% \end{frame}
-\begin{frame}{The beggining of the web}
+\begin{frame}{The beginning of the web}
   \begin{figure}[!htb]
     \centering
-    \includegraphics[width=180pt]{mosaic_browser.png}
+    \includegraphics[width=130pt]{mosaic_browser.png}
+    \caption{Mosaic is the web browser credited with popularizing the World Wide Web.}
   \end{figure}
 \end{frame}
-\begin{frame}{The beggining of the web}
+\begin{frame}{The beginning of the web}
   \begin{itemize}
     \item Plain text and images were the most advanced features
     \item In 1994, the World Wide Web Consortium (W3C) was founded
@@ -187,19 +182,11 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
     \includegraphics[width=270pt]{html5_css3_js.png}
   \end{figure}
 \end{frame}
-\begin{frame}{Browser technologies}
-  \begin{itemize}
-    \item Web pages are written using HyperText Markup Language
-    \item Web can be augmented with other technologies
-    \item Layout and style information uses Cascading Style Sheets
-    \item JavaScript is the main programming language
-  \end{itemize}
-\end{frame}
 \begin{frame}{Browser architecture}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=220pt]{safari.png}
-    \caption{Web browsers running on different devices}
+    \caption{Web browsers running on different devices.}
     \label{figure:web_browsers}
   \end{figure}
 \end{frame}
@@ -207,116 +194,142 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=220pt]{../chapters/basic_concepts/web_architecture.pdf}
-    \caption{Reference architecture for web browsers}
+    \caption{Reference architecture for web browsers.}
     \label{figure:web_architecture}
   \end{figure}
 \end{frame}
-\begin{frame}{Video capturing and processing workflow}
+
+\subsection{Visual tracking}
+\begin{frame}{Visual tracking}
+  \begin{block}{}
+      Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving.
+  \end{block}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{../chapters/basic_concepts/tracking_occlusion.png}
+    \caption{Example of an accurate object tracking robust to occlusion.}
+    \label{figure:tracking_occlusion}
+  \end{figure}
+\end{frame}
+\begin{frame}{Visual tracking}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=200pt]{../chapters/basic_concepts/cv_applications.png}
+    \caption{Computer vision applications: motion-based recognition (top left); automated surveillance (top center); video indexing (top right); human-computer interaction (bottom left); traffic monitoring (bottom center); vehicle navigation (bottom right).}
+    \label{figure:cv_applications}
+  \end{figure}
+\end{frame}
+
+\subsection{Visual tracking on the web}
+\begin{frame}{Visual tracking workflow on the web}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=270pt]{workflow_off.png}
   \end{figure}
 \end{frame}
-\begin{frame}{Audio and video}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=220pt]{../chapters/basic_concepts/html5_audio_video.png}
-    \caption{Video and audio HTML5 elements}
-    \label{figure:html5_audio_video}
-  \end{figure}
-\end{frame}
-\begin{frame}{Capturing audio and video}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=100pt]{webrtc.png}
-  \end{figure}
-\end{frame}
-\begin{frame}[fragile]{Capturing audio and video}
-  \begin{lstlisting}[
-                    language=C++,
-                    label={lst:get_user_media},
-                    caption=Capturing browser microphone and camera,
-                    moredelim={**[is][\btHL<1>]{@1}{@}},
-                    moredelim={**[is][{\btHL<2>}]{@2}{@}}
-                  ]
-
-  @1<video autoplay></video>@
-  <script>
-    var video = document.querySelector('video');
-    navigator.@2getUserMedia@({video: true, audio: true}, function(localMediaStream) {
-        video.src = window.URL.createObjectURL(localMediaStream);
-        video.onloadedmetadata = function(e) { alert('Ready to go.') };
-    }, onFail);
-  </script>
-  \end{lstlisting}
-\end{frame}
-\begin{frame}{Capturing audio and video}
+\begin{frame}{1. Request user web-cam access}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=270pt]{webrtc_confirmation.png}
   \end{figure}
 \end{frame}
-\begin{frame}{Capturing audio and video}
+\begin{frame}{1. Request user web-cam access}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=270pt]{workflow_1.png}
   \end{figure}
 \end{frame}
-\begin{frame}{Capturing audio and video}
+\begin{frame}{2. Capture web-cam stream}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=100pt]{webrtc.png}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{2. Capture web-cam stream}
+  \begin{lstlisting}[
+                    language=C++,
+                    label={lst:get_user_media1},
+                    moredelim={**[is][\btHL<1>]{@1}{@}},
+                    moredelim={**[is][{\btHL<2>}]{@2}{@}}
+                  ]
+
+  <script>
+    navigator.@1getUserMedia@({ video: true }, function(localMediaStream) {
+      // Stream captured
+    }, onFail);
+  </script>
+  \end{lstlisting}
+\end{frame}
+\begin{frame}{2. Capture web-cam stream}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=270pt]{workflow_2.png}
   \end{figure}
 \end{frame}
-\begin{frame}{Capturing audio and video}
+\begin{frame}{3. Reproduce web-cam stream into the video}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=220pt]{../chapters/basic_concepts/html5_audio_video.png}
+    \caption{Video and audio HTML5 elements.}
+    \label{figure:html5_audio_video}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{3. Reproduce web-cam stream into the video}
+  \begin{lstlisting}[
+                    language=C++,
+                    label={lst:get_user_media2},
+                    moredelim={**[is][\btHL<1>]{@1}{@}},
+                    moredelim={**[is][{\btHL<2>}]{@2}{@}},
+                    moredelim={**[is][{\btHL<3>}]{@3}{@}}
+                  ]
+
+  @1<video autoplay></video>@
+  <script>
+    var video = document.querySelector('video');
+    navigator.@2getUserMedia@({video: true}, function(localMediaStream) {
+        @3video.src = window.URL.createObjectURL(localMediaStream);@
+        video.onloadedmetadata = function(e) { alert('Ready to go.') };
+    }, onFail);
+  </script>
+  \end{lstlisting}
+\end{frame}
+\begin{frame}{3. Reproduce web-cam stream into the video}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=270pt]{workflow_3.png}
   \end{figure}
 \end{frame}
-\begin{frame}{Capturing audio and video}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=270pt]{workflow_4.png}
-  \end{figure}
-\end{frame}
-\begin{frame}{Canvas element}
+\begin{frame}{4. Process video data using canvas}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=130pt]{../chapters/basic_concepts/canvas_axis.pdf}
-    \caption{The canvas element}
+    \caption{The canvas element.}
     \label{figure:canvas_axis}
   \end{figure}
 \end{frame}
-\begin{frame}{Canvas element}
+\begin{frame}{4. Process video data using canvas}
   \begin{itemize}
     \item Introduced as a new element on HTML5
     \item Resolution-dependent bitmap canvas
     \item Two-dimensional grid, computer graphics coordinate system
-    \item Can render graphs, game graphics, art, or other visual images
+    \item Can render images, video frames or shapes
   \end{itemize}
 \end{frame}
-\begin{frame}{JavaScript typed arrays}
+\begin{frame}{4. Process video data using canvas}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=270pt]{workflow_4.png}
   \end{figure}
 \end{frame}
-\begin{frame}{JavaScript typed arrays}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=270pt]{workflow_5.png}
-  \end{figure}
-\end{frame}
-\begin{frame}{JavaScript typed arrays}
+\begin{frame}{5. Access canvas data using JavaScript typed arrays}
   \begin{itemize}
     \item In the past, raw data was accessed as a string
-    \item Browsers need to quickly manipulate raw binary data
+    \item Browsers needed a quick way to manipulate raw binary data
     \item Typed data structures were added to JavaScript
     \item JavaScript-typed arrays access raw binary more efficiently
   \end{itemize}
 \end{frame}
-\begin{frame}{JavaScript typed arrays}
+\begin{frame}{5. Access canvas data using JavaScript typed arrays}
   \begin{figure}[!htb]
     \begin{tikzpicture}[scale=0.8]
         \begin{axis}[
@@ -359,8 +372,14 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
             \legend{Array,Float32Array,Uint8Array}
         \end{axis}
     \end{tikzpicture}
-    \caption{Regular \textit{vs} typed arrays performance benchmark}
+    \caption{Regular \textit{vs} typed arrays performance benchmark.}
     \label{figure:typed_arrays_performance}
+  \end{figure}
+\end{frame}
+\begin{frame}{5. Access canvas data using JavaScript typed arrays}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_5.png}
   \end{figure}
 \end{frame}
 \begin{frame}{What is the relation between typed arrays and canvas?}
@@ -380,55 +399,16 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{../chapters/basic_concepts/imagedata_array.pdf}
-    \caption{The canvas image data array of pixels}
+    \caption{The canvas image data array of pixels.}
     \label{figure:imagedata_array}
   \end{figure}
 \end{frame}
-\begin{frame}{Video capturing and processing workflow}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=270pt]{workflow_5.png}
-  \end{figure}
-\end{frame}
-\begin{frame}{Video capturing and processing workflow}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=240pt]{../chapters/basic_concepts/get_user_media.pdf}
-    \caption{Access flow of raw binary data captured from videos}
-    \label{figure:get_user_media}
-  \end{figure}
-\end{frame}
-\subsection{Visual tracking}
-\begin{frame}{Visual tracking}
-  \begin{block}{}
-      Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving.
-  \end{block}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\linewidth]{../chapters/basic_concepts/tracking_occlusion.png}
-    \caption{Example of an accurate object tracking robust to occlusion}
-    \label{figure:tracking_occlusion}
-  \end{figure}
-\end{frame}
-\begin{frame}{Visual tracking}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=200pt]{../chapters/basic_concepts/cv_applications.png}
-    \caption{Computer vision applications: motion-based recognition (top left); automated surveillance (top center); video indexing (top right); human-computer interaction (bottom left); traffic monitoring (bottom center); vehicle navigation (bottom right).}
-    \label{figure:cv_applications}
-  \end{figure}
-\end{frame}
-% \begin{frame}{Which devices could use tracking.js?}
-%   \begin{block}{}
-%       Different devices such as mobile phones, notebooks, and even head-worn (Google Project Glass), provide an embedded web browser capable to run JavaScript and HTML5.
-%   \end{block}
-% \end{frame}
 % % -----------------------------------------------------------------------------
 \section{Tracking library for the web}
 \begin{frame}{tracking.js}
   \begin{figure}[!htb]
     \centering
-    \includegraphics[width=210pt]{site.png}
+    \includegraphics[width=180pt]{site.png}
   \end{figure}
 \end{frame}
 \begin{frame}{tracking.js}
@@ -444,7 +424,7 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=130pt]{../chapters/tracking_library_for_the_web/flartoolkit.png}
-    \caption{Marker based AR for the web using FLARToolKit}
+    \caption{Marker based AR for the web using FLARToolKit.}
     \label{figure:flartoolkit}
   \end{figure}
 \end{frame}
@@ -455,7 +435,7 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=130pt]{../chapters/tracking_library_for_the_web/jsartoolkit.png}
-    \caption{Marker-based AR for the web using JSARToolKit}
+    \caption{Marker-based AR for the web using JSARToolKit.}
     \label{figure:jsartoolkit}
   \end{figure}
 \end{frame}
@@ -466,7 +446,7 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=130pt]{../chapters/tracking_library_for_the_web/unifeyeviewer.png}
-    \caption{Markerless example of image projected over a magazine cover}
+    \caption{Markerless example of image projected over a magazine cover.}
     \label{figure:unifeyeviewer}
   \end{figure}
 \end{frame}
@@ -474,17 +454,35 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=220pt]{trend.png}
-    \caption{Google trends results for ``flash games'' (top) and for ``html5 games'' (bottom)}
+    \caption{Google trends results for ``flash games'' on the top, and for ``html5 games'' on the bottom.}
     \label{figure:trend}
   \end{figure}
 \end{frame}
 \begin{frame}{Library features}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=190pt]{preview.png}
-  \end{figure}
+  \begin{block}{1. Color tracking}
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=120pt]{../chapters/evaluation/color_object_3.png}
+    \end{figure}
+  \end{block}
 \end{frame}
-\begin{frame}{Library modules}
+\begin{frame}{Library features}
+  \begin{block}{2. Rapid object detection (Viola Jones)}
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=120pt]{../chapters/evaluation/viola_face.png}
+    \end{figure}
+  \end{block}
+\end{frame}
+\begin{frame}{Library features}
+  \begin{block}{3. Markerless tracking algorithm}
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[width=200pt]{../chapters/evaluation/keypoints_brief.png}
+    \end{figure}
+  \end{block}
+\end{frame}
+\begin{frame}{Library modules - Base classes}
   \begin{figure}[!htb]
       \tikzumlset{font=\tiny}
       \begin{tikzpicture}
@@ -505,11 +503,10 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
           \umlinherit[geometry=-|]{Video}{DOMElement}
           \umlinherit[geometry=|-]{VideoCamera}{Video}
       \end{tikzpicture}
-      \caption{Base classes of tracking.js library}
       \label{figure:base_classes}
   \end{figure}
 \end{frame}
-\begin{frame}{Library modules}
+\begin{frame}{Library modules - Visual tracking classes}
   \begin{figure}[!htb]
       \tikzumlset{font=\tiny}
       \begin{tikzpicture}
@@ -542,101 +539,61 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 
           \umlinherit[geometry=-|]{Homography}{RANSAC}
       \end{tikzpicture}
-      \caption{Visual tracking classes of tracking.js library}
       \label{figure:visual_tracking_classes}
   \end{figure}
 \end{frame}
-\begin{frame}{Feature detector (FAST)}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=290pt]{../chapters/tracking_library_for_the_web/keypoints.png}
-  \end{figure}
-\end{frame}
-\begin{frame}{Feature detector (FAST)}
-  \begin{itemize}
-    \item Detects individual features across images
-    \item Robustness against partial occlusions or matching errors
-    \item Used as the first step of many vision tasks such as tracking
-    \item Features from Accelerated Segment Test (FAST)
-  \end{itemize}
-\end{frame}
-\begin{frame}{Feature detector (FAST)}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=220pt]{../chapters/tracking_library_for_the_web/fast.png}
-    \caption{Point segment test corner detection in an image patch}
-    \label{figure:fast}
-  \end{figure}
-\end{frame}
-\begin{frame}{Feature extractor (BRIEF)}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=290pt]{../chapters/evaluation/keypoints_building.png}
-  \end{figure}
-\end{frame}
-\begin{frame}{Feature extractor (BRIEF)}
-  \begin{itemize}
-    \item To estimate motion, match sets of features is required
-    \item Use binary strings to describe the keypoints
-    \item Fast to compute, to match and is memory efficient
-    \item Binary Robust Independent Elementary Features (BRIEF)
-  \end{itemize}
-\end{frame}
-\begin{frame}{Feature extractor (BRIEF)}
-  On BRIEF to generate the binary strings it is defined the test $\tau$ on patch \textbf{p} of size \textbf{S $\times$ S} as:
 
-  $$\tau(\textbf{p}; x, y) :=
-  \begin{cases}
-    1 &\mbox{if}\quad \textbf{p(x)} < \textbf{p(y)},\\
-    0 &\mbox{otherwise}
-  \end{cases}$$
-\end{frame}
-\begin{frame}{Feature extractor (BRIEF)}
-  The $n_{d}$-dimensional bit-string is our BRIEF descriptor for each keypoint:
-
-  $$f_{n_{d}}(\textbf{p}) := \sum_{1 \le i \le n_{d}} 2^{i-1} \tau(\textbf{p}; x, y).$$
-
-  In this work, $n_{d}= 128$ was used, since it presented good matching results and performance. The number of bytes required to store the descriptor can be calculated by $k = n_{d}/8$.
-\end{frame}
-\begin{frame}{Feature extractor (BRIEF)}
+\begin{frame}{Color tracking algorithm}
   \begin{figure}[!htb]
     \centering
-    \includegraphics[width=220pt]{../chapters/tracking_library_for_the_web/BRIEF.pdf}
-    \caption{BRIEF feature extractor}
-    \label{figure:BRIEF}
+    \includegraphics[width=170pt]{color_blob.png}
+    \caption{\copyright\ \url{http://www.flickr.com/photos/laynecom/8674644879/}}
   \end{figure}
 \end{frame}
-\begin{frame}{Feature extractor (BRIEF)}
-  The weighted Hamming distance is computed by:
-  $$WHam(x, y)=\sum_{i=1}^{n}w_i(b_i(x)\otimes b_i(y))$$
-  $$b_1=0000000001...$$
-  $$b_2=0000000011...$$
-  $$b_1 \otimes b_2=0000000010...$$
-  $$WHam=1$$
-\end{frame}
-\begin{frame}{Feature extractor (BRIEF)}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=290pt]{../chapters/evaluation/keypoints_building.png}
-  \end{figure}
-\end{frame}
-\begin{frame}{Homography estimation}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=190pt]{homography.png}
-  \end{figure}
-\end{frame}
-\begin{frame}{Homography estimation}
-  Homography is a mapping from $P^2$ → $P^2$ which is a projectivity if and only if there exists a non-singular $3\times3$ matrix $H$ such that for any point in $P^2$ represented by vector $\textbf{x}$ it is true that its mapped point equals $H\textbf{x}$
+\begin{frame}{Color tracking algorithm - Color difference evaluation}
+  $$\|C_1-C_2\|=\sqrt{(C_{1,R}-C_{2,R})^2 + (C_{1,G}-C_{2,G})^2 + (C_{1,B}-C_{2,B})^2}$$
 
-  $$c\begin{pmatrix}u\\ v\\ 1\\\end{pmatrix} = H\begin{pmatrix}x\\ y\\ 1\\\end{pmatrix}, \;\; H=\begin{pmatrix}h1 & h2 & h3\\ h4 & h5 & h6\\ h7 & h8 & h9\\\end{pmatrix},$$
-  where $c$ is any non-zero constant, $(\; u \; v \; 1 \;)^T$ represents $\textbf{x'}$, $(\; x \; y \; 1 \;)^T$ represents $\textbf{x}$
+  \begin{figure}[!htb]
+    \centering
+    \begin{tikzpicture}[scale = 0.5]
+      \def \radi{3}
+      \def \x{3}
+      \def \y{3}
+      \def \z{3}
+
+      \begin{scope}
+       \begin{scope}[color=gray, thin]
+        \foreach \xi in {0,...,\radi}{ \draw (\xi,\radi,0) -- (\xi,0,0) -- (\xi,0,\radi); }%
+        \foreach \yi in {1,...,\radi}{ \draw (0,\yi,\radi) -- (0,\yi,0) -- (\radi,\yi,0); }%
+        \foreach \zi in {0,...,\radi}{ \draw (0,\radi,\zi) -- (0,0,\zi) -- (\radi,0,\zi); }%
+       \end{scope}
+
+       \draw[-latex, thick, color=black] (0,0,0) -- (4,0,0) node[anchor=west] {R};%
+       \draw[-latex, thick, color=black] (0,0,0) -- (0,4,0) node[anchor=east] {B};%
+       \draw[-latex, thick, color=black] (0,0,0) -- (0,0,4) node[anchor=east] {G};%
+
+       \draw[color=black, ultra thick]
+       (0,\y,\z) -- (\x,\y,\z) -- (\x,\y,0) (\x,\y,\z) -- (\x,0,\z);
+      \end{scope}
+
+      \draw (-1,0) arc (180:360:1cm and 0.5cm);
+      \draw[dashed] (-1,0) arc (180:0:1cm and 0.5cm);
+      \draw (0,1) arc (90:270:0.5cm and 1cm);
+      \draw[dashed] (0,1) arc (90:-90:0.5cm and 1cm);
+      \draw (0,0) circle (1cm);
+      \shade[ball color=gray,opacity=1] (0,0) circle (0.1cm);
+     \end{tikzpicture}
+     \caption{Color neighborhood represented in a RGB orthogonal three-dimensional color space.}
+     \label{figure:rgb_space}
+  \end{figure}
 \end{frame}
-\begin{frame}{Random sample consensus (RANSAC)}
-  \begin{block}{}
-      RANSAC (Random Sample Consensus) is an iterative method to estimate parameters of a mathematical model from a set of observed data which contains outliers. It is the most commonly used robust estimation method for homographies.
-  \end{block}
+\begin{frame}{Color tracking algorithm - Color blob detection}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=260pt]{../chapters/tracking_library_for_the_web/color_tracking.png}
+  \end{figure}
 \end{frame}
+
 \begin{frame}{Rapid object detection (Viola Jones)}
   \begin{figure}[!htb]
     \centering
@@ -655,7 +612,7 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=220pt]{features_viola.png}
-    \caption{Images are classified based on the value of rectangle features}
+    \caption{Images are classified based on the value of rectangle features.}
   \end{figure}
 \end{frame}
 \begin{frame}{Rapid object detection (Viola Jones)}
@@ -669,7 +626,7 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=100pt]{integral_image.pdf}
-    \caption{The sum of the pixels within rectangle $D$ can be computed with four array references. The value of the integral image at location $1$ is the sum of the pixels in rectangle $A$. The value at location $2$ is $A + B$, at location $3$ is $A + C$ and at location $4$ is $A + B + C + D$}
+    \caption{The sum of the pixels within rectangle $D$ can be computed with four array references. The value of the integral image at location $1$ is the sum of the pixels in rectangle $A$. The value at location $2$ is $A + B$, at location $3$ is $A + C$ and at location $4$ is $A + B + C + D$.}
     \label{figure:integral_image}
   \end{figure}
 \end{frame}
@@ -694,13 +651,82 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
       Simple loop trough the possible rectangles comparing the current rectangle with all other not yet compared. If their area overlaps by $\eta=0.5$ the smallest rectangle of the set is selected.
   \end{block}
 \end{frame}
-% \begin{frame}{Color tracking algorithm}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
+\begin{frame}{Feature detector (FAST)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=220pt]{../chapters/tracking_library_for_the_web/fast.png}
+    \caption{Point segment test corner detection in an image patch.}
+    \label{figure:fast}
+  \end{figure}
+\end{frame}
+\begin{frame}{Feature detector (FAST)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=290pt]{../chapters/tracking_library_for_the_web/keypoints.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Feature extractor (BRIEF)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=290pt]{../chapters/evaluation/keypoints_building.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Feature extractor (BRIEF)}
+  To generate the binary strings it is defined the test $\tau$ on patch \textbf{p} of size \textbf{S $\times$ S} as:
+
+  $$\tau(\textbf{p}; x, y) :=
+  \begin{cases}
+    1 &\mbox{if}\quad \textbf{p(x)} < \textbf{p(y)},\\
+    0 &\mbox{otherwise}
+  \end{cases}$$
+\end{frame}
+\begin{frame}{Feature extractor (BRIEF)}
+  The $n_{d}$-dimensional bit-string is our BRIEF descriptor for each keypoint:
+
+  $$f_{n_{d}}(\textbf{p}) := \sum_{1 \le i \le n_{d}} 2^{i-1} \tau(\textbf{p}; x, y).$$
+
+  In this work $n_{d}= 128$ was used. The number of bytes required to store the descriptor can be calculated by $k = n_{d}/8$.
+\end{frame}
+\begin{frame}{Feature extractor (BRIEF)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=220pt]{../chapters/tracking_library_for_the_web/BRIEF.pdf}
+    \caption{BRIEF feature extractor.}
+    \label{figure:BRIEF}
+  \end{figure}
+\end{frame}
+\begin{frame}{Feature extractor (BRIEF)}
+  The weighted Hamming distance is computed by:
+  $$WHam(x, y)=\sum_{i=1}^{n}w_i(b_i(x)\otimes b_i(y))$$
+  $$b_1=0000000001...$$
+  $$b_2=0000000011...$$
+  $$b_1 \otimes b_2=0000000010...$$
+  $$WHam=1$$
+\end{frame}
+\begin{frame}{Feature extractor (BRIEF)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=290pt]{../chapters/evaluation/keypoints_building.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Homography estimation}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=190pt]{homography.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Random sample consensus (RANSAC)}
+  \begin{block}{}
+      RANSAC (Random Sample Consensus) is an iterative method to estimate parameters of a mathematical model from a set of observed data which contains outliers. It is the most commonly used robust estimation method for homographies.
+  \end{block}
+\end{frame}
+\begin{frame}{Homography estimation}
+  Homography is a mapping from $P^2$ → $P^2$ which is a projectivity if and only if there exists a non-singular $3\times3$ matrix $H$ such that for any point in $P^2$ represented by vector $\textbf{x}$ it is true that its mapped point equals $H\textbf{x}$
+
+  $$c\begin{pmatrix}u\\ v\\ 1\\\end{pmatrix} = H\begin{pmatrix}x\\ y\\ 1\\\end{pmatrix}, \;\; H=\begin{pmatrix}h1 & h2 & h3\\ h4 & h5 & h6\\ h7 & h8 & h9\\\end{pmatrix},$$
+  where $c$ is any non-zero constant, $(\; u \; v \; 1 \;)^T$ represents $\textbf{x'}$, $(\; x \; y \; 1 \;)^T$ represents $\textbf{x}$
+\end{frame}
+
 % % -----------------------------------------------------------------------------
 % \section{Evaluation}
 
