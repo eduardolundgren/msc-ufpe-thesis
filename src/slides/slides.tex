@@ -86,6 +86,27 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 }
 \beamerdefaultoverlayspecification{<+->}
 
+\makeatletter
+\newenvironment<>{btHighlight}[1][]
+{\begin{onlyenv}#2\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
+{\end{lrbox}\bt@HL@box[bt@Highlight@par]{\@tempboxa}\endgroup\end{onlyenv}}
+
+\newcommand<>\btHL[1][]{%
+  \only#2{\begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv}%
+}
+\def\bt@HL@endenv{%
+  \end{btHighlight}%   
+  \egroup
+}
+\newcommand{\bt@HL@box}[2][]{%
+  \tikz[#1]{%
+    \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
+    \pgfusepath{use as bounding box}%
+    \node[anchor=base west, fill=orange!30,outer sep=0pt,inner xsep=1pt, inner ysep=0pt, rounded corners=3pt, minimum height=\ht\strutbox+1pt,#1]{\raisebox{1pt}{\strut}\strut\usebox{#2}};
+  }%
+}
+\makeatother
+
 % -----------------------------------------------------------------------------
 \begin{document}
 % -----------------------------------------------------------------------------
@@ -109,9 +130,9 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 \begin{frame}{Problem definition}
   \begin{itemize}
+    \item Modern web browsers can natively capture the user media
     \item JavaScript is a language interpreted by all web browsers
     \item Interpreted languages have limited computational power
-    \item Modern web browsers can natively capture the user media
     \item Capturing and processing user media are required steps for visual tracking
   \end{itemize}
 \end{frame}
@@ -127,10 +148,16 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \section{Basic concepts}
 
 \subsection{Web}
-\begin{frame}{World Wide Web}
-  \begin{block}{}
-      The World Wide Web is a shared information system operating on top of the Internet
-  \end{block}
+% \begin{frame}{World Wide Web}
+%   \begin{block}{}
+%       The World Wide Web is a shared information system operating on top of the Internet
+%   \end{block}
+% \end{frame}
+\begin{frame}{The beggining of the web}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=180pt]{mosaic_browser.png}
+  \end{figure}
 \end{frame}
 \begin{frame}{The beggining of the web}
   \begin{itemize}
@@ -141,6 +168,12 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{itemize}
 \end{frame}
 \begin{frame}{The modern web}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{html5_phrase.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{The modern web}
   \begin{itemize}
     \item Contributions transformed the web in a growing universe
     \item Videos, audio, photos, interactive content, 3D graphics
@@ -149,12 +182,26 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{itemize}
 \end{frame}
 \begin{frame}{Browser technologies}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{html5_css3_js.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Browser technologies}
   \begin{itemize}
     \item Web pages are written using HyperText Markup Language
     \item Web can be augmented with other technologies
-    \item JavaScript is the main programming language
     \item Layout and style information uses Cascading Style Sheets
+    \item JavaScript is the main programming language
   \end{itemize}
+\end{frame}
+\begin{frame}{Browser architecture}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=220pt]{safari.png}
+    \caption{Web browsers running on different devices}
+    \label{figure:web_browsers}
+  \end{figure}
 \end{frame}
 \begin{frame}{Browser architecture}
   \begin{figure}[!htb]
@@ -162,6 +209,12 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
     \includegraphics[width=220pt]{../chapters/basic_concepts/web_architecture.pdf}
     \caption{Reference architecture for web browsers}
     \label{figure:web_architecture}
+  \end{figure}
+\end{frame}
+\begin{frame}{Video capturing and processing workflow}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_off.png}
   \end{figure}
 \end{frame}
 \begin{frame}{Audio and video}
@@ -172,32 +225,87 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
     \label{figure:html5_audio_video}
   \end{figure}
 \end{frame}
-\begin{frame}[fragile]{Audio and video}
-\begin{lstlisting}[language=C++,label={lst:get_user_media},caption=Capturing browser microphone and camera]
-  <video autoplay></video>
+\begin{frame}{Capturing audio and video}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=100pt]{webrtc.png}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Capturing audio and video}
+  \begin{lstlisting}[
+                    language=C++,
+                    label={lst:get_user_media},
+                    caption=Capturing browser microphone and camera,
+                    moredelim={**[is][\btHL<1>]{@1}{@}},
+                    moredelim={**[is][{\btHL<2>}]{@2}{@}}
+                  ]
+
+  @1<video autoplay></video>@
   <script>
     var video = document.querySelector('video');
-    navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
+    navigator.@2getUserMedia@({video: true, audio: true}, function(localMediaStream) {
         video.src = window.URL.createObjectURL(localMediaStream);
         video.onloadedmetadata = function(e) { alert('Ready to go.') };
     }, onFail);
   </script>
   \end{lstlisting}
 \end{frame}
-\begin{frame}{Canvas element}
-  \begin{itemize}
-    \item HTML5 element
-    \item Resolution-dependent bitmap canvas
-    \item Two-dimensional grid, computer graphics coordinate system
-    \item Can render graphs, game graphics, art, or other visual images
-  \end{itemize}
+\begin{frame}{Capturing audio and video}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{webrtc_confirmation.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Capturing audio and video}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_1.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Capturing audio and video}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_2.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Capturing audio and video}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_3.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Capturing audio and video}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_4.png}
+  \end{figure}
 \end{frame}
 \begin{frame}{Canvas element}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=130pt]{../chapters/basic_concepts/canvas_axis.pdf}
-    \caption{The canvas coordinate space}
+    \caption{The canvas element}
     \label{figure:canvas_axis}
+  \end{figure}
+\end{frame}
+\begin{frame}{Canvas element}
+  \begin{itemize}
+    \item Introduced as a new element on HTML5
+    \item Resolution-dependent bitmap canvas
+    \item Two-dimensional grid, computer graphics coordinate system
+    \item Can render graphs, game graphics, art, or other visual images
+  \end{itemize}
+\end{frame}
+\begin{frame}{JavaScript typed arrays}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_4.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{JavaScript typed arrays}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_5.png}
   \end{figure}
 \end{frame}
 \begin{frame}{JavaScript typed arrays}
@@ -208,7 +316,7 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
     \item JavaScript-typed arrays access raw binary more efficiently
   \end{itemize}
 \end{frame}
-\begin{frame}{Typed arrays performance benchmark}
+\begin{frame}{JavaScript typed arrays}
   \begin{figure}[!htb]
     \begin{tikzpicture}[scale=0.8]
         \begin{axis}[
@@ -276,19 +384,24 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
     \label{figure:imagedata_array}
   \end{figure}
 \end{frame}
-\begin{frame}{What is the relation between typed arrays and canvas?}
+\begin{frame}{Video capturing and processing workflow}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=270pt]{workflow_5.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Video capturing and processing workflow}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=240pt]{../chapters/basic_concepts/get_user_media.pdf}
-    \caption{Access flow of raw binary data captured from videos on modern browsers}
+    \caption{Access flow of raw binary data captured from videos}
     \label{figure:get_user_media}
   \end{figure}
 \end{frame}
-
 \subsection{Visual tracking}
 \begin{frame}{Visual tracking}
   \begin{block}{}
-      Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving
+      Tracking an object in a video sequence means continuously identifying its location when either the object or the camera are moving.
   \end{block}
   \begin{figure}[!htb]
     \centering
@@ -305,26 +418,28 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
     \label{figure:cv_applications}
   \end{figure}
 \end{frame}
-
-\begin{frame}{Which devices could use tracking.js?}
-  \begin{block}{}
-      Different devices such as mobile phones, notebooks, and even head-worn (Google Project Glass), provide an embedded web browser capable to run JavaScript and HTML5.
-  \end{block}
-\end{frame}
+% \begin{frame}{Which devices could use tracking.js?}
+%   \begin{block}{}
+%       Different devices such as mobile phones, notebooks, and even head-worn (Google Project Glass), provide an embedded web browser capable to run JavaScript and HTML5.
+%   \end{block}
+% \end{frame}
 % % -----------------------------------------------------------------------------
 \section{Tracking library for the web}
-
 \begin{frame}{tracking.js}
-  \begin{block}{}
-      Tracking library for the web aiming to provide a common infrastructure to develop applications and to accelerate the use of those techniques on the web in commercial products
-  \end{block}
-  \begin{block}{}
-      It runs on native web browsers without requiring third-party plugins installation
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=210pt]{site.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{tracking.js}
+  \begin{block}{Tracking library for the web}{
+    Common infrastructure to develop visual tracking applications and to accelerate the use of those techniques on the web in commercial products.
+  }
   \end{block}
 \end{frame}
 \begin{frame}{Related work}
   \begin{itemize}
-    \item FLARToolKit: a port of the well-known ARToolKit marker tracking library to ActionScript
+    \item FLARToolKit: a port of ARToolKit marker tracking library to ActionScript
   \end{itemize}
   \begin{figure}[!htb]
     \centering
@@ -346,13 +461,27 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 \begin{frame}{Related work}
   \begin{itemize}
-    \item Unifeye Viewer: from Metaio company, it offers a robust markerless tracking solution for the web to ActionScript
+    \item Unifeye Viewer: a robust markerless tracking solution for the web to ActionScript
   \end{itemize}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=130pt]{../chapters/tracking_library_for_the_web/unifeyeviewer.png}
-    \caption{Markerless example of image projected over a magazine cover using Unifeye Viewer solution}
+    \caption{Markerless example of image projected over a magazine cover}
     \label{figure:unifeyeviewer}
+  \end{figure}
+\end{frame}
+\begin{frame}{Flash vs HTML5}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=220pt]{trend.png}
+    \caption{Google trends results for ``flash games'' (top) and for ``html5 games'' (bottom)}
+    \label{figure:trend}
+  \end{figure}
+\end{frame}
+\begin{frame}{Library features}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=190pt]{preview.png}
   \end{figure}
 \end{frame}
 \begin{frame}{Library modules}
@@ -417,123 +546,85 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
       \label{figure:visual_tracking_classes}
   \end{figure}
 \end{frame}
-\begin{frame}{Feature detector}
+\begin{frame}{Feature detector (FAST)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=290pt]{../chapters/tracking_library_for_the_web/keypoints.png}
+  \end{figure}
+\end{frame}
+\begin{frame}{Feature detector (FAST)}
   \begin{itemize}
-    \item Detects individual features (\textit{keypoints}) across images
+    \item Detects individual features across images
     \item Robustness against partial occlusions or matching errors
     \item Used as the first step of many vision tasks such as tracking
     \item Features from Accelerated Segment Test (FAST)
   \end{itemize}
 \end{frame}
-\begin{frame}{Feature detector}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=220pt]{../chapters/tracking_library_for_the_web/keypoints.png}
-    \caption{Image features detected on two different frames, green pixels represents found keypoints}
-    \label{figure:keypoints}
-  \end{figure}
-\end{frame}
-\begin{frame}{Feature detector}
-  \begin{block}{Features from Accelerated Segment Test (FAST)}
-      It works by testing a small patch of an image to see if it could be a corner
-  \end{block}
-  \begin{block}{}
-      The detector is evaluated using a circle surrounding the candidate pixel
-  \end{block}
-  \begin{block}{}
-      The test is based on whether the concentric contiguous arcs around the pixel are significantly different from the central pixel $p$
-  \end{block}
-\end{frame}
-\begin{frame}{Feature detector}
+\begin{frame}{Feature detector (FAST)}
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=220pt]{../chapters/tracking_library_for_the_web/fast.png}
-    \caption{FAST: point segment test corner detection in an image patch}
+    \caption{Point segment test corner detection in an image patch}
     \label{figure:fast}
   \end{figure}
 \end{frame}
-\begin{frame}{Feature detector}
-  \begin{itemize}
-    \item FAST technique was chosen for feature detector
-    \item Robust against occlusions, matching errors and illumination
-    \item Has excellent repeatability
-    \item Computational complexity of the technique is low
-  \end{itemize}
+\begin{frame}{Feature extractor (BRIEF)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=290pt]{../chapters/evaluation/keypoints_building.png}
+  \end{figure}
 \end{frame}
-\begin{frame}{Feature extractor}
+\begin{frame}{Feature extractor (BRIEF)}
   \begin{itemize}
     \item To estimate motion, match sets of features is required
-    \item For each point \{$m_{i}$\} in the first image, search in a region of the second image around location \{$m_{i}$\} for point \{$m'_{j}$\}
-    \item The search is based on the similarity of the local image windows
+    \item Use binary strings to describe the keypoints
+    \item Fast to compute, to match and is memory efficient
     \item Binary Robust Independent Elementary Features (BRIEF)
   \end{itemize}
 \end{frame}
-\begin{frame}{Feature extractor}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=220pt]{../chapters/tracking_library_for_the_web/BRIEF.pdf}
-    \caption{Feature extractor}
-    \label{figure:BRIEF}
-  \end{figure}
-\end{frame}
-\begin{frame}{Feature extractor}
-  \begin{block}{Binary Robust Independent Elementary Features (BRIEF)}
-      Searches for correspondent points in the current frame and only points that are highly descriptive invariant features, called keypoints, are tested
-  \end{block}
-  \begin{block}{}
-      After the keypoints are detected they need to be described and the respective matching point should be found
-  \end{block}
-  \begin{block}{}
-      BRIEF uses a binary string to describe the keypoints and having local descriptors that are fast to compute, to match and being memory efficient are important aspects
-  \end{block}
-\end{frame}
-\begin{frame}{Feature extractor}
-  To generate the binary strings it is defined the test $\tau$ on patch \textbf{p} of size \textbf{S $\times$ S} as
+\begin{frame}{Feature extractor (BRIEF)}
+  On BRIEF to generate the binary strings it is defined the test $\tau$ on patch \textbf{p} of size \textbf{S $\times$ S} as:
 
   $$\tau(\textbf{p}; x, y) :=
   \begin{cases}
     1 &\mbox{if}\quad \textbf{p(x)} < \textbf{p(y)},\\
     0 &\mbox{otherwise}
   \end{cases}$$
-
-  where \textbf{p(x)} is the pixel intensity. The set of binary tests is defined by the $n_{d}$ (\textbf{x}, \textbf{y})-location pairs uniquely chosen during the initialization
 \end{frame}
-\begin{frame}{Feature extractor}
-  The $n_{d}$-dimensional bit-string is our BRIEF descriptor for each keypoint
+\begin{frame}{Feature extractor (BRIEF)}
+  The $n_{d}$-dimensional bit-string is our BRIEF descriptor for each keypoint:
 
   $$f_{n_{d}}(\textbf{p}) := \sum_{1 \le i \le n_{d}} 2^{i-1} \tau(\textbf{p}; x, y).$$
 
-  In this work, $n_{d}= 128$ was used, since it presented good matching results and performance. The number of bytes required to store the descriptor can be calculated by $k = n_{d}/8$
+  In this work, $n_{d}= 128$ was used, since it presented good matching results and performance. The number of bytes required to store the descriptor can be calculated by $k = n_{d}/8$.
 \end{frame}
-\begin{frame}{Feature extractor}
-  \begin{itemize}
-    \item Each keypoint is described with its binary string
-    \item Each keypoint is compared with the closest matching point
-    \item Distance metric is critical to the performance
-    \item Using binary strings reduces the size of the descriptor
-  \end{itemize}
+\begin{frame}{Feature extractor (BRIEF)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=220pt]{../chapters/tracking_library_for_the_web/BRIEF.pdf}
+    \caption{BRIEF feature extractor}
+    \label{figure:BRIEF}
+  \end{figure}
 \end{frame}
-\begin{frame}{Feature extractor}
-  Given two image patches $x$ and $y$, denote their binary descriptors as $b(x) \in \{0,1\}^n$ and $b(y) \in \{0,1\}^n$ respectively, the Hamming distance is computed by
-  $$Ham(x, y)=\sum_{i=1}^{n}b_i(x)\otimes b_i(y)$$
-  From the hamming distance, the Hamming weight can be calculated
+\begin{frame}{Feature extractor (BRIEF)}
+  The weighted Hamming distance is computed by:
   $$WHam(x, y)=\sum_{i=1}^{n}w_i(b_i(x)\otimes b_i(y))$$
+  $$b_1=0000000001...$$
+  $$b_2=0000000011...$$
+  $$b_1 \otimes b_2=0000000010...$$
+  $$WHam=1$$
 \end{frame}
-\begin{frame}{Feature extractor}
-  \begin{itemize}
-    \item BRIEF technique was chosen for feature extractor
-    \item Use binary strings to describe the keypoints
-    \item Fast to compute, to match and is memory efficient
-    \item Computational complexity of the technique is low
-  \end{itemize}
+\begin{frame}{Feature extractor (BRIEF)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=290pt]{../chapters/evaluation/keypoints_building.png}
+  \end{figure}
 \end{frame}
 \begin{frame}{Homography estimation}
-  \begin{block}{}
-      Homographies are estimated between images by finding feature correspondences on them
-  \end{block}
-  \begin{block}{}
-      A 2D point $(x,y)$ in an image can be represented as a 3D vector $\textbf{x} = (x_1, x_2, x_3)$ where $x = \frac{x_1}{x_3}$ and $y = \frac{x_2}{x_3}$
-  \end{block}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=190pt]{homography.png}
+  \end{figure}
 \end{frame}
 \begin{frame}{Homography estimation}
   Homography is a mapping from $P^2$ → $P^2$ which is a projectivity if and only if there exists a non-singular $3\times3$ matrix $H$ such that for any point in $P^2$ represented by vector $\textbf{x}$ it is true that its mapped point equals $H\textbf{x}$
@@ -543,21 +634,14 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 \begin{frame}{Random sample consensus (RANSAC)}
   \begin{block}{}
-      RANSAC (Random Sample Consensus) is an iterative method to estimate parameters of a mathematical model from a set of observed data which contains outliers
-  \end{block}
-  \begin{block}{}
-      It is the most commonly used robust estimation method for homographies
+      RANSAC (Random Sample Consensus) is an iterative method to estimate parameters of a mathematical model from a set of observed data which contains outliers. It is the most commonly used robust estimation method for homographies.
   \end{block}
 \end{frame}
-\begin{frame}{Random sample consensus (RANSAC)}
-  The idea of the algorithm is pretty simple
-  \pause
-  \begin{itemize}
-    \item<2-> For $N$ iterations, a random sample of $4$ correspondences is selected and $H$ is computed
-    \item<3-> Each other correspondence is classified as an inlier or outlier
-    \item<4-> The iteration containing more inliers is selected
-    \item<5-> The matrix $H$ is recomputed from all inliers in that iteration
-  \end{itemize}
+\begin{frame}{Rapid object detection (Viola Jones)}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=140pt]{viola.png}
+  \end{figure}
 \end{frame}
 \begin{frame}{Rapid object detection (Viola Jones)}
   \begin{itemize}
@@ -568,27 +652,15 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{itemize}
 \end{frame}
 \begin{frame}{Rapid object detection (Viola Jones)}
-  \begin{block}{Features}
-      Images are classified based on the value of simple features reminiscent of Haar basis functions
-  \end{block}
   \begin{figure}[!htb]
     \centering
-    \includegraphics[width=100pt]{viola.png}
-    \caption{Example rectangle features shown relative to the enclosing detection window}
-    \label{figure:viola}
+    \includegraphics[width=220pt]{features_viola.png}
+    \caption{Images are classified based on the value of rectangle features}
   \end{figure}
 \end{frame}
 \begin{frame}{Rapid object detection (Viola Jones)}
-  \begin{itemize}
-    \item Three kinds of features are used
-    \item Two-rectangle feature is the difference between the sum of the pixels within two rectangular regions
-    \item Three-rectangle feature computes the sum within two outside rectangles subtracted from the sum in a center rectangle
-    \item Four-rectangle feature computes the difference between diagonal pairs of rectangles
-  \end{itemize}
-\end{frame}
-\begin{frame}{Rapid object detection (Viola Jones)}
   \begin{block}{Integral Image}
-      Rectangle features can be computed very rapidly using an intermediate representation for the image which we call the integral image
+      Rectangle features can be computed very rapidly using an intermediate representation for the image which we call the integral image.
   \end{block}
   The integral image at location $x, y$ contains the sum of the pixels above and to the left of $x, y$, inclusive
   $$ii(x,y)=\sum_{x'\leq x,y'\leq y}{i(x',y')}$$
@@ -616,10 +688,10 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 \begin{frame}{Rapid object detection (Viola Jones)}
   \begin{block}{Optimized merging phase}
-      Rectangles are used partitioned into a disjoint set data structure that was replaced by an alternative that is called Minimum Neighbor Area Grouping
+      Rectangles are used partitioned into a disjoint set data structure. On this work it was replaced by an alternative called Minimum Neighbor Area Grouping.
   \end{block}
   \begin{block}{Minimum Neighbor Area Grouping}
-      Simple loop trough the possible rectangles comparing the current rectangle with all other not yet compared. If their area overlaps by $\eta=0.5$ the smallest rectangle of the set is selected
+      Simple loop trough the possible rectangles comparing the current rectangle with all other not yet compared. If their area overlaps by $\eta=0.5$ the smallest rectangle of the set is selected.
   \end{block}
 \end{frame}
 % \begin{frame}{Color tracking algorithm}
