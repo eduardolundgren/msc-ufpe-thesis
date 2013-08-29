@@ -691,6 +691,15 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{figure}
 \end{frame}
 
+\begin{frame}{Feature detector (FAST)}
+  \begin{block}{1. Optimization: no machine learning step}
+      The steps required for machine learning involves extra math operations, such as $log$. The results were good without it.
+  \end{block}
+  \begin{block}{2. Optimization: no non-maximal suppression step}
+      To remove corners which have an adjacent corner requires extra access to the typed array.
+  \end{block}
+\end{frame}
+
 \begin{frame}{Feature extractor (BRIEF)}
   \begin{figure}[!htb]
     \centering
