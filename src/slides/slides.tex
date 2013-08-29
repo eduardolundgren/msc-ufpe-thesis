@@ -1454,38 +1454,80 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{figure}
 \end{frame}
 % % -----------------------------------------------------------------------------
-% \section{Conclusions}
+\section{Conclusions}
 
-% \begin{frame}{Benefits of a JavaScript tracking solution}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
-% \begin{frame}{Contributions}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
-% \begin{frame}{Future work}
-%   \begin{itemize}
-%     \item An imprecise unit of measurement originating from famous CIN hack
-%     \item 1 smoot = 5 feet and 7 inches
-%     \item Harvard bridge = 364.4 smoots (+ an ear)
-%   \end{itemize}
-% \end{frame}
-% \begin{frame}{Questions and Answers}
-%   Want to know more?
+\begin{frame}{Benefits of a JavaScript tracking solution}
+  \small\addtolength{\tabcolsep}{-4pt}
+  \begin{table}[!htb]
+    \centering % here
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        & OSAKit & \textit{tracking.js} + color & \textit{tracking.js} + face \\
+        \hline
+        Avg frame rate & 25 FPS & 30 FPS & 25 FPS\\
+        \hline
+        Avg file size & 22 MB & 8 KB & 187 KB\\
+        \hline
+        Avg load time (256 Kbps) & 11 min & 0.25 seconds & 5 seconds\\
+        \hline
+    \end{tabular}
+    \caption{Comparison between \textit{tracking.js} and OSAKit client-side tracking solution.}
+  \end{table}
+\end{frame}
 
-%   \begin{itemize}
-%     \item Browse \url{http://foo.com}.
-%     \item Smoot's Legacy \url{http://bar.com}.
-%     \item Smoot Salute \url{http://bar.com}.
-%   \end{itemize}
+\begin{frame}{Contributions}
+  \begin{itemize}
+    \item A tracking library for the web called \textit{tracking.js}
+    \item Optimizations for existing techniques in order to run in real-time on the web
+    \item Pioneered a library that brings state-of-the-art techniques for computer vision to the web
+    \item Academic material about web browser concepts
+  \end{itemize}
+\end{frame}
 
-% \end{frame}
+\begin{frame}{Future work}
+  \begin{itemize}
+    \item Publication detailing web browser concepts
+    \item Publication comparing client-side JavaScript based tracking with client-side plugin-based and server-side solutions
+    \item Double Exponential Smoothing technique
+    \item Perspective-$n$-Point problem (P$n$P) calculation
+    \item Image processing layer capable of transformations and filters
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Bonus - Website}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=180pt]{site.png}
+    \caption{\url{http://trackingjs.com}}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Bonus - Repercussion}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=260pt]{repercussion_site.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Bonus - Repercussion}
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=140pt]{repercussion.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Bonus - Repercussion}
+  \begin{itemize}
+    \item 445 tweets mentioning \textit{tracking.js}
+    \item 31,258 website page views
+    \item Project hosted on Developer Mozilla
+    \item Talk presented on W3C conference - Brazil, 2012
+    \item Talk presented on HTML5 Dev Conf - USA, 2013
+    \item Talk accepted on JS.everywhere - USA, 2013
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Thank you!}
+\end{frame}
 % -----------------------------------------------------------------------------
 \end{document}
