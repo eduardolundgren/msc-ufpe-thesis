@@ -178,20 +178,6 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Browser architecture}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=220pt]{safari.png}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Browser architecture}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=220pt]{../chapters/basic_concepts/web_architecture.pdf}
-  \end{figure}
-\end{frame}
-
 \subsection{Visual tracking}
 
 \begin{frame}{Visual tracking}
@@ -370,27 +356,6 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
     \includegraphics[width=270pt]{workflow_5.png}
   \end{figure}
 \end{frame}
-
-\begin{frame}{What is the relation between typed arrays and canvas?}
-  \begin{itemize}
-    \item Videos and images pixels can be drawn on a canvas bitmap
-    \item Canvas raw binary data can be accessed from JavaScript
-    \item Canvas array of pixels, is in row-major order
-    \item Consider the $2\times3$ array $\begin{bmatrix}
-1 & 2 & 3\\
-4 & 5 & 6
-\end{bmatrix}$, in row-major order it is laid out contiguously in linear memory as $\begin{bmatrix}
-1 & 2 & 3 & 4 & 5 & 6
-\end{bmatrix}$.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{What is the relation between typed arrays and canvas?}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\linewidth]{../chapters/basic_concepts/imagedata_array.pdf}
-  \end{figure}
-\end{frame}
 % % -----------------------------------------------------------------------------
 \section{Tracking library for the web}
 
@@ -470,66 +435,6 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
       \includegraphics[width=200pt]{../chapters/evaluation/keypoints_brief.png}
     \end{figure}
   \end{block}
-\end{frame}
-
-\begin{frame}{Library modules - Base classes}
-  \begin{figure}[!htb]
-      \tikzumlset{font=\tiny}
-      \begin{tikzpicture}
-          \umlclass[x=100pt]{Math}{}
-
-          \umlclass{Attribute}{}
-
-          \umlclass[y=-50pt]{DOMElement}{}
-
-          \umlclass[y=-85pt,x=-80pt]{Canvas}{}
-
-          \umlclass[y=-110pt]{Video}{}
-
-          \umlclass[y=-110pt,x=100pt]{VideoCamera}{}
-
-          \umlinherit[geometry=-|]{DOMElement}{Attribute}
-          \umlinherit[geometry=-|]{Canvas}{DOMElement}
-          \umlinherit[geometry=-|]{Video}{DOMElement}
-          \umlinherit[geometry=|-]{VideoCamera}{Video}
-      \end{tikzpicture}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Library modules - Visual tracking classes}
-  \begin{figure}[!htb]
-      \tikzumlset{font=\tiny}
-      \begin{tikzpicture}
-          \umlclass{FAST}{}{
-            findCorners(data, threshold) : Array\\
-          }
-
-          \umlclass[y=-55pt]{BRIEF}{}{
-            getDescriptors(data, corners) : Array\\
-            match(c1, d1, c2, d2) : Array\\
-          }
-
-          \umlclass[y=-110pt]{ViolaJones}{}{
-            find() : Array\\
-            evalStage() : boolean\\
-          }
-
-          \umlclass[y=-110pt,x=140pt]{Color}{}{
-            find() : Array\\
-          }
-
-          \umlclass[x=140pt]{RANSAC}{}{
-            find(matches) : void\\
-            score() : Number\\
-          }
-
-          \umlclass[y=-55pt,x=140pt]{Homography}{}{
-              score(H, matches) : Number\\
-          }
-
-          \umlinherit[geometry=-|]{Homography}{RANSAC}
-      \end{tikzpicture}
-  \end{figure}
 \end{frame}
 
 \begin{frame}{Color tracking algorithm}
@@ -614,15 +519,6 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
         }
     });
   \end{lstlisting}
-\end{frame}
-
-\begin{frame}{Rapid object detection (Viola Jones)}
-  \begin{itemize}
-    \item Robust and extremely rapid object detection
-    \item Became popular mainly because rapid face detection
-    \item A training phase is required
-    \item A scanning detector is what makes the detection
-  \end{itemize}
 \end{frame}
 
 \begin{frame}{Rapid object detection (Viola Jones)}
@@ -742,13 +638,6 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
 \end{frame}
 
 \begin{frame}{Feature extractor (BRIEF)}
-  \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=290pt]{../chapters/evaluation/keypoints_building.png}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Feature extractor (BRIEF)}
   \begin{block}{1. Optimization: avoid smoothing kernels}
       By pre-smoothing the patch, increases the stability and repeatability of the descriptors, but decreases performance.
   \end{block}
@@ -768,6 +657,66 @@ Veronica Teichrieb (\emph{Co-Advisor})}}
   \begin{block}{}
       RANSAC (Random Sample Consensus) is an iterative method to estimate parameters of a mathematical model from a set of observed data which contains outliers. It is the most commonly used robust estimation method for homographies.
   \end{block}
+\end{frame}
+
+\begin{frame}{Library modules - Base classes}
+  \begin{figure}[!htb]
+      \tikzumlset{font=\tiny}
+      \begin{tikzpicture}
+          \umlclass[x=100pt]{Math}{}
+
+          \umlclass{Attribute}{}
+
+          \umlclass[y=-50pt]{DOMElement}{}
+
+          \umlclass[y=-85pt,x=-80pt]{Canvas}{}
+
+          \umlclass[y=-110pt]{Video}{}
+
+          \umlclass[y=-110pt,x=100pt]{VideoCamera}{}
+
+          \umlinherit[geometry=-|]{DOMElement}{Attribute}
+          \umlinherit[geometry=-|]{Canvas}{DOMElement}
+          \umlinherit[geometry=-|]{Video}{DOMElement}
+          \umlinherit[geometry=|-]{VideoCamera}{Video}
+      \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Library modules - Visual tracking classes}
+  \begin{figure}[!htb]
+      \tikzumlset{font=\tiny}
+      \begin{tikzpicture}
+          \umlclass{FAST}{}{
+            findCorners(data, threshold) : Array\\
+          }
+
+          \umlclass[y=-55pt]{BRIEF}{}{
+            getDescriptors(data, corners) : Array\\
+            match(c1, d1, c2, d2) : Array\\
+          }
+
+          \umlclass[y=-110pt]{ViolaJones}{}{
+            find() : Array\\
+            evalStage() : boolean\\
+          }
+
+          \umlclass[y=-110pt,x=140pt]{Color}{}{
+            find() : Array\\
+          }
+
+          \umlclass[x=140pt]{RANSAC}{}{
+            find(matches) : void\\
+            score() : Number\\
+          }
+
+          \umlclass[y=-55pt,x=140pt]{Homography}{}{
+              score(H, matches) : Number\\
+          }
+
+          \umlinherit[geometry=-|]{Homography}{RANSAC}
+      \end{tikzpicture}
+  \end{figure}
 \end{frame}
 % % -----------------------------------------------------------------------------
 \section{Results and evaluation}
