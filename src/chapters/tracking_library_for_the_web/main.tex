@@ -378,7 +378,7 @@ Mapping a RGB color in an orthogonal three-dimensional space, the distance betwe
 
 $$\|C_1-C_2\|=\sqrt{(C_{1,R}-C_{2,R})^2 + (C_{1,G}-C_{2,G})^2 + (C_{1,B}-C_{2,B})^2}.$$
 
-Graphic applications for computers usually employ the Red-Green-Blue (RGB) color space. This model maps well to the way the common Cathode Ray Tube (CRT) and Liquid-Crystal Display (LCD) display works. These displays have three kinds of elements that emit red, green or blue light. Another advantage of the RGB model is that it is a three-dimensional orthogonal space, precisely what we need for the Euclidean distance function.
+Graphic applications for computers usually employ the Red-Green-Blue (RGB) color space. This model maps well to the way the common Cathode Ray Tube (CRT) and Liquid-Crystal Display (LCD) works. These displays have three kinds of elements that emit red, green or blue light. Another advantage of the RGB model is that it is a three-dimensional orthogonal space, precisely what we need for the Euclidean distance function.
 
 To determine if the pixel represents a possible color it should be inside the tracked color neighborhood and $\|C_1-C_2\|$ must be lower than a configurable $threshold=100$. Imagine that the tracked color $C_1$ is the center of a sphere in a three-dimensional space, any point $C_2$ around $C_1$ that its Euclidean distance is lower than a $threshold$ is considered a color that ``looks like'' $C_1$. Figure \ref{figure:rgb_space} exemplifies a color neighborhood represented in a RGB orthogonal three-dimensional color space. The mentioned technique resulted in a robust and simple color tracking algorithm, since considering multiple values around $C_1$ as the tracked color increase robustness against illumination changes.
 
