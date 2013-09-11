@@ -428,7 +428,7 @@ Once all pixels of the tracked color are collected two steps are still required:
 \subsubsection{Detecting outliers}
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection:detecting_outliers}
 
-Outliers pixels are determined if they are not close enough to other pixels with the same characteristics. For each pixel $p=(x,y)$, the mean distance with the other found pixels is calculated as follows:
+Outlier pixels are determined if they are not close enough to other pixels with the same characteristics. For each pixel $p=(x,y)$, the mean distance with the other found pixels is calculated as follows:
 
 $$meanDistance=\frac{\sum_{1}^{n}\sqrt{(x_n-x)^2 + (y_n-y)^2}} {n},$$
 
