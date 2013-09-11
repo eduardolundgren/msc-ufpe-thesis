@@ -256,7 +256,7 @@ reserved.\par\permission}}
   \signature{Certified by}{#1 \\ #2}}
   \setbox\@abstractsupervisor\vbox{\unvbox\@abstractsupervisor
   \vskip\baselineskip \def\baselinestretch{1}\@normalsize
-  \par\noindent #2: #1 \\ Title: #2}}
+  \par\noindent #2: #1}}
 
 % department chairman, not dissertation committee chairman
 \def\chairman#1#2{\gdef\@chairmanname{#1}\gdef\@chairmantitle{#2}}
