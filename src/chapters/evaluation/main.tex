@@ -71,7 +71,7 @@ Augmented reality and tracking applications for advertising and entertainment ar
 \subsubsection{Performance} % (fold)
 \label{subsub:evaluation:rapid_object_detection:results:performance}
 
-The United Kingdom popular video format known as Phase Alternating Line (PAL) \cite{PAL1962} defines that real-time video is represented by 25 FPS, therefore this value is used to define whether the tests can or cannot be considered real-time. In Figure \ref{figure:viola_fps}, the Viola Jones implementation were tested with different numbers of detected faces. Fifteen faces were gradually added, for each addition the FPS average was recorded. Note that, until five faces detected the web implementation still runs inside the real-time limit defined by PAL.
+The United Kingdom popular video format known as Phase Alternating Line (PAL) \cite{PAL1962} defines that real-time video is represented by 25 FPS, therefore this value is used to define whether the tests can or cannot be considered real-time. In Figure \ref{figure:viola_fps}, the Viola Jones implementation was tested with different numbers of detected faces. Fifteen faces were gradually added, for each addition the FPS average was recorded. Note that, until five faces detected the web implementation still runs inside the real-time limit defined by PAL.
 
 \begin{figure}[!htb]
   \centering
@@ -112,7 +112,7 @@ The United Kingdom popular video format known as Phase Alternating Line (PAL) \c
 \subsubsection{Oclusion robustness} % (fold)
 \label{subsub:evaluation:rapid_object_detection:results:occlusion_robustness}
 
-Viola Jones implementation of \textit{tracking.js} is robust for random partial occlusions. Figure \ref{figure:viola_occlusion} demonstrates occlusions variations that still allows the face to be detected.
+Viola Jones implementation of \textit{tracking.js} is robust for random partial occlusions. Figure \ref{figure:viola_occlusion} demonstrates occlusions variations that still allow the face to be detected.
 
 \begin{figure}[!htb]
   \centering
@@ -195,7 +195,7 @@ Another example of color tracking on user interactions is demonstrated in Figure
 \subsubsection{Performance} % (fold)
 \label{subsub:evaluation:color_tracking_algorithm:results:performance}
 
-In Figure \ref{figure:color_fps}, the color tracking implementation were tested with different numbers of pixels detected. The size of the detect object were gradually increased, resulting in a bigger number of pixels found, for each incrementation in the size the FPS average was recorded. Note that, until $2138$ pixels detected the web implementation still runs inside the real-time limit defined by PAL \cite{PAL1962}.
+In Figure \ref{figure:color_fps}, the color tracking implementation was tested with different numbers of pixels detected. The size of the detect object were gradually increased, resulting in a bigger number of pixels found, for each incrementation in the size the FPS average was recorded. Note that, until $2138$ pixels detected the web implementation still runs inside the real-time limit defined by PAL \cite{PAL1962}.
 
 \begin{figure}[!htb]
   \centering
@@ -568,7 +568,7 @@ The markerless tracking web implementation has also showed to be robust for illu
 \subsubsection{Performance} % (fold)
 \label{subsub:evaluation:markerless_tracking_algorithm:results:performance}
 
-Figure \ref{figure:markerless_fps}, the markerless tracking implementation were tested in an interval of $1000$ seconds. The FPS average for this technique is 6 FPS, which is not ideal for real-time applications yet. Some optimizations could be applied in future work, such as implementing FAST-ER \cite{RostenFaster2010} for feature detection.
+Figure \ref{figure:markerless_fps}, the markerless tracking implementation was tested in an interval of $1000$ seconds. The FPS average for this technique is 6 FPS, which is not ideal for real-time applications yet. Some optimizations could be applied in future work, such as implementing FAST-ER \cite{RostenFaster2010} for feature detection.
 
 \begin{figure}[!htb]
   \centering
