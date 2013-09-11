@@ -16,7 +16,7 @@ In this context, this dissertation aims to present the implementation and evalua
 There are not many web-based RA solutions available and registered in the literature. The ones available are mainly focused on fiducial markers \cite{Cho1998}, such as FLARToolKit \cite{Yan2011} and JSARToolkit \cite{JSARToolkit2011}, they both are ports of ARToolKit \cite{Hirokazu2002}. ARToolKit is a desktop library which is useful to make vision-based AR applications. The Metaio company developed Unifeye Viewer \cite{Metaio2009}, a proprietary plug-in for Flash \cite{Flash2013} that allows the utilization of markerless AR applications on the web. In order to run Flash based applications, the installation of its plugin is required. Third-party plugins, such as Flash, are in decadency on modern and mobile web browsers, instead JavaScript based solutions are preferred, since they can run in any modern browser without requiring any user effort of installing external software. Some smart-phones do not even support Flash plugin into their browsers, \eg\ Safari for mobile \cite{Safari2013} is one example of a mobile browser that has banned Flash.
 
 \begin{enumerate}
-    \item FLARToolKit: is a port of the well-known ARToolKit marker tracking library to ActionScript \cite{Flash2013}, which is the language utilized in the development of Flash applications for the web. This was the first initiative towards AR solutions for the web \cite{Pablo2013}. Using FLARToolKit, is possible to develop AR applications that run on a client's browser. A marker-based AR example for the web, developed for a marketing campaign of General Electric's company using FLARToolKit, is shown on Figure \ref{figure:flartoolkit}.
+    \item FLARToolKit: is a port of the well-known ARToolKit marker tracking library to ActionScript \cite{Flash2013}, which is the language utilized in the development of Flash applications for the web. This was the first initiative towards AR solutions for the web \cite{Pablo2013}. Using FLARToolKit, is possible to develop AR applications that run on a client's browser. A marker-based AR example for the web, developed for a marketing campaign of General Electric's company using FLARToolKit, is shown in Figure \ref{figure:flartoolkit}.
 
     \begin{figure}[!htb]
       \centering
@@ -25,7 +25,7 @@ There are not many web-based RA solutions available and registered in the litera
       \label{figure:flartoolkit}
     \end{figure}
 
-    \item JSARToolkit: is a JavaScript port of FLARToolKit, operating on canvas images and video element contents, provides another marker tracking library. This was the first, open-source, JavaScript-based, AR solution available for the web. A marker-based AR example for the web using JSARToolKit is shown on Figure \ref{figure:jsartoolkit}.
+    \item JSARToolkit: is a JavaScript port of FLARToolKit, operating on canvas images and video element contents, provides another marker tracking library. This was the first, open-source, JavaScript-based, AR solution available for the web. A marker-based AR example for the web using JSARToolKit is shown in Figure \ref{figure:jsartoolkit}.
 
     \begin{figure}[!htb]
       \centering
@@ -34,7 +34,7 @@ There are not many web-based RA solutions available and registered in the litera
       \label{figure:jsartoolkit}
     \end{figure}
 
-    \item Unifeye Viewer: from Metaio company, it offers a robust markerless tracking solution for the web. Unifeye \cite{Metaio2009} also depends on Flash plugin in order to run on web browsers. A similar example of General Electric's marker-based solution, this time markerless based, is shown on Figure \ref{figure:unifeyeviewer}. Note that the 3D image is projected over a magazine cover instead of a fiducial marker.
+    \item Unifeye Viewer: from Metaio company, it offers a robust markerless tracking solution for the web. Unifeye \cite{Metaio2009} also depends on Flash plugin in order to run on web browsers. A similar example of General Electric's marker-based solution, this time markerless based, is shown in Figure \ref{figure:unifeyeviewer}. Note that the 3D image is projected over a magazine cover instead of a fiducial marker.
 
     \begin{figure}[!htb]
       \centering
@@ -216,7 +216,7 @@ Despite the design of FAST for speed, this detector has excellent repeatability,
 
 This detector itself exhibits high performance, but there are several weaknesses: (1) This high-speed test does not reject as many candidates; (2) The efficiency of the detector will depend on the ordering of the questions and the distribution of corner appearances; and (3) Multiple features are detected adjacent to one another \cite{Rosten2010}.
 
-On Figure \ref{figure:fast}, the highlighted squares are the pixels used in the corner detection. The pixel at $p$ is the central pixel. The arc is indicating that the dashed line passes through FAST-$n$, let $n$ be $9$ or $12$ contiguous pixels which are brighter or darker than $p$ \cite{Rosten2010}.
+In Figure \ref{figure:fast}, the highlighted squares are the pixels used in the corner detection. The pixel at $p$ is the central pixel. The arc is indicating that the dashed line passes through FAST-$n$, let $n$ be $9$ or $12$ contiguous pixels which are brighter or darker than $p$ \cite{Rosten2010}.
 
 \begin{figure}[!htb]
   \centering
@@ -241,7 +241,7 @@ To estimate motion, one can then match sets of features \{$m_{i}$\} and \{$m'_{j
 
 The feature matching used in the case studies performed in this work searches for correspondent points in the current frame. Only points that are highly descriptive invariant features, called keypoints, are tested. After the keypoints are detected they need to be described and the respective matching point should be found. Since web and handled devices have limited computational power, having local descriptors that are fast to compute, to match and being memory efficient are important aspects, and for that reason, it was used an efficient method called Binary Robust Independent Elementary Features (BRIEF).
 
-To generate the binary string for each keypoint found in the smoothed frame, the individual bits are obtained by comparing the intensities of pairs of points, $(\textbf{p}; x, y)$, represented by $\ast$ symbol on Figure \ref{figure:BRIEF}, along the kernel window centered on each keypoint without requiring a training phase.
+To generate the binary string for each keypoint found in the smoothed frame, the individual bits are obtained by comparing the intensities of pairs of points, $(\textbf{p}; x, y)$, represented by $\ast$ symbol in Figure \ref{figure:BRIEF}, along the kernel window centered on each keypoint without requiring a training phase.
 Empirically, this technique shows that $256$ or even $128$ bits \cite{Calonder2010}, often suffice to obtain very good matching results. In order to have better recognition rates, the best spatial arrangement of the tested (\textbf{x}, \textbf{y})-pairs of points are reached when selected based on an isotropic Gaussian distribution. Computing the Gaussian distribution can be time consuming. As an optimization proposed by this work, the Gaussian distribution could be simply replaced by a uniform version of JavaScript \textit{Math.random()} function. Function \textit{Math.random()} should return an evenly-distributed variable $X$ such that $0.0 \le X < 1.0$ and $X$ is commonly seeded from the current time \cite{International2009}. The locations of (\textbf{x}, \textbf{y})-pairs are evenly distributed over the patch and tests can lie close to the patch border, \ie\ $(-\frac{S}{2},\frac{S}{2})$.
 
 To generate the binary strings it is defined the test $\tau$ on patch \textbf{p} of size \textbf{S $\times$ S} as
@@ -448,7 +448,7 @@ $$x_b=\frac{\sum_{1}^{n}x_n}{n}, y_b=\frac{\sum_{1}^{n}y_n}{n}.$$
 \subsubsection{Discussion}
 \label{sub:tracking_library_for_the_web:color_tracking_algorithm:color_blob_detection:discussion}
 
-The described color technique results in a fast and robust solution for color blob detection on the web. On Figure \ref{figure:color_tracking} is shown the result running on the browser with and without possible outliers interference in the scene.
+The described color technique results in a fast and robust solution for color blob detection on the web. In Figure \ref{figure:color_tracking} is shown the result running on the browser with and without possible outliers interference in the scene.
 
 \begin{figure}[!htb]
   \centering

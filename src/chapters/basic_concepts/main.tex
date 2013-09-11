@@ -23,14 +23,14 @@ The browser main functionality is to present a web resource, by requesting it fr
 For any result or information presented in this work related to the browser environment, three mature browser implementations were selected. For each browser, a conceptual architecture was described based on domain knowledge and available documentation. Firefox version $16.0$, Safari version $6.0.4$ and Chrome version $25.0.1364$ were used to derive the reference architecture because they are mature systems, have reasonably large developer communities and user bases, provide good support for web standards, and are entirely open source \cite{WC2006,Grosskurth2005}. The reference architecture for web browsers is shown in Figure \ref{figure:web_architecture}. It comprises eight major subsystems plus the dependencies between them \cite{Grosskurth2005}:
 
 \begin{enumerate}
-  \item User interface: includes the address bar, back and forward buttons, bookmarking menu and other user interface elements of the browser \cite{Grosskurth2005}.
-  \item Browser engine: an embeddable component that provides a high-level interface for querying and manipulating the Rendering engine \cite{Grosskurth2005,Rocks2013}.
-  \item Rendering engine: performs parsing and layout for HTML documents \cite{Grosskurth2005,Rocks2013}.
-  \item Networking subsystem: used for network calls, like HTTP requests. It has platform independent interface and underneath implementations for each platform \cite{Grosskurth2005,Rocks2013}.
-  \item JavaScript parser: parses and executes the JavaScript \cite{International2009} code \cite{Grosskurth2005}.
+  \item User Interface: includes the address bar, back and forward buttons, bookmarking menu and other user interface elements of the browser \cite{Grosskurth2005}.
+  \item Browser Engine: an embeddable component that provides a high-level interface for querying and manipulating the Rendering engine \cite{Grosskurth2005,Rocks2013}.
+  \item Rendering Engine: performs parsing and layout for HTML documents \cite{Grosskurth2005,Rocks2013}.
+  \item Networking Subsystem: used for network calls, like HTTP requests. It has platform independent interface and underneath implementations for each platform \cite{Grosskurth2005,Rocks2013}.
+  \item JavaScript Parser: parses and executes the JavaScript \cite{International2009} code \cite{Grosskurth2005}.
   \item XML Parser: parses the HTML markup into a parse tree \cite{Hickson2013}, HTML is rather close to XML \cite{Rocks2013,Hickson2013}.
-  \item UI backend: provides drawing and windowing primitives, user interface widgets, and fonts. Underneath it uses the operating system user interface methods \cite{Grosskurth2005}.
-  \item Data persistence: stores various data associated with the browsing session on disk, including bookmarks, cookies, and cache \cite{Grosskurth2005,Rocks2013}.
+  \item UI Backend: provides drawing and windowing primitives, user interface widgets, and fonts. Underneath it uses the operating system user interface methods \cite{Grosskurth2005}.
+  \item Data Persistence: stores various data associated with the browsing session on disk, including bookmarks, cookies, and cache \cite{Grosskurth2005,Rocks2013}.
 \end{enumerate}
 
 \begin{figure}[!htb]
@@ -40,7 +40,7 @@ For any result or information presented in this work related to the browser envi
   \label{figure:web_architecture}
 \end{figure}
 
-Browser subsystems are swappable \cite{Grosskurth2005} and could vary for each browser vendor, platform or operational system. The browsers mostly differ between different vendors in subsystems (2) the Browser engine, (3) the Rendering engine, and (5) the JavaScript parser  \cite{Firefox2013,Safari2013,WebKit2013,Chrome2010}. In Firefox, subsystems (2) and (3) are known as Gecko \cite{Firefox2013,Gecko2013}, Safari as WebKit \cite{Safari2013,WebKit2013} and Chrome uses a fork of WebKit project called Blink \cite{Chrome2010,Blink2013}. Those browsers subsystems, often called Browser engines, are shown on Figure \ref{figure:web_architecture_engines}.
+Browser subsystems are swappable \cite{Grosskurth2005} and could vary for each browser vendor, platform or operational system. The browsers mostly differ between different vendors in subsystems (2) the Browser engine, (3) the Rendering engine, and (5) the JavaScript parser  \cite{Firefox2013,Safari2013,WebKit2013,Chrome2010}. In Firefox, subsystems (2) and (3) are known as Gecko \cite{Firefox2013,Gecko2013}, Safari as WebKit \cite{Safari2013,WebKit2013} and Chrome uses a fork of WebKit project called Blink \cite{Chrome2010,Blink2013}. Those browsers subsystems, often called Browser engines, are shown in Figure \ref{figure:web_architecture_engines}.
 
 Another common swappable subsystem is (5) the JavaScript parser. JavaScript \cite{International2009} is a lightweight, interpreted, object-oriented language with first-class functions, most known as the scripting language for Web pages \cite{Gecko2013}. The JavaScript standard is ECMAScript. As of 2013, all modern browsers fully support ECMAScript 5.1. Older browsers support at least ECMAScript 3 \cite{Gecko2013,International2009}.
 
@@ -82,7 +82,7 @@ The microphone and camera hardware access can be used in combination with the HT
 </script>
 \end{lstlisting}
 
-In Section \ref{sub:basic_concepts:web:canvas_element}, a new HTML5 called canvas \cite{Canvas2013} is introduced. Trough the canvas element video frames can be read, thus providing access to the raw binary data information of each frame. This raw binary data, also known as array of pixels \cite{Gonzalez2007}, is extremely useful for visual tracking applications \cite{Teichrieb2007}. Since the area of study performed on this dissertation is based on visual tracking, from now on, it will focus on camera and video. There are several integration steps required from capturing video to reading the array of pixels. In order to enable the browser to capture the user camera \cite{MediaCapture2013}, stream the information into a video element \cite{Hickson2013}, connect the video to a canvas element, to finally access the array of pixels of each video frame is a long run. The access flow of raw binary data captured from videos on modern browsers is shown on Figure \ref{figure:get_user_media} and comprises four major steps \cite{WebRTC2013,Rocks2013}:
+In Section \ref{sub:basic_concepts:web:canvas_element}, a new HTML5 called canvas \cite{Canvas2013} is introduced. Trough the canvas element video frames can be read, thus providing access to the raw binary data information of each frame. This raw binary data, also known as array of pixels \cite{Gonzalez2007}, is extremely useful for visual tracking applications \cite{Teichrieb2007}. Since the area of study performed on this dissertation is based on visual tracking, from now on, it will focus on camera and video. There are several integration steps required from capturing video to reading the array of pixels. In order to enable the browser to capture the user camera \cite{MediaCapture2013}, stream the information into a video element \cite{Hickson2013}, connect the video to a canvas element, to finally access the array of pixels of each video frame is a long run. The access flow of raw binary data captured from videos on modern browsers is shown in Figure \ref{figure:get_user_media} and comprises four major steps \cite{WebRTC2013,Rocks2013}:
 
 \begin{enumerate}
   \item  Hardware access: using HTML5 new media capture and streams specification, the browser microphone and camera hardware is accessed.
@@ -107,7 +107,7 @@ The canvas is an HTML5 element that provides scripts with a resolution-dependent
 
 Authors should not use the canvas element in a document when a more suitable element is available, \eg\ it is inappropriate to use a canvas element to render a page heading. The usage of canvas conveys essentially the same function or purpose as the canvas bitmap. A basic canvas element HTML markup given a width and height in pixels is represented as: <canvas width=``200'' height=``200''></canvas>.
 
-The canvas is a two-dimensional grid that could be described as a simple computer graphics coordinate system \cite{Hartley2004}. Normally one unit in the grid corresponds to one pixel in the canvas. The origin of this grid is positioned at the top left corner coordinate $(0,0)$. All elements are placed relative to this origin. So the position of the top left corner of the blue square shown on Figure \ref{figure:canvas_axis} becomes $x$ pixels from the left and $y$ pixels from the top coordinate $(x,y)$. The canvas coordinate space is shown in Figure \ref{figure:canvas_axis} \cite{MDN2013}.
+The canvas is a two-dimensional grid that could be described as a simple computer graphics coordinate system \cite{Hartley2004}. Normally one unit in the grid corresponds to one pixel in the canvas. The origin of this grid is positioned at the top left corner coordinate $(0,0)$. All elements are placed relative to this origin. So the position of the top left corner of the blue square shown in Figure \ref{figure:canvas_axis} becomes $x$ pixels from the left and $y$ pixels from the top coordinate $(x,y)$. The canvas coordinate space is shown in Figure \ref{figure:canvas_axis} \cite{MDN2013}.
 
  \begin{figure}[!htb]
    \centering
@@ -207,7 +207,7 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order,
 4 & 5 & 6
 \end{bmatrix}$, in row-major order it is laid out contiguously in linear memory as $\begin{bmatrix}
 1 & 2 & 3 & 4 & 5 & 6
-\end{bmatrix}$. Each array value is represented as integers between $0$ and $255$, where each four-integer group represents the four color channels of one pixel: red, green, blue and alpha (RGBA). While RGBA is sometimes described as a color space, it is actually simply a use of the RGB color model. This array linear typed structure improves read and write performance, since JavaScript is as an interpreted language \cite{MDN2013}, previous knowledge of the type results in faster language execution \cite{TypedArray2013}. An example of the canvas image data array of pixels is shown on Figure \ref{figure:imagedata_array}.
+\end{bmatrix}$. Each array value is represented as integers between $0$ and $255$, where each four-integer group represents the four color channels of one pixel: red, green, blue and alpha (RGBA). While RGBA is sometimes described as a color space, it is actually simply a use of the RGB color model. This array linear typed structure improves read and write performance, since JavaScript is as an interpreted language \cite{MDN2013}, previous knowledge of the type results in faster language execution \cite{TypedArray2013}. An example of the canvas image data array of pixels is shown in Figure \ref{figure:imagedata_array}.
 
 \begin{figure}[!htb]
   \centering
@@ -268,7 +268,7 @@ Vision has the potential to yield non-invasive, accurate and low-cost solutions 
 \subsection{Tracking in augmented reality applications} % (fold)
 \label{sub:basic_concepts:visual_tracking:tracking_in_augmented_reality_applications}
 
-Imagine a technology in which you could see more than others see, hear more than others hear, and even touch things that others cannot. A technology able to perceive computational elements and objects within our real world experience that helps us in our daily activities, while interacting almost unconsciously through mere gestures \cite{Krevelen2010,Teichrieb2007}. With such technology, mechanics could see instructions on what to do next when repairing an unknown piece of equipment, surgeons could take advantage of AR while performing surgery on them and we could read reviews for each restaurant in the street we are walking in on the way to work. On the reality-virtuality \textit{continuum} by Milgram and Ki \cite{Mistry2009}, AR is one part of the general area of mixed reality. Both virtual environments (or virtual reality) and augmented virtuality, in which real objects are added to virtual ones, replace the surrounding environment by a virtual one. In contrast, AR provides local virtuality. The reality-virtuality \textit{continuum} is shown on Figure \ref{figure:reality_continuum}.
+Imagine a technology in which you could see more than others see, hear more than others hear, and even touch things that others cannot. A technology able to perceive computational elements and objects within our real world experience that helps us in our daily activities, while interacting almost unconsciously through mere gestures \cite{Krevelen2010,Teichrieb2007}. With such technology, mechanics could see instructions on what to do next when repairing an unknown piece of equipment, surgeons could take advantage of AR while performing surgery on them and we could read reviews for each restaurant in the street we are walking in on the way to work. On the reality-virtuality \textit{continuum} by Milgram and Ki \cite{Mistry2009}, AR is one part of the general area of mixed reality. Both virtual environments (or virtual reality) and augmented virtuality, in which real objects are added to virtual ones, replace the surrounding environment by a virtual one. In contrast, AR provides local virtuality. The reality-virtuality \textit{continuum} is shown in Figure \ref{figure:reality_continuum}.
 
 \begin{figure}[!htb]
   \centering
