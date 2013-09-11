@@ -207,7 +207,7 @@ The \textit{ImageData} data property, or array of pixels, is in row-major order,
 4 & 5 & 6
 \end{bmatrix}$, in row-major order it is laid out contiguously in linear memory as $\begin{bmatrix}
 1 & 2 & 3 & 4 & 5 & 6
-\end{bmatrix}$. Each array value is represented as integers between $0$ and $255$, where each four-integer group represents the four color channels of one pixel: red, green, blue and alpha (RGBA). While RGBA is sometimes described as a color space, it is actually simply a use of the RGB color model. This array linear typed structure improves read and write performance, since JavaScript is as an interpreted language \cite{MDN2013}, previous knowledge of the type results in faster language execution \cite{TypedArray2013}. An example of the canvas image data array of pixels is shown in Figure \ref{figure:imagedata_array}.
+\end{bmatrix}$. Each array value is represented as integers between $0$ and $255$, where each four-integer group represents the four color channels of one pixel: red, green, blue and alpha (RGBA). While RGBA is sometimes described as a color space, it is actually simply a use of the RGB color model. This linear array typed structure improves read and write performance, since JavaScript is as an interpreted language \cite{MDN2013}, previous knowledge of the type results in faster language execution \cite{TypedArray2013}. An example of the canvas image data array of pixels is shown in Figure \ref{figure:imagedata_array}.
 
 \begin{figure}[!htb]
   \centering
