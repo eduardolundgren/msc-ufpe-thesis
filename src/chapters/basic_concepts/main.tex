@@ -85,9 +85,9 @@ The microphone and camera hardware access can be used in combination with the HT
 In Section \ref{sub:basic_concepts:web:canvas_element}, a new HTML5 element called canvas \cite{Canvas2013} is introduced. Through the canvas element video frames can be read, thus providing access to the raw binary data information of each frame. This raw binary data, also known as array of pixels \cite{Gonzalez2007}, is extremely useful for visual tracking applications \cite{Teichrieb2007}. Since the area of study performed on this dissertation is based on visual tracking, from now on, it will focus on camera and video. There are several integration steps required from capturing video to reading the array of pixels. In order to enable the browser to capture the user camera \cite{MediaCapture2013}, stream the information into a video element \cite{Hickson2013}, connect the video to a canvas element, to finally access the array of pixels of each video frame is a long run. The access flow of raw binary data captured from videos on modern browsers is shown in Figure \ref{figure:get_user_media} and comprises four major steps \cite{WebRTC2013,Rocks2013}:
 
 \begin{enumerate}
-  \item  Hardware access: using HTML5 new Media Capture and Streams specification, the browser microphone and camera hardware is accessed.
-  \item Streaming: hardware streams audio and video to the browser UI elements.
-  \item UI elements: display the video data stream into the browser viewport trough a HMTL5 video element \cite{WC2006}.
+  \item Hardware access: using HTML5 new Media Capture and Streams specification, the browser microphone and camera hardware is accessed.
+  \item Streaming: hardware streams audio and video to the browser UI Elements.
+  \item UI Elements: display the video data stream into the browser viewport trough a HMTL5 video element \cite{WC2006}.
   \item Raw binary data: reads the video frames providing access to the array of pixels trough a HTML5 canvas element.
 \end{enumerate}
 
