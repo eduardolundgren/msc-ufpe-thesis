@@ -11,7 +11,7 @@ This chapter presents the results of each technique described on Chapter \ref{ch
 	\item Partial occlusion robustness: examples of how the visual tracking techniques behaves under partial occlusion. Web users are usually novice, therefore, for those users, requiring some training or calibration before using tracking solutions is overwhelming. Web users can potentially have unexpected behaviors when using a tracking application in front of a computer, and partial occlusion is one of them. Therefore the importance of measuring random partial occlusions on web techniques is to understand how the implementation reacts to those situations. This work considered robustness to a partial occlusion situations that the tracked object was still able to be identified with the addition of random occlusions caused by the user fingers.
 \end{enumerate}
 
-Several tracking techniques are already available in server-side languages, such as C/C++; OpenCV is an example of a library with those capabilities. Integrating existing libraries in tracking solutions on the web was, at first glance, much doable, since the code base was already available, on the other hand the web browsers are not able to run C/C++ directly. In order to run those existing technologies, several approached were tested in \cite{Pablo2013}: using client-to-server requests in order to process video frames; or trough platform dependent plugins, such as OSAKit \cite{OSAKit2013}, that allowed OpenCV library to run on the client-side \cite{Pablo2013}. A comparison between \textit{tracking.js} and those existing solutions involving client and server-side tracking is discussed in subsection \ref{sec:evaluation:js_tracking_solution}, showing some benefits of a pure JavaScript client-side tracking solution.
+Several tracking techniques are already available in server-side languages, such as C/C++; OpenCV is an example of a library with those capabilities. Integrating existing libraries in tracking solutions on the web was, at first glance, much doable, since the code base was already available, on the other hand the web browsers are not able to run C/C++ directly. In order to run those existing technologies, several approached were tested in \cite{Pablo2013}: using client-to-server requests in order to process video frames; or through platform dependent plugins, such as OSAKit \cite{OSAKit2013}, that allowed OpenCV library to run on the client-side \cite{Pablo2013}. A comparison between \textit{tracking.js} and those existing solutions involving client and server-side tracking is discussed in subsection \ref{sec:evaluation:js_tracking_solution}, showing some benefits of a pure JavaScript client-side tracking solution.
 
 Google Chrome browser is the current most popular web browser, for that reason, all tests were executed on Google Chrome browser version 28.0.1500.71 \cite{Chrome2010}, running on Mac OS X 10.8.3, 2.6 GHz Intel Core i7 16 GB 1600 MHz RAM.
 
@@ -138,7 +138,7 @@ This section shows rapid object detection as an interesting technique to be avai
 \subsection{Description} % (fold)
 \label{sub:evaluation:results:color_tracking_algorithm:description}
 
-Being able to use colored objects to control your browser trough the camera is very appealing. Any colored object could serve as a tool for the user interaction trough a simple and intuitive JavaScript API (Listing \ref{lst:color}). Figure \ref{figure:color_object} illustrates different colored objects being tracked.
+Being able to use colored objects to control your browser through the camera is very appealing. Any colored object could serve as a tool for the user interaction through a simple and intuitive JavaScript API (Listing \ref{lst:color}). Figure \ref{figure:color_object} illustrates different colored objects being tracked.
 
 \begin{figure}[!htb]
   \centering
@@ -169,7 +169,7 @@ Enabling entertainment web applications is also possible by using color tracking
   \label{figure:psmove}
 \end{figure}
 
-In Figure \ref{figure:color_games}, the two bottom images are examples of how games could be developed to the web trough color tracking. On the bottom left, a multi-player game that allows the user to draw in order to competitors guess what is the drawing meaning is demonstrated. On the bottom right, multiple PlayStation move controllers are used to control the user interactions into a 3D environment rendered trough the GPU using WebGL \cite{WebGL2013}. Note that, the available \textit{tracking.js} techniques could be combined with WebGL rendering in order to reach real-time 3D rendering.
+In Figure \ref{figure:color_games}, the two bottom images are examples of how games could be developed to the web through color tracking. On the bottom left, a multi-player game that allows the user to draw in order to competitors guess what is the drawing meaning is demonstrated. On the bottom right, multiple PlayStation move controllers are used to control the user interactions into a 3D environment rendered through the GPU using WebGL \cite{WebGL2013}. Note that, the available \textit{tracking.js} techniques could be combined with WebGL rendering in order to reach real-time 3D rendering.
 
 \begin{figure}[!htb]
   \centering
@@ -178,7 +178,7 @@ In Figure \ref{figure:color_games}, the two bottom images are examples of how ga
   \label{figure:color_games}
 \end{figure}
 
-Another example of color tracking on user interactions is demonstrated in Figure \ref{figure:color_volume}. Using a HTML5 audio element \cite{International2009} a music is played and trough any colored object, the user can control the volume of the player sliding the object from the left to right and vice-versa, left most coordinates mean volume set to zero, right most coordinates mean volume set to maximum.
+Another example of color tracking on user interactions is demonstrated in Figure \ref{figure:color_volume}. Using a HTML5 audio element \cite{International2009} a music is played and through any colored object, the user can control the volume of the player sliding the object from the left to right and vice-versa, left most coordinates mean volume set to zero, right most coordinates mean volume set to maximum.
 
 \begin{figure}[!htb]
   \centering
