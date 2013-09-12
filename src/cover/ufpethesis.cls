@@ -800,7 +800,7 @@ Thesis presented to the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \def\presentationpage{%
-  \if@openright\cleardoublepage\else\clearpage\fi
+  \if@openright\clearpage\else\clearpage\fi
   \thispagestyle{empty}
   \begin{center}
   \large
