@@ -314,8 +314,7 @@ requirements for the \@degreeword\ of \\
 
 %% Changed from \unvbox to \unvcopy for use with multiple copies of abstract
 %% page.
-\def\endabstractpage{\end{abstract}\noindent
- \unvcopy\@abstractsupervisor \newpage}
+\def\endabstractpage{\end{abstract}\noindent\newpage}
 
 %% This counter is used to save the page number for the second copy of
 %% the abstract.
