@@ -348,5 +348,7 @@ requirements for the \@degreeword\ of \\
 \def\signature#1#2{\par\noindent#1\dotfill\null\\*
   {\raggedleft #2\par}}
 
-\def\abstract{\subsection*{Abstract}\small\def\baselinestretch{1}\@normalsize}
+\def\abstracttitle#1{\gdef\@abstracttitle{#1}}
+
+\def\abstract{\subsection*{\@abstracttitle}\small\def\baselinestretch{1}\@normalsize}
 \def\endabstract{\par}
