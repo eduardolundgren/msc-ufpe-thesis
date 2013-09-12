@@ -298,7 +298,7 @@ at the
 % this environment should probably be called abstract,
 % but we want people to also be able to get at the more
 % basic abstract environment
-\def\abstractpage{\cleardoublepage
+\def\abstractpage{\clearpage
 \begin{center}{\large{\bf \@title} \\
 by \\
 \@author \\[\baselineskip]}
