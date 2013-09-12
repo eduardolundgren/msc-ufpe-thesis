@@ -124,9 +124,9 @@
 
 %% Language Independent
 
-\gdef\@maleadvisertitle{Orientador}
+\gdef\@maleadvisertitle{Advisor}
 \gdef\@femaleadvisertitle{Orientadora}
-\gdef\@malecoadvisertitle{Co-orientador}
+\gdef\@malecoadvisertitle{Co-Advisor}
 \gdef\@femalecoadvisertitle{Co-orientadora}
 \gdef\@bachelordissertation{Trabalho de Graduação}
 \gdef\@mastersdissertation{Master Thesis}
